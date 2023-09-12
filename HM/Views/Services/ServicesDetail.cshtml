@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "ServicesDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(/Assets/img/carousel-1.jpg);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center pb-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Phòng & Căn hộ</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Phòng & Căn hộ</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Service Detail Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+
+            <div class="col-lg-8">
+                <div id="service-carousel" class="carousel slide mb-5 wow fadeIn" data-bs-ride="carousel"
+                     data-wow-delay="0.1s">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="w-100" src="~/Assets/img/carousel-1.jpg" alt="Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-100" src="~/Assets/img/carousel-2.jpg" alt="Image">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#service-carousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#service-carousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <h1 class="mb-4">Phòng & Căn hộ</h1>
+                <p>
+                    Chúng tôi có đầy đủ các phòng cho nhiều nhu cầu khác nhau của khách hàng. Mỗi sự lựa chọn của bạn sẽ
+                    mang đến những trải nghiệm khác nhau. Tất cả các phòng đều được thiết kế hoàn toàn độc lập, tạo cảm giác
+                    mới mẻ và sinh động.
+                </p>
+                <p class="mb-5">
+                    Ngoài ra chúng tôi còn có các căn hộ, biệt thự mini phù hợp cho nhu cầu của những khách hàng đòi hỏi
+                    sự riêng tư cho chuyến đi nghỉ dưỡng của mình.
+                </p>
+                <h4 class="mb-4">Các câu hỏi thường gặp</h4>
+                <div class="accordion accordion-custom" id="accordionExample">
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.2s">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button fw-semi-bold" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                Làm sao để
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show"
+                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et
+                                magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no
+                                diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.3s">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed fw-semi-bold" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                    aria-controls="collapseTwo">
+                                How long will it take to get a new website?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et
+                                magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no
+                                diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.4s">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed fw-semi-bold" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                Do you only create HTML websites?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse"
+                             aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et
+                                magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no
+                                diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-0 wow fadeIn" data-wow-delay="0.5s">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed fw-semi-bold" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true"
+                                    aria-controls="collapseFour">
+                                Will my website be mobile-friendly?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et
+                                magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no
+                                diam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layout Right Start-->
+            <div class="col-lg-4">
+                <div class="bg-light p-4 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <h4 class="section-title text-start mb-4">Các dịch vụ của chúng tôi</h4>
+                    <div class="category-list d-flex flex-column">
+                        <a class="text-body d-flex mb-3" href="#">Phòng & Căn hộ</a>
+                        <a class="text-body d-flex mb-3" href="#">Ẩm thực & Nhà hàng</a>
+                        <a class="text-body d-flex mb-3" href="#">Spa & Fitness</a>
+                        <a class="text-body d-flex mb-3" href="#">Thể thao & Trò chơi</a>
+                        <a class="text-body d-flex mb-3" href="#">Sự kiện & Tiệc</a>
+                        <a class="text-body d-flex mb-0" href="#">GYM & Yoga</a>
+                    </div>
+                </div>
+
+
+                <div class="bg-light p-4 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <h4 class="section-title text-start mb-4">Các loại phòng của chúng tôi</h4>
+                    <a class="d-block position-relative mb-3" href="">
+                        <img class="img-fluid" src="~/Assets/img/cat-1.jpg" alt="">
+                        <div class="d-flex position-absolute top-0 start-0 w-100 h-100 p-3"
+                             style="background: rgba(0,0,0,.3);">
+                            <h5 class="text-white m-0 mt-auto">Căn hộ, biệt thự</h5>
+                        </div>
+                    </a>
+                    <a class="d-block position-relative mb-3" href="">
+                        <img class="img-fluid" src="~/Assets/img/cat-2.jpg" alt="">
+                        <div class="d-flex position-absolute top-0 start-0 w-100 h-100 p-3"
+                             style="background: rgba(0,0,0,.3);">
+                            <h5 class="text-white m-0 mt-auto">Phòng đôi</h5>
+                        </div>
+                    </a>
+                    <a class="d-block position-relative" href="">
+                        <img class="img-fluid" src="~/Assets/img/cat-3.jpg" alt="">
+                        <div class="d-flex position-absolute top-0 start-0 w-100 h-100 p-3"
+                             style="background: rgba(0,0,0,.3);">
+                            <h5 class="text-white m-0 mt-auto">Phòng đơn</h5>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="border p-1 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="border p-4">
+                        <h4 class="section-title text-start mb-4">Trợ giúp & Hỗ trợ</h4>
+                        <p>
+                            Nếu có bất cứ vấn đề gì thắc mắc, hoặc có yêu cầu. Hãy liên hệ với chúng tôi để được hỗ trợ sớm nhất
+                        </p>
+                        <div class="bg-primary text-center p-3">
+                            <h4 class="text-white m-0">+84 2345 6789</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Service Detail End -->
