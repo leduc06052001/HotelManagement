@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="85f2b76e1f884c3fab32f09c261b28f5" Name="Diagram1">
+        <EntityTypeShape EntityType="HMModel.sysdiagram" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Bookings" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Customers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Employees" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Invoices" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Managers" Width="1.5" PointX="7.625" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Payments" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Promotions" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Rooms" Width="1.5" PointX="7.625" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Searchs" Width="1.5" PointX="9.625" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMModel.tb_Services" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="HMModel.FK_tb_Bookings_tb_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Bookings_tb_Rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Bookings_tb_Services" ManuallyRouted="true" >
+          <ConnectorPoint PointX="8.2193942100331174" PointY="5.25" />
+          <ConnectorPoint PointX="8.2193942100331174" PointY="4.2830572148837156" />
+          <ConnectorPoint PointX="6.75" PointY="4.2830572148837156" />
+        </AssociationConnector>
+        <AssociationConnector Association="HMModel.FK_tb_Invoices_tb_Bookings" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Customers_tb_Promotions" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Invoices_tb_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Payments_tb_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Invoices_tb_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Payments_tb_Invoices" ManuallyRouted="false" />
+        <AssociationConnector Association="HMModel.FK_tb_Payments_tb_Promotions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -130,6 +138,54 @@
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model_HM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_HM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model_HM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model_HM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_HM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Bookings.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Customers.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Employees.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Invoices.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Managers.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Payments.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Promotions.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Rooms.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Searchs.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Services.cs">
+      <DependentUpon>Model_HM.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -215,6 +271,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Model_HM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model_HM.Context.cs</LastGenOutput>
+      <DependentUpon>Model_HM.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model_HM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_HM.edmx</DependentUpon>
+      <LastGenOutput>Model_HM.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -306,6 +372,13 @@
     <Content Include="Assets\scss\bootstrap\scss\_type.scss" />
     <Content Include="Assets\scss\bootstrap\scss\_utilities.scss" />
     <Content Include="Assets\scss\bootstrap\scss\_variables.scss" />
+    <EntityDeploy Include="Models\Model_HM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_HM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model_HM.edmx.diagram">
+      <DependentUpon>Model_HM.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -346,7 +419,6 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
@@ -375,6 +447,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
