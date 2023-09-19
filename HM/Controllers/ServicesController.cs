@@ -8,7 +8,6 @@ namespace QL_khachSan.Controllers
 {
     public class ServicesController : Controller
     {
-        // GET: Services
         public ActionResult Services()
         {
             return View();

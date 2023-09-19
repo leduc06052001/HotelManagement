@@ -36,6 +36,7 @@
 </head>
 
 <body>
+    @{ var user = Session["user"] as HM.Models.tb_Customers;}
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -67,7 +68,29 @@
                         </div>
                         <div class="col-lg-5 px-5 text-end">
                             <div class="d-inline-flex align-items-center py-2">
-                                <a class="me-0" href="">Đăng nhập/Đăng ký</a>
+                                @{
+                                    if (user == null)
+                                    {
+                                        <a class="me-0" href="~/Home/Login">Đăng nhập/Đăng ký</a>
+                                    }
+                                    else
+                                    {
+                                        <div class="nav-item dropdown has-arrow">
+                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="~/Areas/Admin/assets/img/profiles/avatar-01.jpg" width="31" alt="Admin"></span> </a>
+                                            <div class="dropdown-menu">
+                                                <div class="user-header">
+                                                    <div class="avatar avatar-sm"> <img src="~/Areas/Admin/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
+                                                    <div class="user-text">
+                                                        @{
+                                                            @user.FullName
+                                                        }
+                                                    </div>
+                                                </div> <a class="dropdown-item" href="profile.html">My Profile</a>
+                                                       <a class="dropdown-item" href="~/Home/Logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>

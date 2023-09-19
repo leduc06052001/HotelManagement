@@ -8,7 +8,6 @@ namespace QL_khachSan.Controllers
 {
     public class ContactController : Controller
     {
-        // GET: Contact
         public ActionResult Contact()
         {
             return View();

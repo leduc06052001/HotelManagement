@@ -8,7 +8,6 @@ namespace QL_khachSan.Controllers
 {
     public class RoomsController : Controller
     {
-        // GET: Room
         public ActionResult Rooms()
         {
             return View();

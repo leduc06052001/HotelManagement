@@ -8,7 +8,6 @@ namespace QL_khachSan.Controllers
 {
     public class BlogController : Controller
     {
-        // GET: Blog
         public ActionResult Blog()
         {
             return View();
