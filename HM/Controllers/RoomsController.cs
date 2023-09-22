@@ -27,5 +27,10 @@ namespace QL_khachSan.Controllers
         {
             return View();
         }
+
+        public ActionResult Select_Room()
+        {
+            return View();
+        }
     }
 }

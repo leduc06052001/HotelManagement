@@ -129,9 +129,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmployeeManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomManageController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
@@ -309,6 +314,7 @@
     <Content Include="Assets\lib\owlcarousel\assets\owl.video.play.png" />
     <Content Include="Assets\lib\owlcarousel\owl.carousel.js" />
     <Content Include="Assets\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="Assets\lib\rating\rating.js" />
     <Content Include="Assets\lib\tempusdominus\css\tempusdominus-bootstrap-4.css" />
     <Content Include="Assets\lib\tempusdominus\css\tempusdominus-bootstrap-4.min.css" />
     <Content Include="Assets\lib\tempusdominus\js\moment-timezone.min.js" />
@@ -476,6 +482,12 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\AllBooking.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\AddBooking.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\EditBooking.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomManage\AllRoom.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomManage\AddRoom.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomManage\EditRoom.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -512,10 +524,15 @@
     <Content Include="Views\Shared\_Slider.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Rooms\Select_Room.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\CustomerManage\" />
+    <Folder Include="Areas\Admin\Views\EmployeeManage\" />
+    <Folder Include="Areas\Admin\Views\ManageRoom\" />
     <Folder Include="Assets\User\" />
   </ItemGroup>
   <ItemGroup>

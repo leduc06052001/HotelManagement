@@ -88,13 +88,9 @@
                                             </span>
                                             <div class="media-body">
                                                 <p class="noti-details">
-                                                    <span class="noti-title">
-                                                        Mercury Software
-                                                        Inc
-                                                    </span> added a new product <span class="noti-title">
-                                                        Apple
-                                                        MacBook Pro
-                                                    </span>
+                                                    <span class="noti-title"> Mercury Software Inc </span>
+                                                    added a new product
+                                                    <span class="noti-title"> Apple MacBook Pro </span>
                                                 </p>
                                                 <p class="noti-time"><span class="notification-time">12 mins ago</span> </p>
                                             </div>
@@ -113,9 +109,9 @@
                             <div class="avatar avatar-sm"> <img src="~/Areas/Admin/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
                             <div class="user-text">
                                 @{
-                                    var user = (HM.Models.tb_Managers)HttpContext.Current.Session["user"];
-                                    <span>@user.UserName</span>
-                                 }
+                                    var manager = Session["user"] as HM.Models.tb_Managers;
+                                    <span>@manager.UserName</span>
+                                }
                                 <p class="text-muted mb-0">Administrator</p>
                             </div>
                         </div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="~/Admin/Dashboard/Logout">Logout</a>
@@ -138,9 +134,9 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
-                                <li><a href="all-booking.html"> All Booking </a></li>
-                                <li><a href="edit-booking.html"> Edit Booking </a></li>
-                                <li><a href="add-booking.html"> Add Booking </a></li>
+                                <li><a href="~/Admin/Booking/AllBooking"> All Booking </a></li>
+                                <li><a href="/Admin/Booking/EditBooking"> Edit Booking </a></li>
+                                <li><a href="~/Admin/Booking/AddBooking"> Add Booking </a></li>
                             </ul>
                         </li>
 
@@ -148,9 +144,9 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
-                                <li><a href="all-rooms.html">All Rooms </a></li>
-                                <li><a href="edit-room.html"> Edit Rooms </a></li>
-                                <li><a href="add-room.html"> Add Rooms </a></li>
+                                <li><a href="~/Admin/RoomManage/AllRoom">All Rooms</a></li>
+                                <li><a href="~/Admin/RoomManage/EditRoom"> Edit Rooms </a></li>
+                                <li><a href="~/Admin/RoomManage/AddRoom"> Add Rooms </a></li>
                             </ul>
                         </li>
 
@@ -290,7 +286,17 @@
     <script src="~/Areas/Admin/assets/plugins/raphael/raphael.min.js"></script>
     <script src="~/Areas/Admin/assets/plugins/morris/morris.min.js"></script>
     <script src="~/Areas/Admin/assets/js/chart.morris.js"></script>
+    <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Areas/Admin/assets/js/script.js"></script>
+    <script>
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'LT'
+
+            });
+        });
+    </script>
 </body>
 
 </html>
