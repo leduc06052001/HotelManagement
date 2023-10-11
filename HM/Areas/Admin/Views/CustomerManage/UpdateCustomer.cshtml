@@ -1,0 +1,111 @@
+﻿@model DAL.Entity.Customer
+
+@{
+    ViewBag.Title = "UpdateCustomer";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title mt-5">Edit Customer</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form enctype="multipart/form-data" method="post">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CustomerID)
+                    <div class="row formtype">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" name="FullName" value="@Model.FullName">
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" name="Address" class="form-control" value="@Model.Address" />
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" name="Phone" class="form-control" value="@Model.Phone" />
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="Email" class="form-control" value="@Model.Email" />
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div>
+                                    <input type="radio" value="Male" name="Gender" />
+                                    <span>Male</span>
+                                </div>
+                                <div>
+                                    <input type="radio" value="Female" name="Gender" />
+                                    <span>Female</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Birth Date</label>
+                                <div class="cal-icon">
+                                    <input type="text" name="BirthDate" class="form-control datetimepicker" value="@Model.BirthDate" />
+                                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>File Upload</label>
+                                <div class="custom-file mb-3">
+                                    <input type="file" class="custom-file-input" name="fileImage">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Promotion</label>
+                                <select class="form-control" name="PromotionID">
+                                    @foreach (var item in new DAL.mapPromotion().LoadData())
+                                    {
+                                        <option value="@item.PromotionID" @(item.PromotionID == Model.PromotionID ? "selected" : "")>@item.PromotionName</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => model.PromotionID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonedit">Save</button>
+                    <a href="~/Admin/CustomerManage/AllCustomer" class="btn btn-primary btn-danger" style="float:right; margin-right:8px; padding:10px">Cancel</a>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+

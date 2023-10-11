@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>Hotel Dashboard</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/Areas/Admin/assets/img/favicon.png">
-    <link rel="stylesheet" href="~/Areas/Admin/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Areas/Admin/assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="~/Areas/Admin/assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="~/Areas/Admin/assets/css/feathericon.min.css">
+    <link href="~/Areas/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/assets/css/feathericon.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link rel="stylehseet" href="https://cdn.oesmith.co.uk/morris-0.5.1.css">
     <link rel="stylesheet" href="~/Areas/Admin/assets/plugins/morris/morris.css">
-    <link rel="stylesheet" href="~/Areas/Admin/assets/css/style.css">
+    <link href="~/Areas/Admin/assets/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="index.html" class="logo"> <img src="~/Areas/Admin/assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
-                <a href="index.html" class="logo logo-small"> <img src="~/Areas/Admin/assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
+                <a href="~/Admin/DashBoard/Index" class="logo"> <img src="~/Areas/Admin/assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
+                <a href="~/Admin/DashBoard/Index" class="logo logo-small"> <img src="~/Areas/Admin/assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
             </div>
             <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
             <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
@@ -108,10 +109,10 @@
                         <div class="user-header">
                             <div class="avatar avatar-sm"> <img src="~/Areas/Admin/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
                             <div class="user-text">
-                                @{
-                                    var manager = Session["user"] as HM.Models.tb_Managers;
-                                    <span>@manager.UserName</span>
-                                }
+                                @*@{
+                                        var manager = Session["manager"] as HM.Models.tb_Managers;
+                                        <span>@manager.UserName</span>
+                                    }*@
                                 <p class="text-muted mb-0">Administrator</p>
                             </div>
                         </div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="~/Admin/Dashboard/Logout">Logout</a>
@@ -129,13 +130,12 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="active"> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
+                        <li class="active"> <a href="~/Admin/Dashboard/Index"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                         <li class="list-divider"></li>
                         <li class="submenu">
                             <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
                                 <li><a href="~/Admin/Booking/AllBooking"> All Booking </a></li>
-                                <li><a href="/Admin/Booking/EditBooking"> Edit Booking </a></li>
                                 <li><a href="~/Admin/Booking/AddBooking"> Add Booking </a></li>
                             </ul>
                         </li>
@@ -145,7 +145,6 @@
                             <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
                                 <li><a href="~/Admin/RoomManage/AllRoom">All Rooms</a></li>
-                                <li><a href="~/Admin/RoomManage/EditRoom"> Edit Rooms </a></li>
                                 <li><a href="~/Admin/RoomManage/AddRoom"> Add Rooms </a></li>
                             </ul>
                         </li>
@@ -154,8 +153,7 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
-                                <li><a href="all-customer.html"> All customers </a></li>
-                                <li><a href="edit-customer.html"> Edit Customer </a></li>
+                                <li><a href="~/Admin/CustomerManage/AllCustomer"> All customers </a></li>
                                 <li><a href="add-customer.html"> Add Customer </a></li>
                             </ul>
                         </li>
@@ -163,8 +161,7 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
-                                <li><a href="all-staff.html">All Staff </a></li>
-                                <li><a href="edit-staff.html"> Edit Staff </a></li>
+                                <li><a href="~/Admin/EmployeeManage/AllEmployee">All Staff </a></li>
                                 <li><a href="add-staff.html"> Add Staff </a></li>
                             </ul>
                         </li>
@@ -284,6 +281,8 @@
     <script src="~/Areas/Admin/assets/js/bootstrap.min.js"></script>
     <script src="~/Areas/Admin/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="~/Areas/Admin/assets/plugins/raphael/raphael.min.js"></script>
+    <script src="~/Areas/Admin/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/assets/plugins/datatables/datatables.min.js"></script>
     <script src="~/Areas/Admin/assets/plugins/morris/morris.min.js"></script>
     <script src="~/Areas/Admin/assets/js/chart.morris.js"></script>
     <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
@@ -293,7 +292,6 @@
         $(function () {
             $('#datetimepicker3').datetimepicker({
                 format: 'LT'
-
             });
         });
     </script>

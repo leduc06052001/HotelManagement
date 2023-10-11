@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- Search Detail-->
+<div class="search-detail">
+
+</div>
+
 <!-- Select Room start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -38,9 +43,8 @@
                                 lorem sed diam stet diam sed stet.
                             </p>
                         </div>
-                        <div class="d-flex justify-content-between border-top mt-auto p-4">
-                            <a href="" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
-                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                        <div class="d-flex justify-content-right border-top mt-auto p-4">
+                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Chọn</a>
                         </div>
                     </div>
                 </div>
@@ -74,8 +78,7 @@
                             </p>
                         </div>
                         <div class="d-flex justify-content-between border-top mt-auto p-4">
-                            <a href="" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
-                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Chọn</a>
                         </div>
                     </div>
                 </div>
@@ -109,8 +112,7 @@
                             </p>
                         </div>
                         <div class="d-flex justify-content-between border-top mt-auto p-4">
-                            <a href="" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
-                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Chọn</a>
                         </div>
                     </div>
                 </div>
@@ -144,8 +146,7 @@
                             </p>
                         </div>
                         <div class="d-flex justify-content-between border-top mt-auto p-4">
-                            <a href="" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
-                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Chọn</a>
                         </div>
                     </div>
                 </div>
@@ -179,8 +180,7 @@
                             </p>
                         </div>
                         <div class="d-flex justify-content-between border-top mt-auto p-4">
-                            <a href="" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
-                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                            <a href="" class="btn btn-sm btn-dark rounded py-2 px-4">Chọn</a>
                         </div>
                     </div>
                 </div>
@@ -209,52 +209,48 @@
 
             <!-- Total amount -->
             <div class="col-lg-4">
-                <div class="bg-light mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="border-bottom text-center text-dark p-3 pt-4 mb-3">
-                        <span class="align-top fs-4 lh-base">$</span>
-                        <span class="align-middle fs-1 lh-sm fw-bold">49.00</span>
-                        <span class="align-bottom fs-6 lh-lg">/ Night</span>
-                    </div>
-                    <div class="row g-3 p-4 pt-2">
-                        <div class="col-12">
-                            <div class="date" id="date3" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" placeholder="Check in" data-target="#date3" data-toggle="datetimepicker" />
+                <form method="post">
+                    <div class="bg-light mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="border-bottom text-center text-dark p-3 pt-4 mb-3">
+                            <span class="align-middle fs-3 fw-bold">Đơn hàng</span>
+                        </div>
+                        <div class="row g-3 p-4 pt-2">
+                            <div class="col-12">
+                                <h6>Ngày nhận - Trả phòng</h6>
+                                <div class="d-flex">
+                                    <label class="border-end pe-3 me-3" name="checkInDate"></label>
+                                    <label class="pe-3 me-3" name="checkOutDate"></label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h6>Người lớn - Trẻ em</h6>
+                                <div class="d-flex">
+                                    <label class="border-end pe-3 me-3">1</label>
+                                    <label class="pe-3 me-3">1</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h6>Phòng đã chọn</h6>
+                                <div class="d-flex">
+                                    <label class="pe-3 me-3">Junior Suite</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h6>Thành tiền</h6>
+                                <div class="d-flex">
+                                    <p>vnd</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary py-3 w-100">Tiếp tục</button>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="date" id="date4" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date4" data-toggle="datetimepicker" />
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <select class="form-select">
-                                <option selected>Người lớn</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <select class="form-select">
-                                <option selected>Trẻ em</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <select class="form-select">
-                                <option selected>Night</option>
-                                <option value="1">Night 1</option>
-                                <option value="2">Night 2</option>
-                                <option value="3">Night 3</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-primary py-3 w-100">Tiếp tục</button>
-                        </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Support -->
                 <div class="border p-1 wow fadeInUp" data-wow-delay="0.1s">

@@ -28,6 +28,8 @@ namespace HM.Models
         public Nullable<System.DateTime> ChekinDate { get; set; }
         public Nullable<System.DateTime> CheckoutDate { get; set; }
         public Nullable<int> PaymentStatus { get; set; }
+        public Nullable<int> Adult { get; set; }
+        public Nullable<int> Child { get; set; }
     
         public virtual tb_Customers tb_Customers { get; set; }
         public virtual tb_Rooms tb_Rooms { get; set; }

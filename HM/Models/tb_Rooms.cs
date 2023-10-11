@@ -22,12 +22,16 @@ namespace HM.Models
     
         public int RoomID { get; set; }
         public Nullable<int> RoomNumber { get; set; }
-        public string RoomType { get; set; }
         public Nullable<int> Bed { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string Status { get; set; }
+        public Nullable<int> Bath { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> RoomTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Bookings> tb_Bookings { get; set; }
+        public virtual tb_RoomTypes tb_RoomTypes { get; set; }
     }
 }

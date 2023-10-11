@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -26,6 +26,8 @@
           <Property Name="BookingDate" Type="date" />
           <Property Name="ChekinDate" Type="date" />
           <Property Name="CheckoutDate" Type="date" />
+          <Property Name="Adult" Type="int" />
+          <Property Name="Child" Type="int" />
           <Property Name="PaymentStatus" Type="int" />
         </EntityType>
         <EntityType Name="tb_Customers">
@@ -37,10 +39,11 @@
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="char" MaxLength="10" />
           <Property Name="IdentifyNumber" Type="char" MaxLength="15" />
-          <Property Name="Email" Type="char" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Gender" Type="nvarchar" MaxLength="10" />
           <Property Name="BirthDate" Type="date" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
           <Property Name="PromotionID" Type="int" />
         </EntityType>
         <EntityType Name="tb_Employees">
@@ -107,18 +110,30 @@
           </Key>
           <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoomNumber" Type="int" />
-          <Property Name="RoomType" Type="nvarchar" MaxLength="25" />
           <Property Name="Bed" Type="int" />
+          <Property Name="Bath" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Image" Type="varchar(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoomTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_RoomTypes">
+          <Key>
+            <PropertyRef Name="RoomTypeID" />
+          </Key>
+          <Property Name="RoomTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomTypeName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="tb_Searchs">
           <Key>
             <PropertyRef Name="SearchID" />
           </Key>
           <Property Name="SearchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SearchKey" Type="nvarchar" MaxLength="50" />
-          <Property Name="Result" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckInDate" Type="date" />
+          <Property Name="CheckOutDate" Type="date" />
+          <Property Name="Adult" Type="int" />
+          <Property Name="Child" Type="int" />
         </EntityType>
         <EntityType Name="tb_Services">
           <Key>
@@ -249,6 +264,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_Rooms_RoomType">
+          <End Role="tb_RoomTypes" Type="Self.tb_RoomTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tb_Rooms" Type="Self.tb_Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_RoomTypes">
+              <PropertyRef Name="RoomTypeID" />
+            </Principal>
+            <Dependent Role="tb_Rooms">
+              <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HMModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Bookings" EntityType="Self.tb_Bookings" Schema="dbo" store:Type="Tables" />
@@ -259,6 +288,7 @@
           <EntitySet Name="tb_Payments" EntityType="Self.tb_Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Promotions" EntityType="Self.tb_Promotions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Rooms" EntityType="Self.tb_Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_RoomTypes" EntityType="Self.tb_RoomTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Searchs" EntityType="Self.tb_Searchs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Services" EntityType="Self.tb_Services" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tb_Bookings_tb_Customers" Association="Self.FK_tb_Bookings_tb_Customers">
@@ -301,9 +331,12 @@
             <End Role="tb_Promotions" EntitySet="tb_Promotions" />
             <End Role="tb_Payments" EntitySet="tb_Payments" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_Rooms_RoomType" Association="Self.FK_tb_Rooms_RoomType">
+            <End Role="tb_RoomTypes" EntitySet="tb_RoomTypes" />
+            <End Role="tb_Rooms" EntitySet="tb_Rooms" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -333,6 +366,8 @@
           <NavigationProperty Name="tb_Rooms" Relationship="Self.FK_tb_Bookings_tb_Rooms" FromRole="tb_Bookings" ToRole="tb_Rooms" />
           <NavigationProperty Name="tb_Services" Relationship="Self.FK_tb_Bookings_tb_Services" FromRole="tb_Bookings" ToRole="tb_Services" />
           <NavigationProperty Name="tb_Invoices" Relationship="Self.FK_tb_Invoices_tb_Bookings" FromRole="tb_Bookings" ToRole="tb_Invoices" />
+          <Property Name="Adult" Type="Int32" />
+          <Property Name="Child" Type="Int32" />
         </EntityType>
         <EntityType Name="tb_Customers">
           <Key>
@@ -343,7 +378,7 @@
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="IdentifyNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -352,6 +387,7 @@
           <NavigationProperty Name="tb_Promotions" Relationship="Self.FK_tb_Customers_tb_Promotions" FromRole="tb_Customers" ToRole="tb_Promotions" />
           <NavigationProperty Name="tb_Invoices" Relationship="Self.FK_tb_Invoices_tb_Customers" FromRole="tb_Customers" ToRole="tb_Invoices" />
           <NavigationProperty Name="tb_Payments" Relationship="Self.FK_tb_Payments_tb_Customers" FromRole="tb_Customers" ToRole="tb_Payments" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_Employees">
           <Key>
@@ -427,19 +463,25 @@
           </Key>
           <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoomNumber" Type="Int32" />
-          <Property Name="RoomType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Bed" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tb_Bookings" Relationship="Self.FK_tb_Bookings_tb_Rooms" FromRole="tb_Rooms" ToRole="tb_Bookings" />
+          <Property Name="Bath" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RoomTypeID" Type="Int32" />
+          <NavigationProperty Name="tb_RoomTypes" Relationship="HMModel.FK_tb_Rooms_RoomType1" FromRole="tb_Rooms" ToRole="tb_RoomTypes" />
         </EntityType>
         <EntityType Name="tb_Searchs">
           <Key>
             <PropertyRef Name="SearchID" />
           </Key>
           <Property Name="SearchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SearchKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckInDate" Type="DateTime" Precision="0" />
+          <Property Name="CheckOutDate" Type="DateTime" Precision="0" />
+          <Property Name="Adult" Type="Int32" />
+          <Property Name="Child" Type="Int32" />
         </EntityType>
         <EntityType Name="tb_Services">
           <Key>
@@ -623,7 +665,34 @@
             <End Role="tb_Promotions" EntitySet="tb_Promotions" />
             <End Role="tb_Payments" EntitySet="tb_Payments" />
           </AssociationSet>
+          <EntitySet Name="tb_RoomTypes" EntityType="HMModel.tb_RoomTypes" />
+          <AssociationSet Name="FK_tb_Rooms_RoomType1" Association="HMModel.FK_tb_Rooms_RoomType1">
+            <End Role="tb_RoomTypes" EntitySet="tb_RoomTypes" />
+            <End Role="tb_Rooms" EntitySet="tb_Rooms" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tb_RoomTypes">
+          <Key>
+            <PropertyRef Name="RoomTypeID" />
+          </Key>
+          <Property Name="RoomTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomTypeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Rooms" Relationship="HMModel.FK_tb_Rooms_RoomType1" FromRole="tb_RoomTypes" ToRole="tb_Rooms" />
+        </EntityType>
+        <Association Name="FK_tb_Rooms_RoomType1">
+          <End Type="HMModel.tb_RoomTypes" Role="tb_RoomTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HMModel.tb_Rooms" Role="tb_Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_RoomTypes">
+              <PropertyRef Name="RoomTypeID" />
+            </Principal>
+            <Dependent Role="tb_Rooms">
+              <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -644,6 +713,8 @@
           <EntitySetMapping Name="tb_Bookings">
             <EntityTypeMapping TypeName="HMModel.tb_Bookings">
               <MappingFragment StoreEntitySet="tb_Bookings">
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="Adult" ColumnName="Adult" />
                 <ScalarProperty Name="BookingID" ColumnName="BookingID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
@@ -658,6 +729,7 @@
           <EntitySetMapping Name="tb_Customers">
             <EntityTypeMapping TypeName="HMModel.tb_Customers">
               <MappingFragment StoreEntitySet="tb_Customers">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -737,9 +809,12 @@
           <EntitySetMapping Name="tb_Rooms">
             <EntityTypeMapping TypeName="HMModel.tb_Rooms">
               <MappingFragment StoreEntitySet="tb_Rooms">
+                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Bath" ColumnName="Bath" />
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
                 <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
-                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
                 <ScalarProperty Name="Bed" ColumnName="Bed" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -749,10 +824,12 @@
           <EntitySetMapping Name="tb_Searchs">
             <EntityTypeMapping TypeName="HMModel.tb_Searchs">
               <MappingFragment StoreEntitySet="tb_Searchs">
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="Adult" ColumnName="Adult" />
+                <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+                <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
                 <ScalarProperty Name="SearchID" ColumnName="SearchID" />
-                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
-                <ScalarProperty Name="Result" ColumnName="Result" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_Services">
@@ -762,6 +839,14 @@
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_RoomTypes">
+            <EntityTypeMapping TypeName="HMModel.tb_RoomTypes">
+              <MappingFragment StoreEntitySet="tb_RoomTypes">
+                <ScalarProperty Name="RoomTypeName" ColumnName="RoomTypeName" />
+                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

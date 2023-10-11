@@ -36,5 +36,10 @@ namespace HM.Models
         public virtual DbSet<tb_Rooms> tb_Rooms { get; set; }
         public virtual DbSet<tb_Searchs> tb_Searchs { get; set; }
         public virtual DbSet<tb_Services> tb_Services { get; set; }
+        public virtual DbSet<tb_RoomTypes> tb_RoomTypes { get; set; }
+
+        public System.Data.Entity.DbSet<DAL.Entity.Room> Rooms { get; set; }
+
+        public System.Data.Entity.DbSet<DAL.Entity.RoomType> RoomTypes { get; set; }
     }
 }

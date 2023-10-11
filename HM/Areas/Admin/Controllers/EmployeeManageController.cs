@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL;
+using DAL.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,12 +12,27 @@ namespace HM.Areas.Admin.Controllers
     {
         public ActionResult AllEmployee()
         {
-            return View();
+            var mapped = new mapEmployee();
+            return View(mapped.LoadData());
         }
 
         public ActionResult AddEmployee()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddEmployee(Employee employee)
+        {
+            var mapped = new mapEmployee();
+            if(mapped.AddEmployee(employee) > 0) 
+            {
+                return RedirectToAction("AllEmployee");
+            }
+            else
+            {
+                return View(employee);
+            }
         }
 
         public ActionResult EditEmployee()

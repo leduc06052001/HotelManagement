@@ -15,7 +15,9 @@ namespace HM.Models
     public partial class tb_Searchs
     {
         public int SearchID { get; set; }
-        public string SearchKey { get; set; }
-        public string Result { get; set; }
+        public Nullable<System.DateTime> CheckInDate { get; set; }
+        public Nullable<System.DateTime> CheckOutDate { get; set; }
+        public Nullable<int> Adult { get; set; }
+        public Nullable<int> Child { get; set; }
     }
 }

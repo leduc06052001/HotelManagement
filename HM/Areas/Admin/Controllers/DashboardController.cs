@@ -5,22 +5,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DAL.Entity;
+using DAL;
 
 namespace HM.Areas.Admin.Controllers
 {
+    
     public class DashboardController : Controller
     {
-        HMEntities db = new HMEntities();
         public ActionResult Index()
         {
-            if (Session["user"]  == null)
+            /*if (Session["manager"]  == null)
             {
                 return RedirectToAction("Login");
             }
             else
             {
                 return View();
-            }
+            }*/
+            return View();
         }
 
         public ActionResult Login() 
@@ -31,21 +34,31 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var accounts = db.tb_Managers.SingleOrDefault(p=>p.UserName == username && p.Password == password);
+            mapManager mapped = new mapManager();
+            var accounts = mapped.Login(username, password);
             if(accounts != null)
             {
-                Session["user"] = accounts;
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.error = "*Username or Password is incorrect, please try again";
+                return View();
+            }
+            /*if(accounts != null)
+            {
+                Session["manager"] = accounts;
                 return RedirectToAction("Index");
             }
             else
             {
                 return View();
-            }
+            }*/
         }
 
         public ActionResult Logout()
         {
-            Session.Remove("user");
+            Session.Remove("manager");
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }

@@ -56,5 +56,17 @@ namespace QL_khachSan.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+
+        public ActionResult BookingDetail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BookingDetail(tb_Searchs search)
+        {
+
+            return View();
+        }
     }
 }
