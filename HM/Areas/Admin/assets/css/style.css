@@ -492,8 +492,8 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .btn-success {
-    background-color: #009688;
-    border-color: #009688
+    background-color: #FEA116;
+    border-color: #FEA116
 }
 
     .btn-success:hover, .btn-success:focus, .btn-success.active, .btn-success:active, .open > .dropdown-toggle.btn-success {
@@ -526,8 +526,8 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
     }
 
 .btn-info {
-    background: #009688;
-    border-color: #009688
+    background: #FEA116;
+    border-color: #FEA116
 }
 
     .btn-info:hover, .btn-info:focus, .btn-info.active, .btn-info:active, .open > .dropdown-toggle.btn-info {
@@ -797,8 +797,8 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .page-item.active .page-link {
-    background-color: #009688;
-    border-color: #009688
+    background-color: #FEA116;
+    border-color: #FEA116
 }
 
 .dropdown-menu {
@@ -834,7 +834,7 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .card.board1.fill {
-    -webkit-text-fill-color: #009688
+    -webkit-text-fill-color: #FEA116
 }
 
 .card-body {
@@ -871,9 +871,9 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .btn-light {
-    border-color: #009688;
+    border-color: #FEA116;
     color: #fff;
-    background-color: #009688
+    background-color: #FEA116
 }
 
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
@@ -1030,8 +1030,8 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
     .nav-tabs.nav-tabs-solid > li > a.active, .nav-tabs.nav-tabs-solid > li > a.active:hover, .nav-tabs.nav-tabs-solid > li > a.active:focus {
-        background-color: #009688;
-        border-color: #009688;
+        background-color: #FEA116;
+        border-color: #FEA116;
         color: #fff
     }
 
@@ -1413,8 +1413,8 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
         }
 
         .roles-menu > ul > li.active > a {
-            border-color: #009688;
-            color: #009688
+            border-color: #FEA116;
+            color: #FEA116
         }
 
 .header {
@@ -1546,11 +1546,11 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
     }
 
         .user-menu .dropdown-menu .dropdown-item:hover {
-            color: #009688
+            color: #FEA116
         }
 
 .header .dropdown-menu > li > a:focus, .header .dropdown-menu > li > a:hover {
-    background-color: #009688;
+    background-color: #FEA116;
     color: #fff
 }
 
@@ -1563,14 +1563,14 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
     .header .dropdown-menu > li > a i {
-        color: #009688;
+        color: #FEA116;
         margin-right: 10px;
         text-align: center;
         width: 18px
     }
 
 .header .user-menu .dropdown-menu > li > a i {
-    color: #009688;
+    color: #FEA116;
     font-size: 16px;
     margin-right: 10px;
     min-width: 18px;
@@ -1697,8 +1697,8 @@ html.menu-opened {
     }
 
     .top-nav-search .form-control {
-        background-color: #009688;
-        border-color: #009688;
+        background-color: #FEA116;
+        border-color: #FEA116;
         border-radius: 50px;
         color: #fff;
         height: 40px;
@@ -1798,16 +1798,16 @@ html.menu-opened {
 }
 
     .sidebar-menu li a:hover {
-        color: #009688
+        color: #FEA116
     }
 
 .sidebar-menu > ul > li > a:hover {
     color: #fff !important;
-    background-color: #01776c
+    background-color: #FEA116
 }
 
 .sidebar-menu > ul > li.active > a:hover {
-    border-color: #01776c;
+    border-color: #FEA116;
     color: #fff
 }
 
@@ -1816,7 +1816,7 @@ html.menu-opened {
     color: #fff !important;
     box-shadow: 0 7px 12px 0 rgba(95,118,232,.21);
     opacity: 1;
-    background: #009688
+    background: #FEA116
 }
 
 .menu-title {
@@ -1856,7 +1856,7 @@ html.menu-opened {
 }
 
     .sidebar-menu ul ul a.active {
-        color: #009688;
+        color: #FEA116;
         text-decoration: none
     }
 
@@ -1874,7 +1874,7 @@ html.menu-opened {
     }
 
     .sidebar-menu ul ul a.active:before {
-        border-color: #009688
+        border-color: #FEA116
     }
 
 .mobile_btn {
@@ -2098,12 +2098,12 @@ html.menu-opened {
 }
 
 .ellipse_color {
-    color: #009688
+    color: #FEA116
 }
 
 .login-wrapper .loginbox .login-left {
     align-items: center;
-    background: #009688;
+    background: #FEA116;
     background: -moz-linear-gradient(-45deg,rgba(0,150,136,1) 0%,rgba(6,198,180,1) 52%,rgba(0,150,136,1) 100%,rgba(6,198,180,1) 100%);
     background: -webkit-linear-gradient(-45deg,rgba(0,150,136,1) 0%,rgba(6,198,180,1) 52%,rgba(0,150,136,1) 100%,rgba(6,198,180,1) 100%);
     background: linear-gradient(135deg,rgba(0,150,136,1) 0%,rgba(6,198,180,1) 52%,rgba(0,150,136,1) 100%,rgba(6,198,180,1) 100%);
@@ -2228,7 +2228,7 @@ html.menu-opened {
 }
 
 .logoclass {
-    color: #009688;
+    color: #FEA116;
     font-size: 23px;
     font-weight: 600;
     margin-left: 4px
@@ -2305,7 +2305,7 @@ html.menu-opened {
     }
 
 .user-menu.nav > li > a .badge {
-    background-color: #009688;
+    background-color: #FEA116;
     display: block;
     font-size: 10px;
     font-weight: 700;
@@ -2585,7 +2585,7 @@ html.menu-opened {
     min-width: 70px;
     min-height: 28px;
     line-height: 2;
-    background-color: #009688 !important
+    background-color: #FEA116 !important
 }
 
 .inv-logo {
@@ -3006,7 +3006,7 @@ table.table-inbox tbody tr.checked {
 }
 
     .error-box h1 {
-        color: #009688;
+        color: #FEA116;
         font-size: 10em
     }
 
@@ -3020,7 +3020,7 @@ table.table-inbox tbody tr.checked {
         font-weight: 600;
         min-width: 200px;
         padding: 10px 20px;
-        background-color: #009688
+        background-color: #FEA116
     }
 
 .chat-window {
@@ -3977,17 +3977,17 @@ card-title {
 
 .veiwbutton {
     font-size: .9rem;
-    background: #009688;
-    border-color: #009688
+    background: #FEA116;
+    border-color: #FEA116
 }
 
 .search_button {
-    background: #009688;
-    border-color: #009688
+    background: #FEA116;
+    border-color: #FEA116
 }
 
 section.pricing {
-    background: #009688;
+    background: #FEA116;
     height: 150px;
     border-radius: 15px
 }
@@ -4036,8 +4036,8 @@ section.pricing {
     font-weight: 700;
     padding: 1rem;
     transition: all .2s;
-    background: #009688;
-    border-color: #009688
+    background: #FEA116;
+    border-color: #FEA116
 }
 
 @media(min-width:992px) {
@@ -4215,7 +4215,7 @@ h3.page-sub-title {
 
 .blog-view .blog-title {
     font-size: 28px;
-    color: #009688
+    color: #FEA116
 }
 
 .blog-view .blog-info {
@@ -5930,7 +5930,7 @@ h3.page-sub-title {
 @media only screen and (min-width:992px) {
     #toggle_btn {
         align-items: center;
-        color: #009688;
+        color: #FEA116;
         display: inline-flex;
         float: left;
         font-size: 30px;

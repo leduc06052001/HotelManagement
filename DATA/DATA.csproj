@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D304EA4-D7EE-4860-9AE3-83F7B087ADAC}</ProjectGuid>
+    <ProjectGuid>{5A9A44E8-A406-46D2-83ED-2F16D9057496}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>DATA</RootNamespace>
+    <AssemblyName>DATA</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,8 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,98 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Booking.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Customer.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Employee.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Invoice.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Manager.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\ModelHM.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelHM.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\ModelHM.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\ModelHM.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelHM.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\News.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Payment.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Position.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Promotion.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Room.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\RoomType.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Search.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Service.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\sysdiagram.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="mapCustomer.cs" />
-    <Compile Include="mapEmployee.cs" />
-    <Compile Include="mapManager.cs" />
-    <Compile Include="mapNew.cs" />
-    <Compile Include="mapPositon.cs" />
-    <Compile Include="mapPromotion.cs" />
-    <Compile Include="mapRoom.cs" />
-    <Compile Include="mapRoomType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Entity\ModelHM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelHM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Entity\ModelHM.edmx.diagram">
-      <DependentUpon>ModelHM.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entity\ModelHM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelHM.edmx</DependentUpon>
-      <LastGenOutput>ModelHM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Entity\ModelHM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelHM.edmx</DependentUpon>
-      <LastGenOutput>ModelHM.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Folder Include="Entity\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

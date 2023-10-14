@@ -52,13 +52,9 @@ namespace HM.Areas.Admin.Controllers
             {
                 if(fileImage.ContentLength > 0)
                 {
-                    //1. Xác định thư mục lưu
-                    string _path = "/Areas/Admin/assets/img/roomImage/";
-                    //2. Xác định tên file
+                    string _path = "/Areas/Admin/assets/img/profiles/";
                     string fileName = fileImage.FileName;
-                    //3. Xác định đường dẫn tuyệt đối 
                     string _root = Server.MapPath(_path + fileName);
-                    //4. Kiểm tra file đã tồn tại? nếu có thì xóa file cũ (ktra trùng tên?)
                     if (System.IO.File.Exists(_root) == true)
                     {
                         System.IO.File.Delete(_root);

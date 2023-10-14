@@ -12,25 +12,19 @@ namespace DAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Position
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Position()
         {
-            this.Invoices = new HashSet<Invoice>();
+            this.Employees = new HashSet<Employee>();
         }
     
-        public int EmployeeID { get; set; }
-        public string FullName { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Gender { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public Nullable<int> PositionID { get; set; }
+        public int PositionID { get; set; }
+        public string PositionName { get; set; }
+        public string Description { get; set; }
     
-        public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

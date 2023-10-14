@@ -10,13 +10,15 @@
 namespace DAL.Entity
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class News
     {
-        public string Database { get; set; }
+        public int NewID { get; set; }
         public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public string Author { get; set; }
+        public Nullable<System.DateTime> PublishDate { get; set; }
+        public string NewContent { get; set; }
+        public string Image { get; set; }
     }
 }

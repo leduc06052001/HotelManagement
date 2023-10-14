@@ -10,32 +10,26 @@ namespace DAL
     public class mapRoom
     {
         HMEntities db = new HMEntities();
-        public string message = "";
-        //Read
         public List<Room> LoadData()
         {
-            return (db.Rooms.ToList());
+            return db.Rooms.ToList();
         }
 
         public List<Room> LoadPage(int page, int size)
         {
-            var listRoom = db.Rooms.ToList().Skip((page-1)*size).Take(size).ToList();
-            return listRoom;
+            return db.Rooms.ToList().Skip((page - 1) * size).Take(size).ToList();
         }
 
-        //Lấy đối tượng theo ID
-        public Room GetDetail(int ID)
-        { 
-            return db.Rooms.Find(ID);
-        }
-
-        //Create
-        //Lưu phòng mới được thêm vào và trả về ID phòng
-        public int AddRoom(Room room)
+        public Room GetDetail(int id)
         {
-            if(room.RoomNumber == null)
+            return db.Rooms.Find(id);
+        }
+
+        //------------------* Create *------------------//
+        public int CreateRoom(Room room)
+        {
+            if (room.RoomNumber == 0)
             {
-                message = "Thiếu thông tin số phòng";
                 return 0;
             }
             db.Rooms.Add(room);
@@ -43,13 +37,12 @@ namespace DAL
             return room.RoomID;
         }
 
-        //Update
-        public bool EditRoom(Room room)
+        //------------------* Update *------------------//
+        public bool UpdateRoom(Room room)
         {
             var roomInfo = db.Rooms.Find(room.RoomID);
-            if(roomInfo == null)
+            if (roomInfo == null)
             {
-                message = "Không tìm thấy thông tin phòng";
                 return false;
             }
             roomInfo.RoomNumber = room.RoomNumber;
@@ -62,11 +55,11 @@ namespace DAL
             db.SaveChanges();
             return true;
         }
-        //Delete
 
-        public void DeleteRoom(int ID)
+        //------------------* Delete *------------------//
+        public void DeleteRoom(int id)
         {
-            var roomInfo = db.Rooms.Find(ID);
+            var roomInfo = db.Rooms.Find(id);
             db.Rooms.Remove(roomInfo);
             db.SaveChanges();
         }

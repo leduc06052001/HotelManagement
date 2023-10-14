@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using Antlr.Runtime.Tree;
+using DAL;
 using DAL.Entity;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,32 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult EditEmployee()
+        // --- Update ---
+        public ActionResult UpdateEmployee(int ID)
         {
-            return View();
+            var employeeInfo = new mapEmployee().GetDetail(ID);
+            return View(employeeInfo);
+        }
+        [HttpPost]
+        public ActionResult UpdateEmployee(Employee employee)
+        {
+            var mapped = new mapEmployee();
+            if(mapped.UpdateEmployee(employee) == true)
+            {
+                return RedirectToAction("AllEmployee");
+            }
+            else
+            {
+                return View(employee);
+            }
+        }
+
+        // --- Delete ---
+        public ActionResult DeleteEmployee(int ID)
+        {
+            var mapped = new mapEmployee();
+            mapped.DeleteEmployee(ID);
+            return RedirectToAction("AllEmployee");
         }
     }
 }

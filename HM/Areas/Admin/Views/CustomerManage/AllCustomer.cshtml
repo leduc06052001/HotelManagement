@@ -36,6 +36,7 @@
                                             <th>BirthDate</th>
                                             <th style="text-align:center">Image</th>
                                             <th>Promotion</th>
+                                            <th class="text-right">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,7 +50,7 @@
                                                 <td>@item.IdentifyNumber</td>
                                                 <td>@item.Email</td>
                                                 <td>@item.Gender</td>
-                                                <td>@item.BirthDate</td>
+                                                <td>@string.Format("{0:dd-MM-yyyy}", item.BirthDate)</td>
                                                 <td style="text-align:center">
                                                     <img src="@item.Image" style="width:60px; height:60px" />
                                                 </td>

@@ -13,7 +13,7 @@ namespace DAL
         public Manager Login(string username, string password)
         {
             var account = db.Managers.SingleOrDefault(p => p.UserName == username && p.Password == password);
-            if (account != null) 
+            if (account != null)
             {
                 return account;
             }
