@@ -23,7 +23,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Name</label>
-                                @Html.ValidationMessageFor(model => model.Name, "*", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.NewsTitle, "*", new { @class = "text-danger" })
                                 <input type="text" name="Name" class="form-control" />
                             </div>
                         </div>
@@ -42,29 +42,33 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="display-block">Blog Status</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="blog_active" value="option1" checked>
-                                <label class="form-check-label" for="blog_active"> Active </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="blog_inactive" value="option2">
-                                <label class="form-check-label" for="blog_inactive"> Inactive </label>
-                            </div>
-                        </div>
+                        @*                        <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="display-block">News Status</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="blog_active" value="option1" checked>
+                                    <label class="form-check-label" for="blog_active"> Active </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="blog_inactive" value="option2">
+                                    <label class="form-check-label" for="blog_inactive"> Inactive </label>
+                                </div>
+                            </div>*@
 
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label>Content</label>
-                                <textarea type="text" name="NewContent" class="form-control" rows="5" placeholder="Message"></textarea>
-                                @Html.ValidationMessageFor(model => model.NewContent, "", new { @class = "text-danger" })
+                                <textarea name="NewsContent" id="NewsContent" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary buttonedit1 mt-4">Publish Blog</button>
+                    @section scripts{
+                        <script>
+                            CKEDITOR.replace("NewsContent")
+                        </script>
+                    }
                 </form>
             </div>
         </div>

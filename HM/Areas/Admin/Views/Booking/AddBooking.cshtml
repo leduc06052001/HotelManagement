@@ -1,4 +1,4 @@
-﻿
+﻿@model DAL.Entity.Booking
 @{
     ViewBag.Title = "AddBooking";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -15,116 +15,104 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form>
+                <form method="post">
+                    @Html.AntiForgeryToken()
                     <div class="row formtype">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Booking ID</label>
-                                <input class="form-control" type="text" value="BKG-0001">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <select class="form-control" id="sel1" name="sellist1">
-                                    <option>Select</option>
-                                    <option>Jennifer Robinson</option>
-                                    <option>Terry Baker</option>
-                                </select>
+                                <label>Customer Name</label>
+                                <input class="form-control" type="text" name="FullName">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Room Type</label>
-                                <select class="form-control" id="sel2" name="sellist1">
+                                <select class="form-control" name="RoomType">
                                     <option>Select</option>
-                                    <option>Single</option>
-                                    <option>Double</option>
-                                    <option>Quad</option>
-                                    <option>King</option>
-                                    <option>Suite</option>
-                                    <option>Villa</option>
+                                    @foreach (var item in new DAL.mapRoomType().LoadData())
+                                    {
+                                        <option value="@item.RoomTypeID">@item.RoomTypeName</option>
+                                    }
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <label>Total Members</label>
-                                <select class="form-control" id="sel3" name="sellist1">
-                                    <option>Select</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <label>Adult</label>
+                                <select class="form-control" name="Adult">
+                                    @for (int i = 1; i < 10; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
                                 </select>
                             </div>
                         </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Child</label>
+                                <select class="form-control" name="Child">
+                                    @for (int i = 0; i < 10; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Date</label>
+                                <label>Booking Date</label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker">
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Time</label>
-                                <div class="time-icon">
-                                    <input type="text" class="form-control" id="datetimepicker3">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Arrival Date</label>
+                                <label>Checkin Date</label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker">
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Depature Date</label>
+                                <label>Checkout Date</label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker">
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Email ID</label>
-                                <input type="text" class="form-control" id="usr">
+                                <label>Email</label>
+                                <input type="text" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input type="text" class="form-control" id="usr1">
+                                <input type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>File Upload</label>
-                                <div class="custom-file mb-3">
-                                    <input type="file" class="custom-file-input" id="customFile"
-                                           name="filename">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Message</label>
-                                <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                                <textarea class="form-control" rows="3" id="comment" name="text"></textarea>
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary buttonedit">Create Booking</button>
                 </form>
             </div>
         </div>
-        <button type="button" class="btn btn-primary buttonedit1">Create Booking</button>
     </div>
 </div>
 

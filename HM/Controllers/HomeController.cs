@@ -22,9 +22,9 @@ namespace QL_khachSan.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(tb_Customers customer)
+        public ActionResult Register(Customer customer)
         {
-            db.tb_Customers.Add(customer);
+            db.Customers.Add(customer);
             db.SaveChanges();
             return RedirectToAction("Login");
         }
@@ -34,20 +34,17 @@ namespace QL_khachSan.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(tb_Customers customer)
+        public ActionResult Login(Customer customer)
         {
             var emailForm = customer.Email;
             var passwordForm = customer.Password;
-            var login = db.tb_Customers.SingleOrDefault(p => p.Email.Equals(emailForm) && p.Password == passwordForm);
+            var login = db.Customers.SingleOrDefault(p => p.Email.Equals(emailForm) && p.Password == passwordForm);
             if(login != null)
             {
                 Session["user"] = login;
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         public ActionResult Logout()
@@ -63,9 +60,8 @@ namespace QL_khachSan.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingDetail(tb_Searchs search)
+        public ActionResult BookingDetail(Search search)
         {
-
             return View();
         }
     }

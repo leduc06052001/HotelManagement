@@ -1,7 +1,8 @@
-﻿
+﻿@model DAL.Entity.OrderDetail
 @{
     ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var roomDetail = new DAL.mapOrder().
 }
 
 <!-- Page Header Start -->
@@ -10,16 +11,15 @@
         <div class="container text-center pb-5">
             <h1 class="display-3 text-white mb-3 animated slideInDown">Đặt phòng</h1>
             @*<nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center text-uppercase">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Booking</li>
-                </ol>
-            </nav>*@
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Booking</li>
+                    </ol>
+                </nav>*@
         </div>
     </div>
 </div>
 <!-- Page Header End -->
-
 <!-- Booking Start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -28,59 +28,70 @@
             <h1 class="mb-5">Thông tin người đặt phòng</h1>
         </div>
         <div class="row g-5">
-            <div class="col-lg-6">
-                <div class="row g-3">
-                    <div class="col-6 text-end">
-                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="~/Assets/img/about-1.jpg" style="margin-top: 25%;">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="room-item shadow rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="@Model.Room.Image" alt="notset">
+                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4" style="font-size: 16px; font-weight:bold;"> / đêm</small>
                     </div>
-                    <div class="col-6 text-start">
-                        <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="~/Assets/img/about-2.jpg">
-                    </div>
-                    <div class="col-6 text-end">
-                        <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="~/Assets/img/about-3.jpg">
-                    </div>
-                    <div class="col-6 text-start">
-                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="~/Assets/img/about-4.jpg">
+                    <div class="p-4 mt-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="select-room">@Model.Room.RoomType.RoomTypeName</span>
+                            <div class="ps-2">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i> giường</small>
+                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i> phòng tắm</small>
+                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                        </div>
+                        <p class="text-body mb-3"></p>
+                        
                     </div>
                 </div>
+
             </div>
+
             <div class="col-lg-6">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
                     <form>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Tên của bạn">
-                                    <label for="name">Tên của bạn</label>
+                                    <input type="text" class="form-control" name="FullName" required placeholder="Họ Tên">
+                                    <label for="FullName">Họ tên</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Email của bạn">
-                                    <label for="email">Email của bạn</label>
+                                    <input type="email" class="form-control" id="email" required placeholder="Email">
+                                    <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" id="checkin" placeholder="Check In" />
                                     <label for="checkin">Check In</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating date" id="date4" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" id="checkout" placeholder="Check Out" />
                                     <label for="checkout">Check Out</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <select class="form-select" id="select1">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
+                                        @for (int i = 1; i < 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
                                     </select>
                                     <label for="select1">Người lớn</label>
                                 </div>
@@ -88,19 +99,17 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <select class="form-select" id="select2">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
+                                        @for (int i = 0; i < 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
                                     </select>
                                     <label for="select2">Trẻ em</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="phone_number" placeholder="Số điện thoại của bạn"/>
+                                    <input class="form-control" id="phone_number" required min="10" maxlength="11" placeholder="Số điện thoại của bạn" />
                                     <label for="phone_number">Số điện thoại</label>
                                 </div>
                             </div>
@@ -108,10 +117,10 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="name" placeholder="Mã ưu đãi">
-                                    <label for="name">Mã ưu đãi</label>
+                                    <label for="name">Mã ưu đãi (nếu có)</label>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12">
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
@@ -119,9 +128,9 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Đặt ngay</button>
+                                <button class="btn btn-primary w-100 py-3" type="submit">Thanh toán</button>
                             </div>
-                            
+
                         </div>
                     </form>
                 </div>

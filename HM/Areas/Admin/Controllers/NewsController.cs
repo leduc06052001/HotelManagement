@@ -13,8 +13,7 @@ namespace HM.Areas.Admin.Controllers
         //------------* ALL NEWS *------------//
         public ActionResult AllNews()
         {
-            var mapped = new mapNew();
-            return View(mapped.LoadData());
+            return View(new mapNews().LoadData());
         }
 
         //------------* ADD NEWS *------------//
@@ -25,8 +24,7 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddNews(News news)
         {
-            var mapped = new mapNew();
-            var data = mapped.AddNews(news);
+            var data = new mapNews().CreateNews(news);
             if (data > 0)
             {
                 return RedirectToAction("AllNews");
@@ -39,6 +37,30 @@ namespace HM.Areas.Admin.Controllers
         }
 
         //------------* UPDATE NEWS *------------// 
+        public ActionResult UpdateNews(int ID)
+        {
+            return View(new mapNews().GetDetail(ID));
+        }
 
+        [HttpPost]
+        public ActionResult UpdateNews(News news)
+        {
+            var mapped = new mapNews();
+            if(mapped.UpdateNews(news) == true)
+            {
+                return RedirectToAction("AllNews");
+            }
+            else
+            {
+                return View(news);
+            }
+        }
+
+        //------------* DELETE NEWS *------------// 
+        public ActionResult DeleteNews(int ID)
+        {
+            new mapNews().DeleteNews(ID);
+            return RedirectToAction("AllNews");
+        }
     }
 }

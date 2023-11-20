@@ -18,6 +18,7 @@ namespace DAL.Entity
         public Room()
         {
             this.Bookings = new HashSet<Booking>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public int RoomID { get; set; }
@@ -32,6 +33,8 @@ namespace DAL.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual RoomType RoomType { get; set; }
     }
 }

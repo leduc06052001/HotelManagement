@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL;
+using DAL.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace QL_khachSan.Controllers
 {
     public class RoomsController : Controller
     {
+        HMEntities db = new HMEntities();
         public ActionResult Rooms()
         {
             return View();
@@ -23,9 +26,24 @@ namespace QL_khachSan.Controllers
             return View();
         }
 
-        public ActionResult RoomDetail() 
+        public ActionResult RoomDetail(int ID)
         {
-            return View();
+            var rooms = db.Rooms.Find(ID);
+            if (rooms == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rooms);
+        }
+
+        [HttpPost]
+        public ActionResult RoomDetail(OrderDetail order)
+        {
+            if(new mapOrder().AddOrder(order) > 0)
+            {
+                return RedirectToAction("Booking");
+            }
+            return View(order);
         }
 
         public ActionResult Select_Room()

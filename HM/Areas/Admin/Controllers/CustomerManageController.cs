@@ -11,12 +11,11 @@ namespace HM.Areas.Admin.Controllers
     public class CustomerManageController : Controller
     {
         public ActionResult AllCustomer()
-        {
-            mapCustomer mapped = new mapCustomer();
-            return View(mapped.LoadData());
+        { 
+            return View(new mapCustomer().LoadData());
         }
 
-        //--- Create Customer ---
+        //------------------* CREATE *------------------//
         public ActionResult AddCustomer()
         {
             return View();
@@ -25,8 +24,7 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddCustomer(Customer customer)
         {
-            mapCustomer mapped = new mapCustomer();
-            var data = mapped.AddCustomer(customer);
+            var data = new mapCustomer().AddCustomer(customer);
             if(data > 0)
             {
                 return RedirectToAction("AllCustomer");
@@ -37,12 +35,10 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-
-        //--- Update Customer ---
+        //------------------* UPDATE *------------------//
         public ActionResult UpdateCustomer(int ID)
         {
-            var customerInfo = new mapCustomer().GetDetail(ID);
-            return View(customerInfo);
+            return View(new mapCustomer().GetDetail(ID));
         }
 
         [HttpPost]
@@ -52,18 +48,23 @@ namespace HM.Areas.Admin.Controllers
             {
                 if(fileImage.ContentLength > 0)
                 {
+                    //Lấy đường dẫn
                     string _path = "/Areas/Admin/assets/img/profiles/";
                     string fileName = fileImage.FileName;
                     string _root = Server.MapPath(_path + fileName);
+
+                    // Xóa file có trùng tên
                     if (System.IO.File.Exists(_root) == true)
                     {
                         System.IO.File.Delete(_root);
                     }
-                    //5. Lưu file
+                    // Lưu file
                     fileImage.SaveAs(_root);
                     customer.Image = _path + fileName;
                 }
             }
+
+            // Xử lý cập nhật
             var mapped = new mapCustomer();
             if(mapped.UpdateCustomer(customer) == true)
             {
@@ -75,7 +76,7 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        //--- Delete Customer ---
+        //------------------* DELETE *------------------//
         public ActionResult DeleteCustomer(int ID)
         {
             var mapped = new mapCustomer();

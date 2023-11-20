@@ -1,6 +1,5 @@
 ﻿using DAL;
 using DAL.Entity;
-using HM.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,9 +27,8 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddRoom(Room room)
         {
-            mapRoom mapped = new mapRoom();
-            var data = mapped.AddRoom(room);
-            if (data > 0)
+
+            if (new mapRoom().CreateRoom(room) > 0)
             {
                 return RedirectToAction("AllRoom");
             }
@@ -73,7 +71,7 @@ namespace HM.Areas.Admin.Controllers
             }
 
             var mapped = new mapRoom();
-            if (mapped.EditRoom(room) == true)
+            if (mapped.UpdateRoom(room) == true)
             {
                 return RedirectToAction("AllRoom");
             }

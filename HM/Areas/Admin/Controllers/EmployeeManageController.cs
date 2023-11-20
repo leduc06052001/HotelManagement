@@ -17,6 +17,7 @@ namespace HM.Areas.Admin.Controllers
             return View(mapped.LoadData());
         }
 
+        //------------------* Create *------------------//
         public ActionResult AddEmployee()
         {
             return View();
@@ -26,7 +27,7 @@ namespace HM.Areas.Admin.Controllers
         public ActionResult AddEmployee(Employee employee)
         {
             var mapped = new mapEmployee();
-            if(mapped.AddEmployee(employee) > 0) 
+            if(mapped.CreateEmployee(employee) > 0) 
             {
                 return RedirectToAction("AllEmployee");
             }
@@ -36,7 +37,7 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        // --- Update ---
+        //------------------* Update *------------------//
         public ActionResult UpdateEmployee(int ID)
         {
             var employeeInfo = new mapEmployee().GetDetail(ID);
@@ -56,7 +57,7 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        // --- Delete ---
+        //------------------* Delete *------------------//
         public ActionResult DeleteEmployee(int ID)
         {
             var mapped = new mapEmployee();

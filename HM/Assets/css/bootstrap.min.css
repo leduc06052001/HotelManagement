@@ -4350,7 +4350,11 @@ fieldset:disabled .btn {
 }
 
 .nav-tabs {
-    border-bottom: 1px solid #dee2e6
+    border-bottom: 1px solid #dee2e6;
+    list-style:none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
     .nav-tabs .nav-link {
@@ -8170,6 +8174,7 @@ fieldset:disabled .btn {
 .font-monospace {
     font-family: var(--bs-font-monospace) !important
 }
+
 
 .fs-1 {
     font-size: calc(1.375rem + 1.5vw) !important

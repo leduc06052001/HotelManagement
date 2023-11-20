@@ -22,5 +22,16 @@ namespace DAL
                 return null;
             }
         }
+
+        public int Register(Manager managers)
+        {
+            if(managers.UserName == null)
+            {
+                return 0;
+            }
+            db.Managers.Add(managers);
+            db.SaveChanges();
+            return managers.ManagerID;
+        }
     }
 }

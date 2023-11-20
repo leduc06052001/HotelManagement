@@ -1,0 +1,66 @@
+﻿@model DAL.Entity.News
+
+@{
+    ViewBag.Title = "UpdateNews";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title mt-5">Edit Staff</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    <div class="row formtype">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="Name" class="form-control" value="@Model.NewsTitle">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Author</label>
+                                <input type="text" name="Author" class="form-control" value="@Model.Author" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Publish Date</label>
+                                <input type="date" name="PublishDate" class="form-control" value="@Model.PublishDate" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>File Upload</label>
+                                <div class="custom-file mb-3">
+                                    <input type="file" class="custom-file-input" name="Image">
+                                    <label class="custom-file-label" for="customFile">Choose File</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Content</label>
+                                <textarea name="NewContent" rows="5" class="form-control">@Model.NewsContent</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonedit ml-2">Save</button>
+                    <a href="~/Admin/News/AllNews" class="btn btn-primary btn-danger" style="float:right; margin-right:6px; padding:10px">Cancel</a>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>

@@ -14,11 +14,11 @@ namespace DAL.Entity
     
     public partial class News
     {
-        public int NewID { get; set; }
-        public string Name { get; set; }
+        public int NewsID { get; set; }
+        public string NewsTitle { get; set; }
         public string Author { get; set; }
         public Nullable<System.DateTime> PublishDate { get; set; }
-        public string NewContent { get; set; }
         public string Image { get; set; }
+        public string NewsContent { get; set; }
     }
 }

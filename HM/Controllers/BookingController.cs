@@ -12,5 +12,10 @@ namespace HM.Controllers
         {
             return View();
         }
+
+        public ActionResult Order()
+        {
+            return View();
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using HM.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,22 +6,16 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DAL.Entity;
 using DAL;
+using HM.App_Start;
 
 namespace HM.Areas.Admin.Controllers
 {
     
     public class DashboardController : Controller
     {
+        [RoleUser]
         public ActionResult Index()
         {
-            /*if (Session["manager"]  == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                return View();
-            }*/
             return View();
         }
 
@@ -34,10 +27,11 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            mapManager mapped = new mapManager();
-            var accounts = mapped.Login(username, password);
+            var accounts = new mapManager().Login(username, password);
             if(accounts != null)
             {
+                SessionConfig.SetUser(accounts);
+                SessionConfig.GetUser();
                 return RedirectToAction("Index");
             }
             else
@@ -63,6 +57,20 @@ namespace HM.Areas.Admin.Controllers
             return RedirectToAction("Login");
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Register(Manager managers)
+        {
+            var accounts = new mapManager().Register(managers);
+            if(accounts > 0)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
     }
 }

@@ -457,13 +457,13 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .btn-primary {
-    background-color: #009688;
-    border: 1px solid #009688
+    background-color: #FEA116;
+    border: 1px solid #FEA116
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary.active, .btn-primary:active, .open > .dropdown-toggle.btn-primary {
-        background: #009688;
-        border-color: #009688
+        background: #FEA116;
+        border-color: #FEA116
     }
 
         .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary.focus:active, .btn-primary:active:focus, .btn-primary:active:hover, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
@@ -3962,17 +3962,25 @@ card-title {
 
 .buttonedit {
     float: right;
-    border-color: #009688;
+    border-color: #FEA116;
     height: 45px;
-    background: #009688
+    background: #FEA116
 }
 
 .buttonedit1 {
     float: right;
     border-color: transparent;
     height: 45px;
-    background: #009688;
-    border-color: #009688
+    background: #FEA116;
+    border-color: #FEA116
+}
+
+.button-cancel {
+    float: right;
+    height: 45px;
+    border: none;
+    padding-top: 9px;
+    background-color: #d53b3b;
 }
 
 .veiwbutton {

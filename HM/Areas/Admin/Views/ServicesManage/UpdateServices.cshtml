@@ -1,0 +1,64 @@
+﻿@model DAL.Entity.Service
+
+@{
+    ViewBag.Title = "UpdateServices";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title mt-5">Update Services</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="row formtype">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ServiceID)
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Service Name</label>
+                                <input type="text" name="FullName" value="@Model.ServiceName" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="text" name="Address" value="@Model.Price" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Position</label>
+                                <select class="form-control" name="ServiceTypeID">
+                                    @foreach (var item in new DAL.mapServiceType().LoadData())
+                                    {
+                                        <option value="@item.ServiceTypeID" @(item.ServiceTypeID == Model.ServiceTypeID ? "selected" : "")>@item.ServiceTypeName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="Description" id="description" rows="5" class="form-control">@Model.Description</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonedit">Save</button>
+                    <a href="~/Admin/ServicesManage/AllServices" class="btn btn-primary btn-danger" style="float:right; margin-right:8px; padding:10px">Cancel</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

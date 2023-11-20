@@ -30,9 +30,11 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+
 
     <!-- Template Stylesheet -->
-    <link href="~/Assets/css/style.css" rel="stylesheet">
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -68,10 +70,10 @@
                         <div class="col-lg-5 px-5 text-end">
                             <div class="d-inline-flex align-items-center py-2">
                                 @{
-                                    var user = Session["user"] as HM.Models.tb_Customers;
+                                    var user = Session["user"] as HM.Models.Customer;
                                     if (user == null)
                                     {
-                                        <a class="me-0" href="~/Home/Login">Đăng nhập/Đăng ký</a>
+                                        <a class="me-0" href="~/Home/Login">Đăng nhập</a>
                                     }
                                     else
                                     {
@@ -107,10 +109,10 @@
                                 <a href="~/About/About" class="nav-item nav-link @Html.Raw(ViewBag.active == "About" ? "active" : "")"> Giới thiệu </a>
                                 <a href="~/Rooms/Rooms" class="nav-item nav-link @Html.Raw(ViewBag.active == "Rooms" ? "active":"")"> Phòng</a>
                                 <a href="~/Services/Services" class="nav-item nav-link @Html.Raw(ViewBag.active == "Services" ? "active":"")"> Dịch vụ</a>
-                                <a href="~/Blog/Blog" class="nav-item nav-link @Html.Raw(ViewBag.active == "Blog" ? "active":"")"> Blog</a>
+                                <a href="~/Blog/Blog" class="nav-item nav-link @Html.Raw(ViewBag.active == "Blog" ? "active":"")"> Tin tức</a>
                                 <a href="~/Contact/Contact" class="nav-item nav-link @Html.Raw(ViewBag.active == "Contact" ? "active":"")"> Liên hệ </a>
                             </div>
-                            <a href="~/Rooms/Booking" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Booking Now<i class="fa fa-arrow-right ms-3"></i></a>
+                            <a href="~/Rooms/Select_Room" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Booking Now<i class="fa fa-arrow-right ms-3"></i></a>
                         </div>
                     </nav>
                 </div>
@@ -187,10 +189,9 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Continental</a>, All Right Reserved.
-
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a class="border-bottom" href="">leelia</a>
+                            &copy;
+                            <a class="border-bottom" href="#">Continental</a>, All Right Reserved. Designed By
+                            <a class="border-bottom" href="">leelia</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
@@ -221,7 +222,8 @@
     <script src="~/Assets/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="~/Assets/lib/tempusdominus/js/moment.min.js"></script>
     <script src="~/Assets/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="~/Assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"  ></script>
+    <script src="~/Assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
 
     <!-- Template Javascript -->
