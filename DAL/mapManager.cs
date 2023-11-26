@@ -25,13 +25,28 @@ namespace DAL
 
         public int Register(Manager managers)
         {
-            if(managers.UserName == null)
+            if (managers.UserName == null)
             {
                 return 0;
             }
             db.Managers.Add(managers);
             db.SaveChanges();
             return managers.ManagerID;
+        }
+
+        public int InsertForFacebook(Manager manager)
+        {
+            var managers = db.Managers.SingleOrDefault(p => p.UserName == manager.UserName);
+            if (managers == null)
+            {
+                db.Managers.Add(manager);
+                db.SaveChanges();
+                return manager.ManagerID;
+            }
+            else
+            {
+                return managers.ManagerID;
+            }
         }
     }
 }

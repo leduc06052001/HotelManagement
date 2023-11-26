@@ -21,7 +21,7 @@ namespace DAL.Entity
         }
     
         public int BookingID { get; set; }
-        public int CustomerID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public Nullable<int> ServiceID { get; set; }
         public Nullable<int> RoomID { get; set; }
         public Nullable<System.DateTime> BookingDate { get; set; }
