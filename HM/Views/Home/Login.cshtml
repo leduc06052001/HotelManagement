@@ -9,11 +9,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Đăng nhập</title>
+    <link href="~/Assets/plugin/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Assets/plugin/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
     <style>
         body {
-            background-image: url('../../assets/img/background.jpg');
-            background-size: cover;
+            background-color: gainsboro;
             height: 96vh;
             display: flex;
             justify-content: center;
@@ -21,11 +22,11 @@
         }
 
         form {
+            background-color: #fff;
             width: 360px;
-            height: 520px;
+            height: 560px;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(5px);
             border: solid 1px;
             border-radius: 6px;
             align-items: center;
@@ -33,47 +34,50 @@
 
         h5 {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #FEA116;
+            color: #000;
             font-size: 30px;
+            margin-top: 32px;
+            margin-bottom: 22px;
             text-transform: uppercase;
         }
 
-            .login {
-                display: flex;
-                flex-direction: column;
-                width: 86%;
-            }
-
-            input,
-            button {
-                margin: 10px;
-                padding: 10px 15px;
-                border: none;
-                outline: none;
-                border-radius: 52px;
-                font-size: 16px;
-            }
-
-            form input {
-                color: black;
-                font-size: 16px;
-                letter-spacing: 1px;
-                text-indent: 32px;
-                background-image: url('../../assets/img/user.png');
-                background-repeat: no-repeat;
-                background-size: 26px;
-                background-position: 12px;
-            }
-
-        .form input:nth-child(2) {
-            background-image: url('../../assets/img/lock.png');
+        .login {
+            display: flex;
+            flex-direction: column;
+            width: 86%;
         }
 
-        .login input::placeholder {
-            color: rgb(90, 90, 90);
+        input,
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            border-radius: 52px;
+            font-size: 16px;
         }
+
+        form input {
+            height: 22px;
+            color: black;
+            font-size: 16px;
+            border: solid 1px;
+            letter-spacing: 1px;
+            text-indent: 32px;
+            background-image: url(/Assets/img/User.png);
+            background-repeat: no-repeat;
+            background-size: 26px;
+            background-position: 12px;
+        }
+
+        form input:nth-child(2) {
+            background-image: url(/Assets/img/Lock.png);
+        }
+
+        
 
         .login button {
+            height:42px;
             background-color: #FEA116;
             font-weight: bold;
             text-transform: uppercase;
@@ -81,52 +85,134 @@
         }
 
         .suggests {
-            width: 85%;
+            width: 80%;
             display: flex;
-            justify-content: space-between;
+            justify-content: right;
             align-items: center;
             cursor: pointer;
         }
 
             .suggests .forgot a {
-                color: rgb(20, 186, 236);
+                color: darkgray;
                 text-decoration: none;
                 cursor: pointer;
             }
-        .register{
+
+        .forgot a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .login-or {
+            color: #a0a0a0;
+            margin-top: 18px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .or-line {
+            background-color: #e5e5e5;
+            height: 1px;
+            margin-bottom: 0;
+            margin-top: 0;
+            display: block;
+        }
+
+        .span-or {
+            display: block;
+            left: 50%;
+            margin-left: -20px;
+            position: absolute;
+            text-align: center;
+            text-transform: uppercase;
+            top: 0;
+            width: 42px;
+        }
+
+        .social-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+            .social-login a {
+                background-color: #ccc;
+                border-radius: 20px;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                height: 42px;
+                line-height: 32px;
+                margin: 6px;
+                text-align: center;
+                width: 288px;
+                text-decoration: none;
+            }
+
+                .social-login a.facebook {
+                    background-color: #4b75bd;
+                }
+
+                .social-login a.google {
+                    background-color: #fe5240;
+                }
+
+                .social-login a .fa-facebook {
+                    margin-right: 12px;
+                }
+
+                .social-login a .fa-google {
+                    margin-right: 12px;
+                }
+
+        .register {
             margin-top: 16px;
         }
-            
-            .register a {
-                color:blue;
-                text-decoration:none;
+
+            .register .register-question {
+                color: #000;
             }
+
+            .register a {
+                color: #FEA116;
+                text-decoration: none;
+            }
+
+                .register a:hover {
+                    text-decoration: underline;
+                }
     </style>
 </head>
 
 <body>
     <form method="post">
-        <h5>Login</h5>
+        <h5>Đăng nhập</h5>
         <div class="login">
             <input type="email" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password">
-            <button type="submit">Sign in</button>
+            <input type="password" name="password" placeholder="Mật khẩu">
+            <button type="submit">Đăng nhập</button>
         </div>
 
         <div class="suggests">
-            <div class="remember">
-                <input type="checkbox" checked>
-                <span>Remember Me</span>
-            </div>
-
             <div class="forgot">
-                <a href="">Forgot Password</a>
+                <a href="">Quên mật khẩu?</a>
             </div>
         </div>
 
+        <div class="login-or"> <span class="or-line"></span> <span class="span-or">hoặc</span> </div>
+        <div class="social-login">
+            <a href="~/Home/LoginFacebook" class="facebook"><i class="fab fa-facebook"></i> Đăng nhập với facebook</a>
+            <a href="~/Home/LoginGoogle" class="google"><i class="fab fa-google"></i>Đăng nhập với google</a>
+        </div>
+
         <div class="register">
-            <span>Don't have an account?</span>
-            <a href="~/Home/Register">Register</a>
+            <span class="register-question">Chưa có tài khoản?</span>
+            <a href="~/Home/Register">Đăng ký</a>
         </div>
     </form>
 </body>

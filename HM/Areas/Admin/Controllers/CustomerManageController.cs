@@ -2,6 +2,7 @@
 using DAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,9 +11,11 @@ namespace HM.Areas.Admin.Controllers
 {
     public class CustomerManageController : Controller
     {
-        public ActionResult AllCustomer()
-        { 
-            return View(new mapCustomer().LoadData());
+        public ActionResult AllCustomer(string fullName, string email, int page = 1, int pageSize = 10)
+        {
+            ViewBag.fullName = fullName; 
+            ViewBag.email = email;
+            return View(new mapCustomer().LoadPage(fullName, email, page, pageSize));
         }
 
         //------------------* CREATE *------------------//
@@ -25,7 +28,7 @@ namespace HM.Areas.Admin.Controllers
         public ActionResult AddCustomer(Customer customer)
         {
             var data = new mapCustomer().AddCustomer(customer);
-            if(data > 0)
+            if (data > 0)
             {
                 return RedirectToAction("AllCustomer");
             }
@@ -44,9 +47,9 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateCustomer(Customer customer, HttpPostedFileBase fileImage)
         {
-            if(fileImage != null)
+            if (fileImage != null)
             {
-                if(fileImage.ContentLength > 0)
+                if (fileImage.ContentLength > 0)
                 {
                     //Lấy đường dẫn
                     string _path = "/Areas/Admin/assets/img/profiles/";
@@ -66,7 +69,7 @@ namespace HM.Areas.Admin.Controllers
 
             // Xử lý cập nhật
             var mapped = new mapCustomer();
-            if(mapped.UpdateCustomer(customer) == true)
+            if (mapped.UpdateCustomer(customer) == true)
             {
                 return RedirectToAction("AllCustomer");
             }

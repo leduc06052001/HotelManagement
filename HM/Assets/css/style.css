@@ -202,6 +202,26 @@
     }
 }
 
+.dropdown-menu {
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 3px;
+    transform-origin: left top 0;
+    box-shadow: inherit;
+    background-color: #fff;
+}
+
+.user-menu {
+    float: right;
+    margin: 10px;
+    position: relative;
+    z-index: 99;
+}
+
+    .user-menu .dropdown-menu {
+        min-width: 200px;
+        padding: 0;
+    }
+
 
 /*** Header ***/
 .carousel-caption {

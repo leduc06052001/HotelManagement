@@ -1,4 +1,4 @@
-﻿
+﻿@model DAL.Entity.Manager
 @{
     Layout = null;
 }
@@ -30,23 +30,21 @@
                             <h1 class="mb-3">Đăng ký tài khoản</h1>
                             <form method="post">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="Username" placeholder="Name">
+                                    <input class="form-control" type="text" name="UserName" placeholder="Tên của bạn">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" type="text" name="Email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="Password" placeholder="Password">
+                                    <input class="form-control" type="password" name="Password" placeholder="Mật khẩu">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="confirm_password" placeholder="Confirm Password">
+                                    <input class="form-control" type="password" name="ConfirmPassword" placeholder="Nhập lại mật khẩu">
                                 </div>
                                 <div class="form-group mb-0">
                                     <button class="btn btn-primary btn-block" type="submit">Đăng ký</button>
                                 </div>
                             </form>
-                            <div class="login-or"> <span class="or-line"></span> <span class="span-or">or</span> </div>
-                            <div class="social-login"> <span>Đăng ký với</span> <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="google"><i class="fab fa-google"></i></a> </div>
                             <div class="text-center dont-have">Bạn đã có tài khoản? <a href="~/admin/dashboard/login">Đăng nhập</a> </div>
                         </div>
                     </div>

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿
+@using HM.Common;
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -69,30 +72,25 @@
                         </div>
                         <div class="col-lg-5 px-5 text-end">
                             <div class="d-inline-flex align-items-center py-2">
+
                                 @{
-                                    var user = Session["user"] as HM.Models.Customer;
-                                    if (user == null)
+                                    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                                    if (session == null)
                                     {
                                         <a class="me-0" href="~/Home/Login">Đăng nhập</a>
                                     }
                                     else
                                     {
                                         <div class="nav-item dropdown has-arrow">
-                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="~/Areas/Admin/assets/img/profiles/avatar-01.jpg" width="31" alt="Admin"></span> </a>
+                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> @session.UserName</a>
                                             <div class="dropdown-menu">
-                                                <div class="user-header">
-                                                    <div class="avatar avatar-sm"> <img src="~/Assets/img/about-1.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
-                                                    <div class="user-text">
-                                                        @{
-                                                            @user.FullName
-                                                        }
-                                                    </div>
-                                                </div> <a class="dropdown-item" href="profile.html">My Profile</a>
-                                                <a class="dropdown-item" href="~/Home/Logout">Logout</a>
+                                                <a class="dropdown-item" href="profile.html">Trang cá nhân</a>
+                                                <a class="dropdown-item" href="~/Home/Logout">Đăng xuất</a>
                                             </div>
                                         </div>
                                     }
                                 }
+
                             </div>
                         </div>
                     </div>

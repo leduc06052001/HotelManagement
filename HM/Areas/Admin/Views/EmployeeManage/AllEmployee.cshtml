@@ -4,6 +4,7 @@
     ViewBag.Title = "AllEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     int num = 1;
+    var position = new DAL.mapPositon().LoadData();
 }
 
 <div class="page-wrapper">
@@ -36,12 +37,12 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Role</label>
-                                <select class="form-control" id="sel1" name="sellist1">
+                                <select class="form-control" name="PositionID">
                                     <option>Select</option>
-                                    <option>Staff</option>
-                                    <option>Manager</option>
-                                    <option>Receptionalist</option>
-                                    <option>Accountant</option>
+                                    @foreach(var item in position )
+                                    {
+                                        <option value="@item.PositionID">@item.PositionName</option>
+                                    }
                                 </select>
                             </div>
                         </div>

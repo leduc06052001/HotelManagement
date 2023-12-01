@@ -27,15 +27,15 @@
                     <div class="login-left"> <img class="img-fluid" src="~/Areas/Admin/assets/img/logo.png" alt="Logo"> </div>
                     <div class="login-right">
                         <div class="login-right-wrap">
-                            <h1>Đăng nhập</h1>
-                            <p class="account-subtitle">Access to our dashboard</p>
+                            <h1 class="text-uppercase">Artemis Hotel</h1>
+                            <p class="account-subtitle">Đăng nhập để truy cập trang quản lý</p>
                             <form method="post">
                                 <h8 class="text-danger">@ViewBag.error</h8>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="username" placeholder="Username">
+                                    <input class="form-control" type="text" name="username" placeholder="Tên đăng nhập">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="password" placeholder="Password">
+                                    <input class="form-control" type="password" name="password" placeholder="Mật khẩu">
                                 </div>
 
                                 <div class="form-group">
@@ -43,12 +43,12 @@
                                 </div>
                             </form>
                             <div class="text-center forgotpass"><a href="forgot-password.html">Bạn quên mật khẩu?</a> </div>
-                            <div class="login-or"> <span class="or-line"></span> <span class="span-or">hoặc</span> </div>
+                            @*<div class="login-or"> <span class="or-line"></span> <span class="span-or">hoặc</span> </div>
                             <div class="social-login">
                                 <span>Đăng nhập với</span> 
                                 <a href="~/Admin/Dashboard/LoginFacebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
                                 <a href="~/Admin/Dashboard/LoginGoogle" class="google"><i class="fab fa-google"></i></a>
-                            </div>
+                            </div>*@
                             <div class="text-center dont-have">Chưa có tài khoản? <a href="~/admin/dashboard/register">Đăng ký ngay</a></div>
                         </div>
                     </div>

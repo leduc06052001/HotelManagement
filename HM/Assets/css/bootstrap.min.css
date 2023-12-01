@@ -3868,6 +3868,17 @@ fieldset:disabled .btn {
         margin-top: .125rem
     }
 
+.dropdown-menu .show{
+    display:block;
+}
+
+.dropdown-account {
+    position: absolute;
+    transform: translate3d(-80px, -5px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}
 .dropdown-menu-start {
     --bs-position: start
 }

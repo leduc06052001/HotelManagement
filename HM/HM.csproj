@@ -252,6 +252,7 @@
     <Compile Include="Areas\Admin\Controllers\ServicesManageController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\SessionUser.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Models\Invoice.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Manager.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -345,6 +347,7 @@
     <Content Include="Areas\Admin\assets\img\product\product-06.jpg" />
     <Content Include="Areas\Admin\assets\img\product\product-07.jpg" />
     <Content Include="Areas\Admin\assets\img\product\product-08.jpg" />
+    <Content Include="Areas\Admin\assets\img\profiles\admin-avatar.jpg" />
     <Content Include="Areas\Admin\assets\img\profiles\avartar_01.jpg" />
     <Content Include="Areas\Admin\assets\img\profiles\avartar_02.jpg" />
     <Content Include="Areas\Admin\assets\img\profiles\avatar-03.jpg" />
@@ -834,6 +837,7 @@
     <Content Include="Assets\img\feature.jpg" />
     <Content Include="Assets\img\icons_discount_60px.png" />
     <Content Include="Assets\img\Lock.png" />
+    <Content Include="Assets\img\background1.jpg" />
     <Content Include="Assets\img\logo\icons8_cent_500px.png" />
     <Content Include="Assets\img\room-1.jpg" />
     <Content Include="Assets\img\room-2.jpg" />
@@ -875,6 +879,12 @@
     <Content Include="Assets\lib\waypoints\waypoints.min.js" />
     <Content Include="Assets\lib\wow\wow.js" />
     <Content Include="Assets\lib\wow\wow.min.js" />
+    <Content Include="Assets\plugin\fontawesome\css\all.css" />
+    <Content Include="Assets\plugin\fontawesome\css\all.min.css" />
+    <Content Include="Assets\plugin\fontawesome\css\fontawesome.min.css" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -1086,6 +1096,21 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\RoomType\RoomType.cshtml" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-brands-400-1.eot" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-regular-400-1.eot" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-solid-900-1.eot" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Assets\plugin\fontawesome\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

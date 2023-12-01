@@ -1,6 +1,7 @@
 ﻿using DAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,21 +33,6 @@ namespace DAL
             db.Managers.Add(managers);
             db.SaveChanges();
             return managers.ManagerID;
-        }
-
-        public int InsertForFacebook(Manager manager)
-        {
-            var managers = db.Managers.SingleOrDefault(p => p.UserName == manager.UserName);
-            if (managers == null)
-            {
-                db.Managers.Add(manager);
-                db.SaveChanges();
-                return manager.ManagerID;
-            }
-            else
-            {
-                return managers.ManagerID;
-            }
         }
     }
 }
