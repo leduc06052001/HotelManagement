@@ -17,7 +17,7 @@ namespace HM.Areas.Admin.Controllers
 
     public class DashboardController : Controller
     {
-        [RoleUser]
+        [RoleAdmin]
         public ActionResult Index()
         {
             return View();
@@ -34,8 +34,8 @@ namespace HM.Areas.Admin.Controllers
             var accounts = new mapManager().Login(username, password);
             if (accounts != null)
             {
-                SessionConfig.SetUser(accounts);
-                SessionConfig.GetUser();
+                AdminSessionConfig.SetUser(accounts);
+                AdminSessionConfig.GetUser();
                 return RedirectToAction("Index");
             }
             else

@@ -1,8 +1,8 @@
-﻿@model DAL.Entity.OrderDetail
+﻿@model DAL.Entity.Booking
 @{
     ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var roomDetail = new DAL.mapOrder().
+    DAL.Entity.Room room = ViewBag.RoomDetail;
 }
 
 <!-- Page Header Start -->
@@ -31,12 +31,12 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="room-item shadow rounded overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="@Model.Room.Image" alt="notset">
-                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4" style="font-size: 16px; font-weight:bold;"> / đêm</small>
+                        <img class="img-fluid" src="~/Assets/img/room-1.jpg" alt="notset">
+                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4" style="font-size: 16px; font-weight:bold;">@room.Price /đêm</small>
                     </div>
                     <div class="p-4 mt-2">
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="select-room">@Model.Room.RoomType.RoomTypeName</span>
+                            <span class="select-room">@room.RoomType.RoomTypeName</span>
                             <div class="ps-2">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -46,93 +46,103 @@
                             </div>
                         </div>
                         <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i> giường</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i> phòng tắm</small>
+                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>@room.Bed giường</small>
+                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>@room.Bath phòng tắm</small>
                             <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                         </div>
-                        <p class="text-body mb-3"></p>
-                        
+                        <p class="text-body mb-3">@room.Description</p>
+
                     </div>
                 </div>
-
             </div>
 
             <div class="col-lg-6">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
-                    <form>
+                    @using (Html.BeginForm("Booking", "Bookings", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
                         <div class="row g-3">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.RoomID)
+                            @Html.HiddenFor(model => model.BookingID)
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" name="FullName" required placeholder="Họ Tên">
+                                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ tên" } })
                                     <label for="FullName">Họ tên</label>
+                                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" required placeholder="Email">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
                                     <label for="email">Email</label>
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" id="checkin" placeholder="Check In" />
+                                    @Html.EditorFor(model => model.CheckinDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Check In", type = "date" } })
                                     <label for="checkin">Check In</label>
+                                    @Html.ValidationMessageFor(model => model.CheckinDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" id="checkout" placeholder="Check Out" />
-                                    <label for="checkout">Check Out</label>
+                                    @Html.EditorFor(model => model.CheckoutDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Check Out", type = "date" } })
+                                    <label for="checkin">Check Out</label>
+                                    @Html.ValidationMessageFor(model => model.CheckoutDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="select1">
+                                    <select class="form-select" name="Adult">
                                         @for (int i = 1; i < 10; i++)
                                         {
                                             <option value="@i">@i</option>
                                         }
                                     </select>
-                                    <label for="select1">Người lớn</label>
+                                    <label>Người lớn</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="select2">
+                                    <select class="form-select" name="Child">
                                         @for (int i = 0; i < 10; i++)
                                         {
                                             <option value="@i">@i</option>
                                         }
                                     </select>
-                                    <label for="select2">Trẻ em</label>
+                                    <label>Trẻ em</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input class="form-control" id="phone_number" required min="10" maxlength="11" placeholder="Số điện thoại của bạn" />
-                                    <label for="phone_number">Số điện thoại</label>
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điện thoại" } })
+                                    <label>Số điện thoại</label>
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Mã ưu đãi">
-                                    <label for="name">Mã ưu đãi (nếu có)</label>
+                                    @Html.EditorFor(model => model.PromotionCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mã ưu đãi" } })
+                                    <label>Mã ưu đãi (nếu có)</label>
+                                    @Html.ValidationMessageFor(model => model.PromotionCode, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                                    <label for="message">Ghi chú</label>
+                                    <textarea class="form-control" name="Note" placeholder="Ghi chú" style="height: 100px"></textarea>
+                                    <label>Ghi chú</label>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Thanh toán</button>
                             </div>
-
                         </div>
-                    </form>
+                    }
                 </div>
             </div>
         </div>

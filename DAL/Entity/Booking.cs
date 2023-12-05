@@ -11,7 +11,8 @@ namespace DAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Booking
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,20 +22,23 @@ namespace DAL.Entity
         }
     
         public int BookingID { get; set; }
-        public Nullable<int> CustomerID { get; set; }
         public Nullable<int> ServiceID { get; set; }
-        public Nullable<int> RoomID { get; set; }
+        public int RoomID { get; set; }
+
+        [Required(ErrorMessage = "Please enter your name")]
+        public string CustomerName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
         public Nullable<System.DateTime> BookingDate { get; set; }
-        public Nullable<System.DateTime> ChekinDate { get; set; }
+        public Nullable<System.DateTime> CheckinDate { get; set; }
         public Nullable<System.DateTime> CheckoutDate { get; set; }
         public Nullable<int> Adult { get; set; }
         public Nullable<int> Child { get; set; }
+        public string PromotionCode { get; set; }
         public Nullable<int> PaymentStatus { get; set; }
-        public Nullable<int> OrderID { get; set; }
         public string Note { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual OrderDetail OrderDetail { get; set; }
         public virtual Room Room { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

@@ -7,17 +7,16 @@ using System.Web.Routing;
 
 namespace HM.App_Start
 {
-    public class RoleUser : AuthorizeAttribute
+    public class RoleAdmin : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             /*base.OnAuthorization(filterContext);*/
-            var User = SessionConfig.GetUser();
-            if(User == null)
+            var user = AdminSessionConfig.GetUser();
+            if (user == null)
             {
-                //user null thì chuyển hướng về trang chủ
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
-                new{
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                {
                     controller = "Dashboard",
                     action = "Login",
                     area = "Admin"
@@ -26,5 +25,6 @@ namespace HM.App_Start
             }
             return;
         }
+
     }
 }

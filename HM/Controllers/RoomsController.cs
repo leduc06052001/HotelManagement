@@ -16,11 +16,6 @@ namespace QL_khachSan.Controllers
             return View();
         }
 
-        public ActionResult Booking()
-        {
-            return View();
-        }
-
         public ActionResult RoomList()
         {
             return View();
@@ -34,16 +29,6 @@ namespace QL_khachSan.Controllers
                 return HttpNotFound();
             }
             return View(rooms);
-        }
-
-        [HttpPost]
-        public ActionResult RoomDetail(OrderDetail order)
-        {
-            if(new mapOrder().AddOrder(order) > 0)
-            {
-                return RedirectToAction("Booking");
-            }
-            return View(order);
         }
 
         public ActionResult Select_Room()

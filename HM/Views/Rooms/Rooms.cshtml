@@ -101,7 +101,7 @@
                             <p class="text-body mb-3">@rooms.Description</p>
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-sm btn-primary rounded py-2 px-4" href="~/Rooms/RoomDetail?id=@rooms.RoomID">Xem chi tiết</a>
-                                <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Đặt ngay</a>
+                                <a class="btn btn-sm btn-dark rounded py-2 px-4" href="@Url.Action("Booking", "Bookings", new {@id=rooms.RoomID}, null)">Đặt ngay</a>
                             </div>
                         </div>
                     </div>

@@ -14,12 +14,6 @@ namespace DAL.Entity
     
     public partial class OrderDetail
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OrderDetail()
-        {
-            this.Bookings = new HashSet<Booking>();
-        }
-    
         public int OrderID { get; set; }
         public Nullable<System.DateTime> CheckInDate { get; set; }
         public Nullable<System.DateTime> CheckOutDate { get; set; }
@@ -27,8 +21,6 @@ namespace DAL.Entity
         public Nullable<int> Child { get; set; }
         public Nullable<int> RoomID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual Room Room { get; set; }
     }
 }

@@ -5,24 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9c0ec8691ac24ed3a1ed2ad31c5ffd81" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="HMModel.Booking" Width="1.5" PointX="6" PointY="0.75" />
-        <EntityTypeShape EntityType="HMModel.Customer" Width="1.5" PointX="3.75" PointY="1" />
-        <EntityTypeShape EntityType="HMModel.Employee" Width="1.5" PointX="6" PointY="17.5" />
-        <EntityTypeShape EntityType="HMModel.Invoice" Width="1.5" PointX="8.25" PointY="1.25" />
-        <EntityTypeShape EntityType="HMModel.Manager" Width="1.5" PointX="13.25" PointY="5.625" />
-        <EntityTypeShape EntityType="HMModel.News" Width="1.5" PointX="8.5" PointY="5.5" />
-        <EntityTypeShape EntityType="HMModel.OrderDetail" Width="1.5" PointX="3.75" PointY="9.875" />
-        <EntityTypeShape EntityType="HMModel.Payment" Width="1.5" PointX="10.5" PointY="1.375" />
-        <EntityTypeShape EntityType="HMModel.Position" Width="1.5" PointX="3.75" PointY="18" />
-        <EntityTypeShape EntityType="HMModel.Promotion" Width="1.5" PointX="1.5" PointY="1.5" />
-        <EntityTypeShape EntityType="HMModel.Room" Width="1.5" PointX="1.5" PointY="9.5" />
-        <EntityTypeShape EntityType="HMModel.RoomType" Width="1.5" PointX="2.25" PointY="14.375" />
-        <EntityTypeShape EntityType="HMModel.Search" Width="1.5" PointX="8.5" PointY="8.5" />
-        <EntityTypeShape EntityType="HMModel.Service" Width="1.5" PointX="3.75" PointY="6.25" />
-        <EntityTypeShape EntityType="HMModel.ServiceType" Width="1.5" PointX="1.5" PointY="6.75" />
-        <EntityTypeShape EntityType="HMModel.sysdiagram" Width="1.5" PointX="10.5" PointY="5.5" />
-        <AssociationConnector Association="HMModel.FK_Bookings_Customers" />
-        <AssociationConnector Association="HMModel.FK_Bookings_OrderDetail" />
+        <EntityTypeShape EntityType="HMModel.Booking" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="HMModel.Customer" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="HMModel.Employee" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="HMModel.Invoice" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="HMModel.Manager" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="HMModel.News" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="HMModel.OrderDetail" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="HMModel.Payment" Width="1.5" PointX="7.5" PointY="1.25" />
+        <EntityTypeShape EntityType="HMModel.Position" Width="1.5" PointX="0.75" PointY="25" />
+        <EntityTypeShape EntityType="HMModel.Promotion" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="HMModel.Room" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="HMModel.RoomType" Width="1.5" PointX="1.5" PointY="14.875" />
+        <EntityTypeShape EntityType="HMModel.Search" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="HMModel.Service" Width="1.5" PointX="0.75" PointY="18.125" />
+        <EntityTypeShape EntityType="HMModel.ServiceType" Width="1.5" PointX="1.5" PointY="21.5" />
+        <EntityTypeShape EntityType="HMModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" />
         <AssociationConnector Association="HMModel.FK_Bookings_Rooms" />
         <AssociationConnector Association="HMModel.FK_Invoices_Bookings" />
         <AssociationConnector Association="HMModel.FK_tb_Bookings_tb_Services" />

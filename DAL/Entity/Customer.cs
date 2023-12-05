@@ -17,7 +17,6 @@ namespace DAL.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Bookings = new HashSet<Booking>();
             this.Invoices = new HashSet<Invoice>();
             this.Payments = new HashSet<Payment>();
         }
@@ -34,8 +33,6 @@ namespace DAL.Entity
         public string Image { get; set; }
         public Nullable<int> PromotionID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual Promotion Promotion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

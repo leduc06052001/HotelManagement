@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HM.App_Start
 {
-    public static class SessionConfig
+    public static class AdminSessionConfig
     {
         //Lưu session
         public static void SetUser(Manager manager)

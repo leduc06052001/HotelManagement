@@ -127,7 +127,6 @@
     <Compile Include="mapEmployee.cs" />
     <Compile Include="mapManager.cs" />
     <Compile Include="mapNews.cs" />
-    <Compile Include="mapOrder.cs" />
     <Compile Include="mapPositon.cs" />
     <Compile Include="mapPromotion.cs" />
     <Compile Include="mapRoom.cs" />
