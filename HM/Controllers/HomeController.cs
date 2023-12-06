@@ -2,11 +2,14 @@
 using DAL.Entity;
 using Facebook;
 using HM.Common;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -139,15 +142,9 @@ namespace QL_khachSan.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult BookingDetail()
+        public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult BookingDetail(Search search)
-        {
-            return View();
-        }
-    }
 }

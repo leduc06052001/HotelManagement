@@ -775,6 +775,7 @@
     <Content Include="Assets\img\feature-3.jpg" />
     <Content Include="Assets\img\feature-4.jpg" />
     <Content Include="Assets\img\feature.jpg" />
+    <Content Include="Assets\img\gmail-login.png" />
     <Content Include="Assets\img\icons_discount_60px.png" />
     <Content Include="Assets\img\Lock.png" />
     <Content Include="Assets\img\background1.jpg" />
@@ -841,7 +842,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\templateEmail\EmailOrder.html" />
+    <Content Include="Content\templateEmail\SendEmailtoCustomer.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1071,6 +1072,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Rooms\Select_Room.cshtml" />
     <Content Include="Views\Bookings\Booking.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1109,6 +1111,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{B88B27A1-9705-4AB3-8E47-5E4728BE0917}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{7d304ea4-d7ee-4860-9ae3-83f7b087adac}</Project>
       <Name>DAL</Name>
