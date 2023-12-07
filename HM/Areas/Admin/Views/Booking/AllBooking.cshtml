@@ -13,14 +13,46 @@
             <div class="row align-items-center">
                 <div class="col">
                     <div class="mt-5">
-                        <h4 class="card-title float-left mt-2">Đơn đặt phòng</h4>
-                        <a href="add-booking.html" class="btn btn-primary float-right veiwbutton ">
+                        <h4 class="card-title float-left mt-2">All Bookings</h4>
+                        <a href="~/Admin/Booking/AddBooking" class="btn btn-primary float-right veiwbutton ">
                             Add Booking
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--Start Search-->
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    <div class="row formtype">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Customer Name</label>
+                                <input class="form-control" type="text" value="@ViewBag.customerName" name="customerName">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" type="text" value="@ViewBag.email" name="email">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Search</label>
+                                <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Search </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--End Search-->
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="card card-table">
@@ -40,7 +72,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Note</th>
-                                        <th>Status</th>
+                                        <th class="text-right">Total</th>
                                         <th class="text-right">Actions</th>
                                     </tr>
                                 </thead>
@@ -48,28 +80,26 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@num++</td>
+                                            <td>@(num++)</td>
                                             <td>
-                                                <a href="#">@item.Customer.FullName</a>
+                                                <a href="#">@item.CustomerName</a>
                                             </td>
                                             <td>@item.Room.RoomType.RoomTypeName</td>
                                             <td>@item.Adult</td>
                                             <td>@item.Child</td>
-                                            <td>@item.BookingDate</td>
-                                            <td>@item.ChekinDate</td>
-                                            <td>@item.CheckoutDate</td>
-                                            <td>@item.Customer.Email</td>
-                                            <td>@item.Customer.Phone</td>
+                                            <td>@string.Format("{0:dd-MM-yyyy}", item.BookingDate)</td>
+                                            <td>@string.Format("{0:dd-MM-yyyy}", item.CheckinDate)</td>
+                                            <td>@string.Format("{0:dd-MM-yyyy}", item.CheckoutDate)</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Phone</td>
                                             <td>@item.Note</td>
-                                            <td>
-                                                <div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">Active</a> </div>
-                                            </td>
+                                            <td class="text-right">@string.Format("{0:#,0}", item.TotalAmount)</td>
                                             <td class="text-right">
                                                 <div class="dropdown dropdown-action">
                                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <i class="fas fa-ellipsis-v ellipse_color"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="edit-booking.html"> <i class="fas fa-pencil-alt m-r-5"></i> Edit </a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"> <i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+                                                        <a class="dropdown-item" href="~/Admin/Booking/EditBooking?id=@item.BookingID"> <i class="fas fa-pencil-alt m-r-5"></i> Edit </a>
+                                                        <a class="dropdown-item" onclick="if (confirm('Are you want to delete?') == true) { location.href='/Admin/Booking/DeleteBooking?id=@item.BookingID' }"> <i class="fas fa-trash-alt m-r-5"></i> Delete</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -84,19 +114,4 @@
             </div>
         </div>
     </div>
-    <div id="delete_asset" class="modal fade delete-modal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <img src="assets/img/sent.png" alt="" width="50" height="46">
-                    <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
-                    <div class="m-t-20">
-                        <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-

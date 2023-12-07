@@ -20,5 +20,6 @@ namespace DAL.Entity
         public Nullable<System.DateTime> PublishDate { get; set; }
         public string Image { get; set; }
         public string NewsContent { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

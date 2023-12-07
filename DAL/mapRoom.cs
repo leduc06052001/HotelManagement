@@ -51,6 +51,7 @@ namespace DAL
             roomInfo.Bath = room.Bath;
             roomInfo.Price = room.Price;
             roomInfo.Image = room.Image;
+            roomInfo.IsActive = room.IsActive;
             roomInfo.Description = room.Description;
             db.SaveChanges();
             return true;

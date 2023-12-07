@@ -68,8 +68,8 @@ namespace HM.Areas.Admin.Controllers
             }
 
             // Xử lý cập nhật
-            var mapped = new mapCustomer();
-            if (mapped.UpdateCustomer(customer) == true)
+            var customerInfo = new mapCustomer();
+            if (customerInfo.UpdateCustomer(customer) == true)
             {
                 return RedirectToAction("AllCustomer");
             }

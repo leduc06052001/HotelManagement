@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     var roomType = new DAL.mapRoomType().LoadData();
     int num = 0;
-    
+
 
 }
 
@@ -20,13 +20,14 @@
                 </div>
             </div>
         </div>
+        <!--Start Search-->
         <div class="row">
             <div class="col-lg-12">
                 <form method="post">
                     <div class="row formtype">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Room Number</label>
+                                <label>Customer Name</label>
                                 <input class="form-control" type="text" value="">
                             </div>
                         </div>
@@ -35,8 +36,8 @@
                                 <label>Room Type</label>
                                 <select class="form-control" name="RoomTypeID">
                                     <option>Select</option>
-                                    @foreach (var item in roomType) 
-                                    { 
+                                    @foreach (var item in roomType)
+                                    {
                                         <option value="@item.RoomTypeID">@item.RoomTypeName</option>
                                     }
                                 </select>
@@ -51,6 +52,8 @@
                 </form>
             </div>
         </div>
+        <!--End Search-->
+
         <div class="row">
             <div class="col-sm-12">
                 <form method="post">
@@ -64,11 +67,11 @@
                                             <th style="text-align:center">@Html.DisplayNameFor(model => model.RoomNumber)</th>
                                             <th>@Html.DisplayNameFor(model => model.RoomType)</th>
                                             <th style="text-align:center">@Html.DisplayNameFor(model => model.Bed)</th>
-                                            <th style="text-align:right">@Html.DisplayNameFor(model => model.Price)</th>
-                                            <th style="text-align:center">@Html.DisplayNameFor(model => model.Status)</th>
                                             <th style="text-align:center">@Html.DisplayNameFor(model => model.Bath)</th>
+                                            <th style="text-align:right">@Html.DisplayNameFor(model => model.Price)</th>
                                             <th>@Html.DisplayNameFor(model => model.Image)</th>
                                             <th>@Html.DisplayNameFor(model => model.Description)</th>
+                                            <th style="text-align:center">@Html.DisplayNameFor(model => model.IsActive)</th>
                                             <th class="text-right">Actions</th>
                                         </tr>
                                     </thead>
@@ -81,13 +84,15 @@
                                                 <td style="text-align:center">@item.RoomNumber</td>
                                                 <td>@item.RoomType.RoomTypeName</td>
                                                 <td style="text-align:center">@item.Bed</td>
-                                                <td style="text-align:right">@string.Format("{0:#,0}", item.Price)</td>
-                                                <td style="text-align:center">@item.Status</td>
                                                 <td style="text-align:center">@item.Bath</td>
+                                                <td style="text-align:right">@string.Format("{0:#,0}", item.Price)</td>
                                                 <td>
                                                     <img src="@item.Image" style="width: 80px; height: 50px" alt="image" />
                                                 </td>
                                                 <td>@item.Description</td>
+                                                <td style="text-align:center">
+                                                    <input type="checkbox" @Html.Raw(item.IsActive == true ? "checked" : "") />
+                                                </td>
                                                 <td class="text-right">
                                                     <div class="dropdown dropdown-action">
                                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -99,7 +104,7 @@
                                                                 Edit
                                                             </a>
                                                             <a class="dropdown-item" href="~/Admin/RoomManage/DeleteRoom?id=@item.RoomID">
-                                                                <i class="fas fa-trash-alt m-r-5"></i>
+                                                                <i class="fas fa-trash-alt m-r-5 delete_asset"></i>
                                                                 Delete
                                                             </a>
                                                         </div>
@@ -117,18 +122,20 @@
         </div>
     </div>
 
-    <div id="delete_asset" class="modal fade delete-modal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <img src="assets/img/sent.png" alt="" width="50" height="46">
-                    <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
-                    <div class="m-t-20">
-                        <a href="" class="btn btn-white" data-dismiss="modal">Close</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+    <form method="post">
+        <div id="delete_asset" class="modal fade delete-modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <img src="assets/img/sent.png" alt="" width="50" height="46">
+                        <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
+                        <div class="m-t-20">
+                            <a href="" class="btn btn-white" data-dismiss="modal">Close</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

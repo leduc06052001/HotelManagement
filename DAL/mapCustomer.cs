@@ -55,7 +55,7 @@ namespace DAL
             {
                 data = data.Where(p => p.Email.ToLower().Contains(email));
             }
-            return data.OrderBy(p=>p.FullName).Skip((page - 1) * size).Take(size).ToList();
+            return data.OrderBy(p => p.FullName).Skip((page - 1) * size).Take(size).ToList();
         }
 
         public List<Customer> Filter(string fullName, string email)

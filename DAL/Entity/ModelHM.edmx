@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Accounts">
+          <Property Name="AccountID" Type="int" />
+          <Property Name="AccountType" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
         <EntityType Name="Bookings">
           <Key>
             <PropertyRef Name="BookingID" />
@@ -15,13 +21,13 @@
           <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nchar" MaxLength="100" />
           <Property Name="Phone" Type="char" MaxLength="10" />
+          <Property Name="IdentifyNo" Type="char" MaxLength="12" />
           <Property Name="BookingDate" Type="date" />
           <Property Name="CheckinDate" Type="date" />
           <Property Name="CheckoutDate" Type="date" />
           <Property Name="Adult" Type="int" />
           <Property Name="Child" Type="int" />
           <Property Name="PromotionCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="PaymentStatus" Type="int" />
           <Property Name="Note" Type="nvarchar" MaxLength="200" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
@@ -90,6 +96,7 @@
           <Property Name="PublishDate" Type="date" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="NewsContent" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -148,6 +155,7 @@
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="RoomTypeID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="RoomTypes">
           <Key>
@@ -584,13 +592,13 @@
           <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IdentifyNo" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
           <Property Name="BookingDate" Type="DateTime" Precision="0" />
           <Property Name="CheckinDate" Type="DateTime" Precision="0" />
           <Property Name="CheckoutDate" Type="DateTime" Precision="0" />
           <Property Name="Adult" Type="Int32" />
           <Property Name="Child" Type="Int32" />
           <Property Name="PromotionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentStatus" Type="Int32" />
           <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Room" Relationship="HMModel.FK_Bookings_Rooms" FromRole="Booking" ToRole="Room" />
@@ -671,6 +679,7 @@
           <Property Name="PublishDate" Type="DateTime" Precision="0" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewsContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -736,6 +745,7 @@
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoomTypeID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="Bookings" Relationship="HMModel.FK_Bookings_Rooms" FromRole="Room" ToRole="Booking" />
           <NavigationProperty Name="OrderDetails" Relationship="HMModel.FK_OrderDetail_Rooms" FromRole="Room" ToRole="OrderDetail" />
           <NavigationProperty Name="RoomType" Relationship="HMModel.FK_Rooms_RoomType" FromRole="Room" ToRole="RoomType" />
@@ -988,13 +998,13 @@
               <MappingFragment StoreEntitySet="Bookings">
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
                 <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
                 <ScalarProperty Name="Child" ColumnName="Child" />
                 <ScalarProperty Name="Adult" ColumnName="Adult" />
                 <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
                 <ScalarProperty Name="CheckinDate" ColumnName="CheckinDate" />
                 <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="IdentifyNo" ColumnName="IdentifyNo" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -1066,6 +1076,7 @@
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="HMModel.News">
               <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
@@ -1126,6 +1137,7 @@
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="HMModel.Room">
               <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Image" ColumnName="Image" />

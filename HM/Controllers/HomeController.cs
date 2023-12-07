@@ -59,7 +59,7 @@ namespace QL_khachSan.Controllers
         public ActionResult Login(string email, string password)
         {
             var login = new mapCustomer().Login(email, password);
-            if(login != null)
+            if (login != null)
             {
                 var userSession = new UserLogin();
                 userSession.UserName = login.FullName;
@@ -147,4 +147,5 @@ namespace QL_khachSan.Controllers
             return View();
         }
 
+    }
 }

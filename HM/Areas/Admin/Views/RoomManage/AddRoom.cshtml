@@ -64,6 +64,15 @@
                             </div>
                         </div>
 
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Active</label>
+                                <div>
+                                    <input type="checkbox" value="true" name="IsActive" @Html.Raw(Model.IsActive == true?"checked":"")/>
+                                </div>
+                            </div>
+                        </div>
+
                         @*<div class="col-md-4">
                             <div class="form-group">
                                 <label>Image Upload</label>

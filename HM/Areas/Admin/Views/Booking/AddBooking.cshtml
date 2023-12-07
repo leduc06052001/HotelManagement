@@ -1,4 +1,5 @@
 ﻿@model DAL.Entity.Booking
+
 @{
     ViewBag.Title = "AddBooking";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -22,51 +23,42 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Customer Name</label>
-                                <input class="form-control" type="text" name="FullName">
+                                @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Room Type</label>
-                                <select class="form-control" name="RoomType">
+                                <select class="form-control" name="RoomID">
                                     <option>Select</option>
-                                    @foreach (var item in new DAL.mapRoomType().LoadData())
+                                    @foreach (var item in new DAL.mapRoom().LoadData())
                                     {
-                                        <option value="@item.RoomTypeID">@item.RoomTypeName</option>
+                                        <option value="@item.RoomID">@item.RoomType.RoomTypeName</option>
                                     }
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Adult</label>
-                                <select class="form-control" name="Adult">
-                                    @for (int i = 1; i < 10; i++)
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                </select>
+                                <input type="number" name="Adult" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Adult, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Child</label>
-                                <select class="form-control" name="Child">
-                                    @for (int i = 0; i < 10; i++)
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                </select>
+                                <input type="number" name="Child" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Child, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Booking Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" class="form-control datetimepicker">
+                                <div>
+                                    <input type="date" class="form-control" name="BookingDate">
                                 </div>
                             </div>
                         </div>
@@ -74,8 +66,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Checkin Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" class="form-control datetimepicker">
+                                <div>
+                                    <input type="date" class="form-control" name="CheckinDate">
                                 </div>
                             </div>
                         </div>
@@ -83,8 +75,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Checkout Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" class="form-control datetimepicker">
+                                <div>
+                                    <input type="date" class="form-control" name="CheckoutDate">
                                 </div>
                             </div>
                         </div>
@@ -92,29 +84,33 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" class="form-control">
+                                <input type="email" name="Email" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="text" class="form-control">
+                                <label>Phone</label>
+                                <input type="number" name="Phone" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Message</label>
-                                <textarea class="form-control" rows="3" id="comment" name="text"></textarea>
+                                <label>Note</label>
+                                <textarea class="form-control" rows="2" id="comment" name="Note"></textarea>
+                                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
                     </div>
-                    <button type="submit" class="btn btn-primary buttonedit">Create Booking</button>
+                    <button type="submit" class="btn btn-primary buttonedit1">Create Booking</button>
+                    <a href="~/Admin/Booking/AllBooking" class="btn btn-primary btn-danger" style="float:right; margin-right:8px; padding:10px">Cancel</a>
                 </form>
             </div>
         </div>
+
     </div>
 </div>
-
-
-

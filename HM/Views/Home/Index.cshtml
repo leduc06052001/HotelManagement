@@ -1,4 +1,4 @@
-﻿@model DAL.Entity.RoomType
+﻿@model IEnumerable<DAL.Entity.Room>
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -118,104 +118,41 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h4 class="section-title text-center text-dark text-uppercase mb-4">Danh mục phòng theo phân loại</h4>
-            <ul class="nav-tabs nav-link mb-5" style="align-items:center">
-                @{ string active = "active";}
-                @foreach (var item in roomType)
-                {
-                    <li class="text-uppercase @active"><a href="~/Home/Index">@item.RoomTypeName</a></li>
-                    active = "";
-                }
-            </ul>
+            <h4 class="section-title text-center text-dark text-uppercase mb-4">Khám phá các phòng nghỉ sang trọng</h4>
         </div>
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="room-item shadow rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="~/Assets/img/room-1.jpg" alt="">
-                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">2tr/đêm</small>
-                    </div>
-                    <div class="p-4 mt-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">Hạng nhỏ</h5>
-                            <div class="ps-2">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
+            @foreach (var item in new DAL.mapRoom().LoadData())
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="room-item shadow rounded overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="~/Assets/img/room-1.jpg" alt="">
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">@item.Price /đêm</small>
+                        </div>
+                        <div class="p-4 mt-2">
+                            <div class="d-flex justify-content-between mb-3">
+                                <h5 class="mb-0">@item.RoomType.RoomTypeName</h5>
+                                <div class="ps-2">
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 phòng ngủ</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Phòng tắm</small>
-                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                        </div>
-                        <p class="text-body mb-3">Phù hợp cho những khách du lịch cá nhân hoặc phục vụ cho những chuyến công tác</p>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="~/rooms/roomdetail">Xem chi tiết</a>
+                            <div class="d-flex mb-3">
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>@item.Bed phòng ngủ</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>@item.Bath Phòng tắm</small>
+                                <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                            </div>
+                            <p class="text-body mb-3">Phù hợp cho những khách du lịch cá nhân hoặc phục vụ cho những chuyến công tác</p>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-sm btn-primary rounded py-2 px-4" href="~/rooms/roomdetail">Xem chi tiết</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="room-item shadow rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="~/Assets/img/room-2.jpg" alt="">
-                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">5tr/đêm</small>
-                    </div>
-                    <div class="p-4 mt-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">Hạng vừa</h5>
-                            <div class="ps-2">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>2 phòng ngủ</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Phòng tắm</small>
-                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                        </div>
-                        <p class="text-body mb-3">Phù hợp cho những khách du lịch cá nhân hoặc phục vụ cho những chuyến công tác</p>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="room-item shadow rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="~/Assets/img/room-3.jpg" alt="">
-                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">10tr/đêm</small>
-                    </div>
-                    <div class="p-4 mt-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">Hạng thương gia</h5>
-                            <div class="ps-2">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>2 phòng ngủ</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 phòng tắm</small>
-                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                        </div>
-                        <p class="text-body mb-3">Phù hợp cho những khách du lịch cá nhân hoặc phục vụ cho những chuyến công tác</p>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="~/rooms/roomdetail">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
             <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.9s">
                 <a href="~/Rooms/RoomList" class="btn btn-primary py-3 px-5">Xem thêm</a>
             </div>

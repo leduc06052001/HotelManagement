@@ -14,8 +14,7 @@ namespace HM.Areas.Admin.Controllers
         //--- Read ---
         public ActionResult AllRoom()
         {
-            mapRoom mapped = new mapRoom();
-            return View(mapped.LoadData());
+            return View(new mapRoom().LoadData());
         }
 
         //--- Create ---
@@ -46,6 +45,7 @@ namespace HM.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditRoom(Room room, HttpPostedFileBase fileImage)
         {
             //Kiểm tra có tồn tại file? (người dùng có post file?) null, length
@@ -82,6 +82,7 @@ namespace HM.Areas.Admin.Controllers
         }
 
         //Delete
+        [HttpPost]
         public ActionResult DeleteRoom(int ID)
         {
             mapRoom mapped = new mapRoom();
