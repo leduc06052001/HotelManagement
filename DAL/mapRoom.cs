@@ -10,22 +10,34 @@ namespace DAL
     public class mapRoom
     {
         HMEntities db = new HMEntities();
+
+        //------------------* ALL ROOMS & SEARCH(Load Page) *------------------//
+        public List<Room> AllRooms(string roomType, int page, int size)
+        {
+            IQueryable<Room> data = db.Rooms;
+            /*if(roomNo > 0)
+            {
+                data = db.Rooms.Where(p => p.RoomNumber == roomNo);
+            }*/
+            if(!string.IsNullOrEmpty(roomType))
+            {
+                data = db.Rooms.Where(p => p.RoomType.RoomTypeName.ToLower().Contains(roomType));
+            }
+            return data.OrderBy(p=>p.RoomID).Skip((page-1)*size).Take(size).ToList();
+        }
+
         public List<Room> LoadData()
         {
             return db.Rooms.ToList();
         }
 
-        public List<Room> LoadPage(int page, int size)
-        {
-            return db.Rooms.ToList().Skip((page - 1) * size).Take(size).ToList();
-        }
-
+        //------------------* GET ROOM DETAIL *------------------//
         public Room GetDetail(int id)
         {
             return db.Rooms.Find(id);
         }
 
-        //------------------* Create *------------------//
+        //------------------* CREATE *------------------//
         public int CreateRoom(Room room)
         {
             if (room.RoomNumber == 0)
@@ -37,7 +49,7 @@ namespace DAL
             return room.RoomID;
         }
 
-        //------------------* Update *------------------//
+        //------------------* UPDATE *------------------//
         public bool UpdateRoom(Room room)
         {
             var roomInfo = db.Rooms.Find(room.RoomID);
@@ -57,7 +69,7 @@ namespace DAL
             return true;
         }
 
-        //------------------* Delete *------------------//
+        //------------------* DELETE *------------------//
         public void DeleteRoom(int id)
         {
             var roomInfo = db.Rooms.Find(id);

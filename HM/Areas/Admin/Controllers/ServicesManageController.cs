@@ -15,14 +15,15 @@ namespace HM.Areas.Admin.Controllers
             return View(new mapServices().LoadData());
         }
 
-        //------------------* Create *------------------//
-        public ActionResult CreateServices()
+        //------------------* CREATE *------------------//
+        public ActionResult AddServices()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateServices(Service services)
+        [ValidateInput(false)]
+        public ActionResult AddServices(Service services)
         {
             var data = new mapServices().AddServices(services);
             if(data > 0)
@@ -35,15 +36,40 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        //------------------* Update *------------------//
+        //------------------* UPDATE *------------------//
         public ActionResult UpdateServices(int id)
         {
             return View(new mapServices().GetDetail(id));
         }
 
         [HttpPost]
-        public ActionResult UpdateServices(Service services)
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult UpdateServices(Service services, HttpPostedFileBase fileImage)
         {
+            //Xử lý file ảnh
+            //Kiểm tra dữ liệu đầu vào?
+            if (fileImage != null)
+            {
+                if (fileImage.ContentLength > 0)
+                {
+                    //Thư mục lưu
+                    var _path = "/Areas/Admin/Data/Service_Image/";
+                    //Tên file
+                    var fileName = fileImage.FileName;
+                    //Đường dãn
+                    var _root = Server.MapPath(_path + fileName);
+                    //ktra tồn tại
+                    if (System.IO.File.Exists(_root))
+                    {
+                        System.IO.File.Delete(_root);
+                    }
+                    //Lưu file
+                    fileImage.SaveAs(_root);
+                    services.Image = _path + fileName;
+                }
+            }
+            //Xử lý cập nhật
             var data = new mapServices().UpdateServices(services);
             if(data == true)
             {
@@ -52,7 +78,7 @@ namespace HM.Areas.Admin.Controllers
             return View(services);
         }
 
-        //------------------* Delete *------------------//
+        //------------------* DELETE *------------------//
         public ActionResult DeleteServices(int id)
         {
             new mapServices().DeleteServices(id);

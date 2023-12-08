@@ -11,13 +11,13 @@ namespace HM.Areas.Admin.Controllers
 {
     public class EmployeeManageController : Controller
     {
-        public ActionResult AllEmployee()
+        public ActionResult AllEmployees(string employeeName, string position, int page = 1, int size = 1001)
         {
-            var mapped = new mapEmployee();
-            return View(mapped.LoadData());
+            ViewBag.employeeName = employeeName;
+            return View(new mapEmployee().AllEmployees(employeeName, position, page, size));
         }
 
-        //------------------* Create *------------------//
+        //------------------* CREATE *------------------//
         public ActionResult AddEmployee()
         {
             return View();
@@ -26,8 +26,7 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddEmployee(Employee employee)
         {
-            var mapped = new mapEmployee();
-            if(mapped.CreateEmployee(employee) > 0) 
+            if (new mapEmployee().CreateEmployee(employee) > 0)
             {
                 return RedirectToAction("AllEmployee");
             }
@@ -37,19 +36,17 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        //------------------* Update *------------------//
+        //------------------* UPDATE *------------------//
         public ActionResult UpdateEmployee(int ID)
         {
-            var employeeInfo = new mapEmployee().GetDetail(ID);
-            return View(employeeInfo);
+            return View(new mapEmployee().GetDetail(ID));
         }
         [HttpPost]
         public ActionResult UpdateEmployee(Employee employee)
         {
-            var mapped = new mapEmployee();
-            if(mapped.UpdateEmployee(employee) == true)
+            if (new mapEmployee().UpdateEmployee(employee) == true)
             {
-                return RedirectToAction("AllEmployee");
+                return RedirectToAction("AllEmployees");
             }
             else
             {
@@ -57,12 +54,11 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        //------------------* Delete *------------------//
+        //------------------* DELETE *------------------//
         public ActionResult DeleteEmployee(int ID)
         {
-            var mapped = new mapEmployee();
-            mapped.DeleteEmployee(ID);
-            return RedirectToAction("AllEmployee");
+            new mapEmployee().DeleteEmployee(ID);
+            return RedirectToAction("AllEmployees");
         }
     }
 }

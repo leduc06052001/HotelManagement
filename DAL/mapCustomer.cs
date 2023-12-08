@@ -11,6 +11,7 @@ namespace DAL
     {
         HMEntities db = new HMEntities();
 
+        //------------------* LOGIN *------------------//
         public Customer Login(string email, string password)
         {
             var account = db.Customers.SingleOrDefault(p => p.Email == email & p.Password == password);
@@ -24,9 +25,10 @@ namespace DAL
             }
         }
 
+        //------------------* ADD ACCOUNT LOGIN WITH FB *------------------//
         public int InsertForFacebook(Customer customer)
         {
-            var customerInfo = db.Customers.SingleOrDefault(p => p.FullName == customer.FullName);
+            var customerInfo = db.Customers.SingleOrDefault(p => p.Email == customer.Email);
             if (customerInfo == null)
             {
                 db.Customers.Add(customer);
@@ -39,11 +41,7 @@ namespace DAL
             }
         }
 
-        public List<Customer> LoadData()
-        {
-            return db.Customers.ToList();
-        }
-
+        //------------------* ALL CUSTOMERS & SEARCH(Load page) *------------------//
         public List<Customer> LoadPage(string fullName, string email, int page, int size)
         {
             IQueryable<Customer> data = db.Customers;
@@ -55,21 +53,16 @@ namespace DAL
             {
                 data = data.Where(p => p.Email.ToLower().Contains(email));
             }
-            return data.OrderBy(p => p.FullName).Skip((page - 1) * size).Take(size).ToList();
+            return data.OrderBy(p => p.CustomerID).Skip((page - 1) * size).Take(size).ToList();
         }
 
-        public List<Customer> Filter(string fullName, string email)
-        {
-            var result = db.Customers.Where(p => p.FullName.ToLower().Contains(fullName) || p.Email.ToLower().Contains(email)).ToList();
-            return result;
-        }
-
+        //------------------* GET DETAIL CUSTOMER *------------------//
         public Customer GetDetail(int ID)
         {
             return db.Customers.Find(ID);
         }
 
-        //------------------* Create *------------------//
+        //------------------* CREATE *------------------//
         public int AddCustomer(Customer customer)
         {
             if (customer.FullName == null)
@@ -81,7 +74,7 @@ namespace DAL
             return customer.CustomerID;
         }
 
-        //------------------* Update *------------------//
+        //------------------* UPDATE *------------------//
         public bool UpdateCustomer(Customer customer)
         {
             var customerInfo = db.Customers.Find(customer.CustomerID);
@@ -101,7 +94,7 @@ namespace DAL
             return true;
         }
 
-        //------------------* Delete *------------------//
+        //------------------* DELETE *------------------//
         public void DeleteCustomer(int ID)
         {
             var customerInfo = db.Customers.Find(ID);

@@ -11,13 +11,14 @@ namespace HM.Areas.Admin.Controllers
 {
     public class RoomManageController : Controller
     {
-        //--- Read ---
-        public ActionResult AllRoom()
+        //------------------* ALL ROOMS & SEARCH *------------------//
+        public ActionResult AllRoom(string roomType, int page = 1, int size = 1001)
         {
-            return View(new mapRoom().LoadData());
+            ViewBag.roomType = roomType;
+            return View(new mapRoom().AllRooms(roomType, page, size));
         }
 
-        //--- Create ---
+        //------------------* CREATE *------------------//
         public ActionResult AddRoom()
         {
             return View(new Room() { Bed = 0, Bath = 1 });
@@ -37,7 +38,7 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        //--- Update ---
+        //------------------* UPDATE *------------------//
         public ActionResult EditRoom(int ID)
         {
             var roomInfo = new mapRoom().GetDetail(ID);
@@ -48,10 +49,11 @@ namespace HM.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditRoom(Room room, HttpPostedFileBase fileImage)
         {
+            //Xử lý file ảnh
             //Kiểm tra có tồn tại file? (người dùng có post file?) null, length
-            if(fileImage != null)
+            if (fileImage != null)
             {
-                if(fileImage.ContentLength > 0)
+                if (fileImage.ContentLength > 0)
                 {
                     //1. Xác định thư mục lưu
                     string _path = "/Areas/Admin/Data/";
@@ -59,7 +61,7 @@ namespace HM.Areas.Admin.Controllers
                     string fileName = fileImage.FileName;
                     //3. Xác định đường dẫn tuyệt đối 
                     string _root = Server.MapPath(_path + fileName);
-                    //4. Kiểm tra file đã tồn tại? nếu có thì xóa file cũ (ktra trùng tên?)
+                    //* Kiểm tra file đã tồn tại? nếu có thì xóa file cũ (ktra trùng tên?)
                     if (System.IO.File.Exists(_root) == true)
                     {
                         System.IO.File.Delete(_root);
@@ -81,12 +83,11 @@ namespace HM.Areas.Admin.Controllers
             }
         }
 
-        //Delete
-        [HttpPost]
+        //------------------* DELETE *------------------//
+        
         public ActionResult DeleteRoom(int ID)
         {
-            mapRoom mapped = new mapRoom();
-            mapped.DeleteRoom(ID);
+            new mapRoom().DeleteRoom(ID);
             return RedirectToAction("AllRoom");
         }
     }

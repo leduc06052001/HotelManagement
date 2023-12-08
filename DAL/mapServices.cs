@@ -44,6 +44,7 @@ namespace DAL
             serviceInfo.Price = services.Price;
             serviceInfo.Description = services.Description;
             serviceInfo.ServiceTypeID = services.ServiceTypeID;
+            serviceInfo.Image = services.Image;
             db.SaveChanges();
             return true;
         }

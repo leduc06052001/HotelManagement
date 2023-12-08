@@ -11,9 +11,11 @@ namespace HM.Areas.Admin.Controllers
     public class NewsController : Controller
     {
         //------------* ALL NEWS *------------//
-        public ActionResult AllNews()
+        public ActionResult AllNews(string title, string author, int page = 1, int size = 1001)
         {
-            return View(new mapNews().LoadData());
+            ViewBag.titles = title;
+            ViewBag.author = author;
+            return View(new mapNews().AllNews(title, author, page, size));
         }
 
         //------------* ADD NEWS *------------//
@@ -22,6 +24,7 @@ namespace HM.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddNews(News news)
         {
             var data = new mapNews().CreateNews(news);
@@ -31,7 +34,7 @@ namespace HM.Areas.Admin.Controllers
             }
             else
             {
-                ModelState.AddModelError("","Please fill all infomation");
+                ModelState.AddModelError("", "Please fill all infomation");
                 return View(news);
             }
         }
@@ -43,10 +46,11 @@ namespace HM.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult UpdateNews(News news)
         {
             var mapped = new mapNews();
-            if(mapped.UpdateNews(news) == true)
+            if (mapped.UpdateNews(news) == true)
             {
                 return RedirectToAction("AllNews");
             }

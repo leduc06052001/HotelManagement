@@ -27,7 +27,7 @@
             <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
             <ul class="nav user-menu">
                 <li class="nav-item dropdown noti-dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> @*<span class="badge badge-pill">*@</span> </a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> @*<span class="badge badge-pill"></span>*@ </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header"> <span class="notification-title">Notifications</span> <a href="javascript:void(0)" class="clear-noti"> Clear All </a> </div>
                         <div class="noti-content">
@@ -39,13 +39,14 @@
                 </li>
                 @{
                     var user = HM.App_Start.AdminSessionConfig.GetUser();
+                    var profile = new DAL.mapManager().LoadData();
                 }
                 @if (user != null)
                 {
                     <li class="nav-item dropdown has-arrow">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img">
-                                <img class="rounded-circle" src="~/Areas/Admin/assets/img/profiles/admin-avatar.jpg" width="32" height="32" alt="img"/>
+                                <img class="rounded-circle" src="~/Areas/Admin/assets/img/profiles/admin-avatar.jpg" width="32" height="32" alt="img" />
                             </span>
                             @user.UserName
                         </a>
@@ -56,7 +57,7 @@
                                     <span>Administrator</span>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="~/admin/dashboard/myprofile">My Profile</a>
+                            <a class="dropdown-item" href="~/admin/manager/viewprofile">My Profile</a>
                             <a class="dropdown-item" href="settings.html">Account Settings</a>
                             <a class="dropdown-item" href="~/Admin/Dashboard/Logout">Logout</a>
                         </div>
@@ -76,6 +77,8 @@
                     <ul>
                         <li class="active"> <a href="~/Admin/Dashboard/Index"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                         <li class="list-divider"></li>
+
+                        <!--Booking-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -84,7 +87,7 @@
                             </ul>
                         </li>
 
-                        @*Rooms*@
+                        <!--Room-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -93,7 +96,7 @@
                             </ul>
                         </li>
 
-                        @*Customers*@
+                        <!--Customer-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -102,7 +105,7 @@
                             </ul>
                         </li>
 
-                        @**@
+                        <!--Employee-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-user-friends"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -111,7 +114,7 @@
                             </ul>
                         </li>
 
-                        @**@
+                        <!--News-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-newspaper"></i> <span> News </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -120,30 +123,19 @@
                             </ul>
                         </li>
 
-                        @**@
+                        <!--Service-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-tasks"></i> <span> Services </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
                                 <li><a href="~/Admin/ServicesManage/AllServices">All Services </a></li>
-                                <li><a href="~/Admin/ServicesManage/CreateServices">Add Service </a></li>
+                                <li><a href="~/Admin/ServicesManage/AddServices">Add Service </a></li>
                             </ul>
                         </li>
 
-                        @**@
-                        <li class="submenu">
-                            <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
-                            <ul class="submenu_class" style="display: none;">
-                                <li><a href="blog.html">Blog </a></li>
-                                <li><a href="blog-details.html">Blog Veiw </a></li>
-                                <li><a href="#">Add Blog </a></li>
-                                <li><a href="edit-blog.html">Edit Blog </a></li>
-                            </ul>
-                        </li>
-
-                        @**@
+                        <!--Room Type-->
                         <li> <a href="~/Admin/RoomType/RoomType"><i class="fas fa-th-large"></i> <span>Room Type</span></a> </li>
 
-                        @**@
+                        <!--Accounts-->
                         <li class="submenu">
                             <a href="#"><i class="far fa-money-bill-alt"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -154,6 +146,8 @@
                                 <li><a href="provident-fund.html">Provident Fund </a></li>
                             </ul>
                         </li>
+
+                        <!--Payroll-->
                         <li class="submenu">
                             <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
@@ -164,65 +158,65 @@
                         <li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
 
                         @*<li> <a href="calendar.html"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a> </li>
-                            <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
-                            <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="expense-reports.html">Expense Report </a></li>
-                                    <li><a href="invoice-reports.html">Invoice Report </a></li>
-                                </ul>
-                            </li>
-                            <li class="list-divider"></li>
-                            <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="uikit.html">UI Kit </a></li>
-                                    <li><a href="typography.html">Typography </a></li>
-                                    <li><a href="tabs.html">Tabs </a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-edit"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="form-basic-inputs.html">Basic Input </a></li>
-                                    <li><a href="form-input-groups.html">Input Groups </a></li>
-                                    <li><a href="form-horizontal.html">Horizontal Form </a></li>
-                                    <li><a href="form-vertical.html">Vertical Form </a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="tables-basic.html">Basic Table </a></li>
-                                    <li><a href="tables-datatables.html">Data Table </a></li>
-                                </ul>
-                            </li>
-                            <li class="list-divider"></li>
-                            <li class="menu-title mt-3"> <span>EXTRAS</span> </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="login.html">Login </a></li>
-                                    <li><a href="register.html">Register </a></li>
-                                    <li><a href="forgot-password.html">Forgot Password </a></li>
-                                    <li><a href="change-password.html">Change Password </a></li>
-                                    <li><a href="lock-screen.html">Lockscreen </a></li>
-                                    <li><a href="profile.html">Profile </a></li>
-                                    <li><a href="gallery.html">Gallery </a></li>
-                                    <li><a href="error-404.html">404 Error </a></li>
-                                    <li><a href="error-500.html">500 Error </a></li>
-                                    <li><a href="blank-page.html">Blank Page </a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="">Level 1 </a></li>
-                                    <li><a href="">Level 2 </a></li>
-                                </ul>
-                            </li>*@
+        <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
+        <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
+        <li class="submenu">
+            <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="expense-reports.html">Expense Report </a></li>
+                <li><a href="invoice-reports.html">Invoice Report </a></li>
+            </ul>
+        </li>
+        <li class="list-divider"></li>
+        <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="uikit.html">UI Kit </a></li>
+                <li><a href="typography.html">Typography </a></li>
+                <li><a href="tabs.html">Tabs </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-edit"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="form-basic-inputs.html">Basic Input </a></li>
+                <li><a href="form-input-groups.html">Input Groups </a></li>
+                <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                <li><a href="form-vertical.html">Vertical Form </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="tables-basic.html">Basic Table </a></li>
+                <li><a href="tables-datatables.html">Data Table </a></li>
+            </ul>
+        </li>
+        <li class="list-divider"></li>
+        <li class="menu-title mt-3"> <span>EXTRAS</span> </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="login.html">Login </a></li>
+                <li><a href="register.html">Register </a></li>
+                <li><a href="forgot-password.html">Forgot Password </a></li>
+                <li><a href="change-password.html">Change Password </a></li>
+                <li><a href="lock-screen.html">Lockscreen </a></li>
+                <li><a href="profile.html">Profile </a></li>
+                <li><a href="gallery.html">Gallery </a></li>
+                <li><a href="error-404.html">404 Error </a></li>
+                <li><a href="error-500.html">500 Error </a></li>
+                <li><a href="blank-page.html">Blank Page </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="">Level 1 </a></li>
+                <li><a href="">Level 2 </a></li>
+            </ul>
+        </li>*@
                     </ul>
                 </div>
             </div>
@@ -245,5 +239,8 @@
     <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
     <script src="~/Areas/Admin/assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Areas/Admin/assets/js/script.js"></script>
+    <script src="~/Areas/Admin/assets/plugins/ckeditor/ckeditor.js"></script>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

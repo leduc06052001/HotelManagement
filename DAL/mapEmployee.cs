@@ -10,22 +10,29 @@ namespace DAL
     public class mapEmployee
     {
         HMEntities db = new HMEntities();
-        public List<Employee> LoadData()
+
+        //------------------* ALL EMPLOYEES & SEARCH(Load Page) *------------------//
+        public List<Employee> AllEmployees(string employeeName, string position, int page, int size)
         {
-            return db.Employees.ToList();
+            IQueryable<Employee> data = db.Employees;
+            if (!string.IsNullOrEmpty(employeeName))
+            {
+                data = db.Employees.Where(p => p.FullName.ToLower().Contains(employeeName));
+            }
+            if(!string.IsNullOrEmpty(position))
+            {
+                data = db.Employees.Where(p=>p.Position.PositionName.ToLower().Contains(position));
+            }
+            return data.OrderBy(p=>p.EmployeeID).Skip((page-1)*size).Take(size).ToList();
         }
 
-        public List<Employee> LoadPage(int page, int size)
-        {
-            return db.Employees.ToList().Skip((page-1)*size).Take(size).ToList();
-        }
-
+        //------------------* DETAIL EMPLOYEE *------------------//
         public Employee GetDetail(int id)
         {
             return db.Employees.Find(id);
         }
 
-        //------------------* Create *------------------//
+        //------------------* CREATE *------------------//
         public int CreateEmployee(Employee employee)
         {
             if(employee.FullName == null)
@@ -37,7 +44,7 @@ namespace DAL
             return employee.EmployeeID;
         }
 
-        //------------------* Update *------------------//
+        //------------------* UPDATE *------------------//
         public bool UpdateEmployee(Employee employee)
         {
             var employeeInfo = db.Employees.Find(employee.EmployeeID);
@@ -56,7 +63,7 @@ namespace DAL
             return false;
         }
 
-        //------------------* Delete *------------------//
+        //------------------* DELETE *------------------//
         public void DeleteEmployee(int id)
         {
             var employeeInfo = db.Employees.Find(id);

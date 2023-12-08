@@ -11,6 +11,8 @@ namespace DAL
     public class mapManager
     {
         HMEntities db = new HMEntities();
+
+        //------------------* LOGIN *------------------//
         public Manager Login(string username, string password)
         {
             var account = db.Managers.SingleOrDefault(p => p.UserName == username && p.Password == password);
@@ -24,6 +26,7 @@ namespace DAL
             }
         }
 
+        //------------------* REGISTER *------------------//
         public int Register(Manager managers)
         {
             if (managers.UserName == null)
@@ -33,6 +36,11 @@ namespace DAL
             db.Managers.Add(managers);
             db.SaveChanges();
             return managers.ManagerID;
+        }
+
+        public Manager LoadData(int ID)
+        {
+            return db.Managers.Find(ID);
         }
     }
 }

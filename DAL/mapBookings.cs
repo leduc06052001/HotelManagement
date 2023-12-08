@@ -13,6 +13,7 @@ namespace DAL
     {
         private HMEntities db = new HMEntities();
 
+        //------------------* All Rooms & Search(load page) *------------------//
         public List<Booking> AllBookings(string customerName, string email, int page, int size)
         {
             IQueryable<Booking> data = db.Bookings;
@@ -27,11 +28,13 @@ namespace DAL
             return data.OrderBy(p => p.CustomerName).Skip((page - 1) * size).Take(size).ToList();
         }
 
+        //------------------* Get Detail *------------------//
         public Booking GetDetail(int ID)
         {
             return db.Bookings.Find(ID);
         }
 
+        //------------------* CREATE *------------------//
         public int AddBooking(Booking booking)
         {
             if (booking == null)
@@ -48,6 +51,7 @@ namespace DAL
             return booking.BookingID;
         }
 
+        //------------------* UPDATE *------------------//
         public bool EditBooking(Booking booking)
         {
             var bookingInfo = db.Bookings.Find(booking.BookingID);
@@ -69,6 +73,7 @@ namespace DAL
             return true;
         }
 
+        //------------------* DELETE *------------------//
         public void DeleteBooking(int ID)
         {
             var bookingInfo = db.Bookings.Find(ID);
