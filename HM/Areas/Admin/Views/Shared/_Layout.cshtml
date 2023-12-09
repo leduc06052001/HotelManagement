@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -39,7 +41,6 @@
                 </li>
                 @{
                     var user = HM.App_Start.AdminSessionConfig.GetUser();
-                    var profile = new DAL.mapManager().LoadData();
                 }
                 @if (user != null)
                 {

@@ -38,6 +38,9 @@ namespace DAL
             return managers.ManagerID;
         }
 
+        //------------------* FORGOT PASSWORD *------------------//
+
+
         public Manager LoadData(int ID)
         {
             return db.Managers.Find(ID);

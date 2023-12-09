@@ -13,7 +13,7 @@ namespace HM.Areas.Admin.Controllers
     {
         public ActionResult AllCustomer(string fullName, string email, int page = 1, int pageSize = 10)
         {
-            ViewBag.fullName = fullName; 
+            ViewBag.fullName = fullName;
             ViewBag.email = email;
             return View(new mapCustomer().LoadPage(fullName, email, page, pageSize));
         }
@@ -21,21 +21,22 @@ namespace HM.Areas.Admin.Controllers
         //------------------* CREATE *------------------//
         public ActionResult AddCustomer()
         {
-            return View();
+            return View(new Customer());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCustomer(Customer customer)
         {
-            var data = new mapCustomer().AddCustomer(customer);
-            if (data > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AllCustomer");
+                var data = new mapCustomer().AddCustomer(customer);
+                if (data > 0)
+                {
+                    return RedirectToAction("AllCustomer");
+                }
             }
-            else
-            {
-                return View(customer);
-            }
+            return View(customer);
         }
 
         //------------------* UPDATE *------------------//
@@ -45,38 +46,39 @@ namespace HM.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateCustomer(Customer customer, HttpPostedFileBase fileImage)
         {
-            if (fileImage != null)
+            if (ModelState.IsValid)
             {
-                if (fileImage.ContentLength > 0)
+                if (fileImage != null)
                 {
-                    //Lấy đường dẫn
-                    string _path = "/Areas/Admin/assets/img/profiles/";
-                    string fileName = fileImage.FileName;
-                    string _root = Server.MapPath(_path + fileName);
-
-                    // Xóa file có trùng tên
-                    if (System.IO.File.Exists(_root) == true)
+                    if (fileImage.ContentLength > 0)
                     {
-                        System.IO.File.Delete(_root);
+                        //Lấy đường dẫn
+                        string _path = "/Areas/Admin/assets/img/profiles/";
+                        string fileName = fileImage.FileName;
+                        string _root = Server.MapPath(_path + fileName);
+
+                        // Xóa file có trùng tên
+                        if (System.IO.File.Exists(_root) == true)
+                        {
+                            System.IO.File.Delete(_root);
+                        }
+                        // Lưu file
+                        fileImage.SaveAs(_root);
+                        customer.Image = _path + fileName;
                     }
-                    // Lưu file
-                    fileImage.SaveAs(_root);
-                    customer.Image = _path + fileName;
+                }
+
+                // Xử lý cập nhật
+                var customerInfo = new mapCustomer();
+                if (customerInfo.UpdateCustomer(customer) == true)
+                {
+                    return RedirectToAction("AllCustomer");
                 }
             }
-
-            // Xử lý cập nhật
-            var customerInfo = new mapCustomer();
-            if (customerInfo.UpdateCustomer(customer) == true)
-            {
-                return RedirectToAction("AllCustomer");
-            }
-            else
-            {
-                return View(customer);
-            }
+            return View(customer);
         }
 
         //------------------* DELETE *------------------//

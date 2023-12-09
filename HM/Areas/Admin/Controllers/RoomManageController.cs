@@ -21,21 +21,21 @@ namespace HM.Areas.Admin.Controllers
         //------------------* CREATE *------------------//
         public ActionResult AddRoom()
         {
-            return View(new Room() { Bed = 0, Bath = 1 });
+            return View(new Room());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddRoom(Room room)
         {
-
-            if (new mapRoom().CreateRoom(room) > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AllRoom");
+                if (new mapRoom().CreateRoom(room) > 0)
+                {
+                    return RedirectToAction("AllRoom");
+                }
             }
-            else
-            {
-                return View(room);
-            }
+            return View(room);
         }
 
         //------------------* UPDATE *------------------//
@@ -49,42 +49,42 @@ namespace HM.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditRoom(Room room, HttpPostedFileBase fileImage)
         {
-            //Xử lý file ảnh
-            //Kiểm tra có tồn tại file? (người dùng có post file?) null, length
-            if (fileImage != null)
+            if (ModelState.IsValid)
             {
-                if (fileImage.ContentLength > 0)
+                //Xử lý file ảnh
+                //Kiểm tra có tồn tại file? (người dùng có post file?) null, length
+                if (fileImage != null)
                 {
-                    //1. Xác định thư mục lưu
-                    string _path = "/Areas/Admin/Data/";
-                    //2. Xác định tên file
-                    string fileName = fileImage.FileName;
-                    //3. Xác định đường dẫn tuyệt đối 
-                    string _root = Server.MapPath(_path + fileName);
-                    //* Kiểm tra file đã tồn tại? nếu có thì xóa file cũ (ktra trùng tên?)
-                    if (System.IO.File.Exists(_root) == true)
+                    if (fileImage.ContentLength > 0)
                     {
-                        System.IO.File.Delete(_root);
+                        //1. Xác định thư mục lưu
+                        string _path = "/Areas/Admin/Data/";
+                        //2. Xác định tên file
+                        string fileName = fileImage.FileName;
+                        //3. Xác định đường dẫn tuyệt đối 
+                        string _root = Server.MapPath(_path + fileName);
+                        //* Kiểm tra file đã tồn tại? nếu có thì xóa file cũ (ktra trùng tên?)
+                        if (System.IO.File.Exists(_root) == true)
+                        {
+                            System.IO.File.Delete(_root);
+                        }
+                        //5. Lưu file
+                        fileImage.SaveAs(_root);
+                        room.Image = _path + fileName;
                     }
-                    //5. Lưu file
-                    fileImage.SaveAs(_root);
-                    room.Image = _path + fileName;
+                }
+
+                var mapped = new mapRoom();
+                if (mapped.UpdateRoom(room) == true)
+                {
+                    return RedirectToAction("AllRoom");
                 }
             }
-
-            var mapped = new mapRoom();
-            if (mapped.UpdateRoom(room) == true)
-            {
-                return RedirectToAction("AllRoom");
-            }
-            else
-            {
-                return View(room);
-            }
+            return View(room);
         }
 
         //------------------* DELETE *------------------//
-        
+
         public ActionResult DeleteRoom(int ID)
         {
             new mapRoom().DeleteRoom(ID);

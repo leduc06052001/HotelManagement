@@ -40,7 +40,7 @@ namespace DAL
         //------------------* CREATE *------------------//
         public int CreateRoom(Room room)
         {
-            if (room.RoomNumber == 0)
+            if (room == null)
             {
                 return 0;
             }

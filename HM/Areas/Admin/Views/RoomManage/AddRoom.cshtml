@@ -18,7 +18,6 @@
                 <form enctype="multipart/form-data" method="post">
                     @Html.AntiForgeryToken()
                     <div class="row formtype">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Room Number</label>
@@ -36,7 +35,7 @@
                                         <option value="@item.RoomTypeID">@item.RoomTypeName</option>
                                     }
                                 </select>
-                                @Html.ValidationMessageFor(model => model.RoomType.RoomTypeName, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.RoomTypeID, "", new { @class = "text-danger" })
                             </div>
                         </div>
 

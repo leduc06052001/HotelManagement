@@ -29,10 +29,12 @@ namespace HM.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddBooking(Booking booking)
         {
-            
-            if(new mapBookings().AddBooking(booking) > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AllBooking");
+                if (new mapBookings().AddBooking(booking) > 0)
+                {
+                    return RedirectToAction("AllBooking");
+                }
             }
             return View(booking);
         }
@@ -44,12 +46,16 @@ namespace HM.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditBooking(Booking booking)
         {
-            var bookingInfo = new mapBookings().EditBooking(booking);
-            if(bookingInfo == true)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AllBooking");
+                var bookingInfo = new mapBookings().EditBooking(booking);
+                if (bookingInfo == true)
+                {
+                    return RedirectToAction("AllBooking");
+                }
             }
             return View(booking);
         }

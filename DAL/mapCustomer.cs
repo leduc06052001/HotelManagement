@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.ModelBinding;
 
 namespace DAL
 {
@@ -65,7 +66,7 @@ namespace DAL
         //------------------* CREATE *------------------//
         public int AddCustomer(Customer customer)
         {
-            if (customer.FullName == null)
+            if (customer == null)
             {
                 return 0;
             }
