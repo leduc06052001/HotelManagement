@@ -11,25 +11,14 @@ namespace DAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class News
     {
         public int NewsID { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string NewsTitle { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
-        [StringLength(50, ErrorMessage = "Name don't exceed 50 character")]
         public string Author { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public Nullable<System.DateTime> PublishDate { get; set; }
-
         public string Image { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string NewsContent { get; set; }
         public Nullable<bool> IsActive { get; set; }
     }

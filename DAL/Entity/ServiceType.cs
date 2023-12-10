@@ -11,8 +11,7 @@ namespace DAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class ServiceType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +21,6 @@ namespace DAL.Entity
         }
     
         public int ServiceTypeID { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string ServiceTypeName { get; set; }
         public string Description { get; set; }
     

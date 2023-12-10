@@ -2076,6 +2076,11 @@ html.menu-opened {
     max-height: 460px !important
 }
 
+.forgot_confirm {
+    max-width: 580px;
+    max-height: 380px;
+}
+
 .delete_class {
     font-size: 16px;
     font-weight: 700;
@@ -2123,17 +2128,25 @@ html.menu-opened {
     width: 400px
 }
 
-    .login-wrapper .loginbox .login-right .login-right-wrap {
-        max-width: 100%;
-        flex: 0 0 100%
-    }
+.login-wrapper .loginbox .forgot_center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    width:602px;
+}
 
-    .login-wrapper .loginbox .login-right h1 {
-        font-size: 26px;
-        font-weight: 500;
-        margin-bottom: 5px;
-        text-align: center
-    }
+.login-wrapper .loginbox .login-right .login-right-wrap {
+    max-width: 100%;
+    flex: 0 0 100%
+}
+
+.login-wrapper .loginbox .login-right h1 {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: center
+}
 
 .account-subtitle {
     color: #4c4c4c;

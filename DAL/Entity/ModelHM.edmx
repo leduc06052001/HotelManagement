@@ -43,9 +43,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="10" />
           <Property Name="BirthDate" Type="date" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="PromotionID" Type="int" />
+          <Property Name="resetPasswordCode" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -617,9 +618,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PromotionID" Type="Int32" />
+          <Property Name="resetPasswordCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Customers_Promotions" FromRole="Customer" ToRole="Promotion" />
           <NavigationProperty Name="Invoices" Relationship="HMModel.FK_Invoices_Customers" FromRole="Customer" ToRole="Invoice" />
           <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Customers" FromRole="Customer" ToRole="Payment" />
@@ -1017,6 +1019,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="HMModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="resetPasswordCode" ColumnName="resetPasswordCode" />
                 <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

@@ -1,6 +1,8 @@
 ﻿
 @{
     Layout = null;
+
+
 }
 
 <!DOCTYPE html>
@@ -15,7 +17,7 @@
     <style>
         body {
             background-color: gainsboro;
-            height: 96vh;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,7 +30,7 @@
             height: 560px;
             display: flex;
             flex-direction: column;
-            border: solid 1px;
+            box-shadow: 0 0 10px rgba(0,0,0,.1);
             border-radius: 6px;
             align-items: center;
         }
@@ -63,24 +65,19 @@
             height: 22px;
             color: black;
             font-size: 16px;
-            border: solid 1px;
+            border: solid 1px #ced4da;
             letter-spacing: 1px;
-            text-indent: 32px;
-            background-image: url(/Assets/img/gmail-login.png);
-            background-repeat: no-repeat;
-            background-size: 26px;
-            background-position: 12px;
         }
 
-        form input:nth-child(2) {
-            background-image: url(/Assets/img/Lock.png);
-        }
+        /*        form input:nth-child(2) {
+                    background-image: url(/Assets/img/Lock.png);
+                }
+        */
 
-        
 
         .login button {
-            color:#fff;
-            height:42px;
+            color: #fff;
+            height: 42px;
             background-color: #FEA116;
             text-transform: uppercase;
             cursor: pointer;
@@ -195,6 +192,7 @@
 <body>
     <form method="post">
         <h5>Artemis Hotel</h5>
+        <hr />
         <div class="login">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Mật khẩu">
@@ -221,3 +219,85 @@
 </body>
 
 </html>
+
+@*<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Hotel Dashboard Template</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        <link href="~/Areas/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Areas/Admin/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="~/Areas/Admin/assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+        <link href="~/Areas/Admin/assets/css/feathericon.min.css" rel="stylesheet" />
+        <link href="~/Areas/Admin/assets/plugins/morris/morris.css" rel="stylesheet" />
+        <link href="~/Areas/Admin/assets/css/style.css" rel="stylesheet" />
+
+        <style>
+            .login-input {
+                display: block;
+                width:100%;
+                color: #333;
+                height: 40px;
+                line-height:1.5;
+                font-size: 15px;
+                border-radius:6px;
+                padding:6px 12px;
+                margin-bottom: 12px;
+                border:1px solid #ced4da;
+
+            }
+                .login-input .btn-login {
+                    background-color: #FEA116;
+                }
+        </style>
+    </head>
+
+    <body>
+        <div class="main-wrapper login-body login_class">
+            <div class="login-wrapper">
+                <div class="container">
+                    <div class="loginbox login_pswd">
+                        <div class="login-right">
+                            <div class="login-right-wrap mb-5 mt-5">
+                                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                                {
+                                    <h1>Artemis Hotel</h1>
+                                    <hr />
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Email" class="login-input">
+                                        <input type="password" name="password" placeholder="Mật khẩu" class="login-input">
+                                        <button type="submit" class="login-input btn-login">Đăng nhập</button>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="forgot">
+                                            <a href="~/Home/ForgotPassword">Quên mật khẩu?</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><span class="span-or">hoặc</span> </div>
+                                    <div class="form-group">
+                                        <a href="~/Home/LoginFacebook" class="facebook"><i class="fab fa-facebook"></i> Đăng nhập với facebook</a>
+                                        <a href="~/Home/LoginGoogle" class="google"><i class="fab fa-google"></i>Đăng nhập với google</a>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="register-question">Chưa có tài khoản?</span>
+                                        <a href="~/Home/Register">Đăng ký</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="~/Areas/Admin/assets/js/jquery-3.5.1.min.js"></script>
+        <script src="~/Areas/Admin/assets/js/bootstrap.min.js"></script>
+        <script src="~/Areas/Admin/assets/js/script.js"></script>
+    </body>
+
+    </html>*@

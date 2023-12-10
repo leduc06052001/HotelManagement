@@ -11,8 +11,7 @@ namespace DAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,19 +21,9 @@ namespace DAL.Entity
         }
     
         public int EmployeeID { get; set; }
-        [Required(ErrorMessage = "Required information field")]
-        [StringLength(50, ErrorMessage = "Name don't exceed 50 character")]
         public string FullName { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string Address { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
-        [StringLength(10, ErrorMessage = "Phone number don't exceed 10 character")]
         public string Phone { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
-        [EmailAddress(ErrorMessage = "Email format is invalid")]
         public string Email { get; set; }
         public string Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }

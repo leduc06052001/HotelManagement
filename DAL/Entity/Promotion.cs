@@ -11,8 +11,7 @@ namespace DAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Promotion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,20 +23,10 @@ namespace DAL.Entity
     
         public int PromotionID { get; set; }
         public string PromotionName { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public Nullable<System.DateTime> StartDate { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public Nullable<System.DateTime> EndDate { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string Conditions { get; set; }
-
-        [Required(ErrorMessage = "Required information field")]
         public string PromotionCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

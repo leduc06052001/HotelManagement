@@ -7,21 +7,20 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common
+namespace HM.Common
 {
     public class MailHelper
     {
-        public void SendEmail(string toEmailAddress, string subject, string content)
+        public void SendEmail(string displayName,string toEmailAddress, string subject, string content)
         {
             var fromEmailAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
-            var fromEmailDisplayName = ConfigurationManager.AppSettings["FromEmailDisplayName"].ToString();
             var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
             var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();
             var smtpPort = ConfigurationManager.AppSettings["SMTPPort"].ToString();
             bool enableSsl = bool.Parse(ConfigurationManager.AppSettings["EnabledSSL"].ToString());
 
             string body = content;
-            MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName),new MailAddress(toEmailAddress));
+            MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, displayName),new MailAddress(toEmailAddress));
             message.Subject = subject;
             message.Body = body;
             message.IsBodyHtml = true;

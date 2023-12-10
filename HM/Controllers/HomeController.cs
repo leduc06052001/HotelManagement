@@ -2,7 +2,7 @@
 using DAL.Entity;
 using Facebook;
 using HM.Common;
-using Microsoft.AspNet.Identity;
+using DAL.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,14 +13,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Helpers;
 
-namespace QL_khachSan.Controllers
+namespace HM.Controllers
 {
     public class HomeController : Controller
     {
         HMEntities db = new HMEntities();
 
-        //Redirect Uri (for facebook -->)
+        //------------------* REDIRECT URI(FOR FACEBOOK) *------------------//
         private Uri RedirectUri
         {
             get
@@ -37,6 +38,7 @@ namespace QL_khachSan.Controllers
             return View();
         }
 
+        //------------------* REGISTER *------------------//
         public ActionResult Register()
         {
             return View();
@@ -50,6 +52,7 @@ namespace QL_khachSan.Controllers
             return RedirectToAction("Login");
         }
 
+        //------------------* LOGIN *------------------//
         public ActionResult Login()
         {
             return View();
@@ -71,7 +74,7 @@ namespace QL_khachSan.Controllers
             return View();
         }
 
-        // Login with Facebook
+        //------------------* LOGIN WITH FACEBOOK *------------------//
         public ActionResult LoginFacebook()
         {
             var fb = new FacebookClient();
@@ -86,7 +89,7 @@ namespace QL_khachSan.Controllers
             return Redirect(loginUrl.AbsoluteUri);
         }
 
-        //-----> FacebookCallBack
+        //------------------* FACEBOOK CALLBACK *------------------//
         public ActionResult FacebookCallBack(string code)
         {
             var fb = new FacebookClient();
@@ -142,10 +145,98 @@ namespace QL_khachSan.Controllers
             return RedirectToAction("Index");
         }
 
+        //------------------* FORGOT PASSWORD *------------------//
+
+        [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel forgotPassword)
+        {
+            if (ModelState.IsValid)
+            {
+                var message = "";
+                var userData = db.Customers.SingleOrDefault(p => p.Email == forgotPassword.Email);
+                if (userData != null)
+                {
+                    // Tạo mã token đặt lại mật khẩu
+                    // Tạo liên kết đặt lại mật khẩu (có bao gồm token)
+                    // Gửi liên kết đến email đã nhập (có kiểm tra db)
+                    // Gán mã token vừa tạo vào db
+                    // Lưu thay đổi
+
+                    string resetToken = Guid.NewGuid().ToString();
+                    var resetLink = Url.Action("ResetPassword", "Home", new { email = forgotPassword.Email, code = resetToken }, protocol: Request.Url.Scheme);
+                    new MailHelper().SendEmail("Artemis Hotel", forgotPassword.Email, "Reset password", "You are requeting reset password for your account. Please <a href = '" + resetLink + "'>click here</a> to reset password");
+                    userData.resetPasswordCode = resetToken;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    return RedirectToAction("ForgotPasswordConfimation");
+                }
+                else
+                {
+                    message = "Email not found. Please check again...";
+                }
+                ViewBag.message = message;
+            }
+            return View(forgotPassword);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string code)
+        {
+            // Xác minh liên kết đặt lại mật khẩu
+            // Xác định tài khoản phù hợp với liên kết đặt lại mật khẩu
+            // Chuyển hướng đến trang đặt lại mật khẩu 
+            var userData = db.Customers.Where(p => p.resetPasswordCode == code).FirstOrDefault();
+            if (userData != null)
+            {
+                ResetPasswordViewModel model = new ResetPasswordViewModel();
+                model.ResetPasswordCode = code;
+                return View(model);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordViewModel resetPassword)
+        {
+            var message = "";
+            if (ModelState.IsValid)
+            {
+                // Kiểm tra mã đặt lại mật khẩu
+                // True: thay đổi bằng mật khẩu mới (sử dụng hàm băm)
+                // Lưu thay đổi
+                var userData = db.Customers.Where(p => p.resetPasswordCode == resetPassword.ResetPasswordCode).FirstOrDefault();
+                if (userData != null)
+                {
+                    userData.Password = Crypto.Hash(resetPassword.NewPassword);
+                    userData.resetPasswordCode = "";
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    return RedirectToAction("ForgotPasswordSuccess");
+                }
+            }
+
+            ViewBag.message = message;
+            return View();
+        }
+
+        public ActionResult ForgotPasswordConfimation()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPasswordSuccess()
+        {
+            return View();
+        }
     }
 }
