@@ -127,7 +127,12 @@
                     <div class="room-item shadow rounded overflow-hidden">
                         <div class="position-relative">
                             <img class="img-fluid" src="~/Assets/img/room-1.jpg" alt="">
-                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">@item.Price /đêm</small>
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4" style="font-size:18px">
+                                @string.Format("{0:#,0}", item.Price) /đêm
+                            </small>
+                            <small class="position-absolute start-50 top-100 translate-middle-y bg-discount strikeThrough text-white rounded py-1 px-3 ms-4" style="text-decoration-color:black; font-size: 13px">
+                                @string.Format("{0:#,0}", item.Price) /đêm
+                            </small>
                         </div>
                         <div class="p-4 mt-2">
                             <div class="d-flex justify-content-between mb-3">
@@ -192,8 +197,7 @@
             <div class="modal-body">
                 <!-- 16:9 aspect ratio -->
                 <div class="ratio ratio-16x9">
-                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
-                            allow="autoplay"></iframe>
+                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
                 </div>
             </div>
         </div>

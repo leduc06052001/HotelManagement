@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace HM.Areas.Admin.Controllers
 {
-    public class NewsController : Controller
+    public class NewsManageController : Controller
     {
         //------------* ALL NEWS *------------//
         public ActionResult AllNews(string title, string author, int page = 1, int size = 1001)

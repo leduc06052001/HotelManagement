@@ -1,5 +1,6 @@
 ﻿using Antlr.Runtime.Tree;
 using DAL.Entity;
+using HM.Common;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -31,8 +32,6 @@ namespace HM.Controllers
             var booking = new Booking
             {
                 RoomID = room.RoomID,
-                CheckinDate = DateTime.Today,
-                CheckoutDate = DateTime.Today.AddDays(1),
                 BookingDate = DateTime.UtcNow
             };
 
@@ -41,6 +40,7 @@ namespace HM.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Booking(Booking booking)
         {
             if (ModelState.IsValid)
@@ -59,8 +59,8 @@ namespace HM.Controllers
                 }
                 db.Bookings.Add(booking);
                 db.SaveChanges();
-                SendInfoBookingToCustomer(booking);
-                /*string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/templateEmail/SendEmailtoCustomer.html"));
+
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/templateEmail/SendEmailtoCustomer.html"));
                 content = content.Replace("{{CustomerName}}", booking.CustomerName);
                 content = content.Replace("{{Email}}", booking.Email);
                 content = content.Replace("{{Phone}}", booking.Phone);
@@ -73,8 +73,8 @@ namespace HM.Controllers
 
                 var toEmail = booking.Email.ToString();
                 var toAdmin = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
-                new MailHelper().SendEmail(toAdmin, "Đơn hàng mới", content);
-                new MailHelper().SendEmail(toEmail, "Artemis Hotel", content);*/
+                new MailHelper().SendEmail("Artemis Hotel", toAdmin, "Đơn đặt phòng mới từ '" + booking.CustomerName + "'", content);
+                new MailHelper().SendEmail("Artemis Hotel", toEmail, "Thông tin đơn đặt phòng", content);
                 return Redirect("~/Home/Index");
             }
             else
@@ -109,17 +109,17 @@ namespace HM.Controllers
 
         }
 
-        private void SendInfoBookingToCustomer(Booking booking)
+        /*private void SendInfoBookingToCustomer(Booking booking)
         {
-            //tài khoản gửi
+            // Thông tin tài khoản gửi mail
             string fromEmail = "artemishotel.contact@gmail.com";
             string emailPassword = "tzff yhmr weaj ctof";
 
-            //Email nhận thông tin của khách hàng
+            // Email nhận thông tin của khách hàng
             string customerEmail = booking.Email;
-            //Tiêu đề email
+            // Tiêu đề email
             string subject = "Đơn đặt phòng của bạn từ Artemis";
-            //Nội dung Email
+            // Nội dung Email
             string body = "Thông tin đơn đặt phòng của bạn \n";
             body += "Họ tên: " + booking.CustomerName + "\n";
             body += "Loại phòng: " + booking.Room.RoomType.RoomTypeName + "\n";
@@ -137,6 +137,6 @@ namespace HM.Controllers
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new NetworkCredential(fromEmail, emailPassword);
             smtpClient.Send(message);
-        }
+        }*/
     }
 }

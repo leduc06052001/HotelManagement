@@ -8364,6 +8364,15 @@ fieldset:disabled .btn {
     background-color: #FEA116 !important
 }
 
+.bg-discount{
+    background-color: darkgrey !important;
+}
+
+.strikeThrough{
+    text-decoration-color: black;
+    text-decoration:line-through;
+}
+
 .bg-secondary {
     background-color: #6c757d !important
 }

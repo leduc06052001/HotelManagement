@@ -11,6 +11,8 @@ namespace DAL
     {
         HMEntities db = new HMEntities();
 
+        //------------------> FOR ADMIN <------------------//
+
         //------------------* ALL NEWS & SEARCH(Load Page) *------------------//
         public List<News> AllNews(string title, string author, int page, int size)
         {
@@ -67,6 +69,12 @@ namespace DAL
             var newsInfo = db.News.Find(id);
             db.News.Remove(newsInfo);
             db.SaveChanges();
+        }
+
+        //------------------> FOR CLIENT <------------------//
+        public List<News> LoadData()
+        {
+            return db.News.ToList();
         }
     }
 }
