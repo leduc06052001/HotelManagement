@@ -30,11 +30,10 @@ namespace DAL.Entity
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<InvoicePayment> InvoicePayments { get; set; }
         public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }

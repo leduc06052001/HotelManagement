@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label>Birth Date</label>
                                 <div class="cal-icon">
-                                    <input type="text" name="BirthDate" class="form-control datetimepicker" value="@Model.BirthDate">
+                                    <input type="text" name="BirthDate" class="form-control datetimepicker" value="@string.Format("{0:dd-MM-YYYY}", Model.BirthDate)">
                                 </div>
                             </div>
                         </div>

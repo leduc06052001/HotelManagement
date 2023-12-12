@@ -18,7 +18,6 @@ namespace DAL.Entity
         public Promotion()
         {
             this.Customers = new HashSet<Customer>();
-            this.Payments = new HashSet<Payment>();
         }
     
         public int PromotionID { get; set; }
@@ -31,7 +30,5 @@ namespace DAL.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

@@ -11,34 +11,50 @@ namespace DAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Booking
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Booking()
         {
-            this.Invoices = new HashSet<Invoice>();
+            this.InvoicePayments = new HashSet<InvoicePayment>();
         }
     
         public int BookingID { get; set; }
         public Nullable<int> ServiceID { get; set; }
         public int RoomID { get; set; }
+
+        [Required]
         public string CustomerName { get; set; }
+
+        [Required]
         public string Email { get; set; }
+
+        [Required]
         public string Phone { get; set; }
+
+        [Required]
         public string IdentifyNo { get; set; }
         public Nullable<System.DateTime> BookingDate { get; set; }
+
+        [Required]
         public Nullable<System.DateTime> CheckinDate { get; set; }
+
+        [Required]
         public Nullable<System.DateTime> CheckoutDate { get; set; }
+
+        [Required]
         public Nullable<int> Adult { get; set; }
+
+        [Required]
         public Nullable<int> Child { get; set; }
         public string PromotionCode { get; set; }
-        public string Note { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
-    
+        
         public virtual Room Room { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<InvoicePayment> InvoicePayments { get; set; }
         public virtual Service Service { get; set; }
     }
 }

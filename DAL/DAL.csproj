@@ -90,7 +90,7 @@
     <Compile Include="Entity\Employee.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\Invoice.cs">
+    <Compile Include="Entity\InvoicePayment.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Manager.cs">
@@ -119,9 +119,6 @@
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\OrderDetail.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Payment.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Position.cs">

@@ -28,7 +28,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Adult" Type="int" />
           <Property Name="Child" Type="int" />
           <Property Name="PromotionCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="Note" Type="nvarchar" MaxLength="200" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Customers">
@@ -61,7 +60,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="BirthDate" Type="date" />
           <Property Name="PositionID" Type="int" />
         </EntityType>
-        <EntityType Name="Invoices">
+        <EntityType Name="InvoicePayments">
           <Key>
             <PropertyRef Name="InvoiceID" />
           </Key>
@@ -110,19 +109,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Child" Type="int" />
           <Property Name="RoomID" Type="int" />
         </EntityType>
-        <EntityType Name="Payments">
-          <Key>
-            <PropertyRef Name="PaymentID" />
-          </Key>
-          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InvoiceID" Type="int" />
-          <Property Name="PaymentDate" Type="date" />
-          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
-          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="CustomerID" Type="int" />
-          <Property Name="PromotionID" Type="int" />
-        </EntityType>
         <EntityType Name="Positions">
           <Key>
             <PropertyRef Name="PositionID" />
@@ -153,6 +139,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Bath" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="OldPirce" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="RoomTypeID" Type="int" />
@@ -245,36 +232,36 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
         </Association>
         <Association Name="FK_Invoices_Bookings">
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="0..1" />
-          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <End Role="InvoicePayments" Type="Self.InvoicePayments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bookings">
               <PropertyRef Name="BookingID" />
             </Principal>
-            <Dependent Role="Invoices">
+            <Dependent Role="InvoicePayments">
               <PropertyRef Name="BookingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Invoices_Customers">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <End Role="InvoicePayments" Type="Self.InvoicePayments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="CustomerID" />
             </Principal>
-            <Dependent Role="Invoices">
+            <Dependent Role="InvoicePayments">
               <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Invoices_Employees">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <End Role="InvoicePayments" Type="Self.InvoicePayments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="Invoices">
+            <Dependent Role="InvoicePayments">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -288,42 +275,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="RoomID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payments_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payments_Invoices">
-          <End Role="Invoices" Type="Self.Invoices" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoices">
-              <PropertyRef Name="InvoiceID" />
-            </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="InvoiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payments_Promotions">
-          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Promotions">
-              <PropertyRef Name="PromotionID" />
-            </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="PromotionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -402,11 +353,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoicePayments" EntityType="Self.InvoicePayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotions" EntityType="Self.Promotions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
@@ -429,31 +379,19 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Bookings" Association="Self.FK_Invoices_Bookings">
             <End Role="Bookings" EntitySet="Bookings" />
-            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="InvoicePayments" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Customers" Association="Self.FK_Invoices_Customers">
             <End Role="Customers" EntitySet="Customers" />
-            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="InvoicePayments" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Employees" Association="Self.FK_Invoices_Employees">
             <End Role="Employees" EntitySet="Employees" />
-            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="InvoicePayments" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Rooms" Association="Self.FK_OrderDetail_Rooms">
             <End Role="Rooms" EntitySet="Rooms" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payments_Customers" Association="Self.FK_Payments_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Payments" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payments_Invoices" Association="Self.FK_Payments_Invoices">
-            <End Role="Invoices" EntitySet="Invoices" />
-            <End Role="Payments" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payments_Promotions" Association="Self.FK_Payments_Promotions">
-            <End Role="Promotions" EntitySet="Promotions" />
-            <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_RoomType" Association="Self.FK_Rooms_RoomType">
             <End Role="RoomTypes" EntitySet="RoomTypes" />
@@ -506,11 +444,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <EntitySet Name="Bookings" EntityType="HMModel.Booking" />
           <EntitySet Name="Customers" EntityType="HMModel.Customer" />
           <EntitySet Name="Employees" EntityType="HMModel.Employee" />
-          <EntitySet Name="Invoices" EntityType="HMModel.Invoice" />
+          <EntitySet Name="InvoicePayments" EntityType="HMModel.InvoicePayment" />
           <EntitySet Name="Managers" EntityType="HMModel.Manager" />
           <EntitySet Name="News" EntityType="HMModel.News" />
           <EntitySet Name="OrderDetails" EntityType="HMModel.OrderDetail" />
-          <EntitySet Name="Payments" EntityType="HMModel.Payment" />
           <EntitySet Name="Positions" EntityType="HMModel.Position" />
           <EntitySet Name="Promotions" EntityType="HMModel.Promotion" />
           <EntitySet Name="Rooms" EntityType="HMModel.Room" />
@@ -525,7 +462,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Bookings" Association="HMModel.FK_Invoices_Bookings">
             <End Role="Booking" EntitySet="Bookings" />
-            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="InvoicePayment" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_Bookings_tb_Services" Association="HMModel.FK_tb_Bookings_tb_Services">
             <End Role="Service" EntitySet="Services" />
@@ -537,11 +474,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Customers" Association="HMModel.FK_Invoices_Customers">
             <End Role="Customer" EntitySet="Customers" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payments_Customers" Association="HMModel.FK_Payments_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Payment" EntitySet="Payments" />
+            <End Role="InvoicePayment" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Positions" Association="HMModel.FK_Employees_Positions">
             <End Role="Position" EntitySet="Positions" />
@@ -549,19 +482,11 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Employees" Association="HMModel.FK_Invoices_Employees">
             <End Role="Employee" EntitySet="Employees" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payments_Invoices" Association="HMModel.FK_Payments_Invoices">
-            <End Role="Invoice" EntitySet="Invoices" />
-            <End Role="Payment" EntitySet="Payments" />
+            <End Role="InvoicePayment" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Rooms" Association="HMModel.FK_OrderDetail_Rooms">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payments_Promotions" Association="HMModel.FK_Payments_Promotions">
-            <End Role="Promotion" EntitySet="Promotions" />
-            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_RoomType" Association="HMModel.FK_Rooms_RoomType">
             <End Role="RoomType" EntitySet="RoomTypes" />
@@ -600,10 +525,9 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Adult" Type="Int32" />
           <Property Name="Child" Type="Int32" />
           <Property Name="PromotionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Room" Relationship="HMModel.FK_Bookings_Rooms" FromRole="Booking" ToRole="Room" />
-          <NavigationProperty Name="Invoices" Relationship="HMModel.FK_Invoices_Bookings" FromRole="Booking" ToRole="Invoice" />
+          <NavigationProperty Name="InvoicePayments" Relationship="HMModel.FK_Invoices_Bookings" FromRole="Booking" ToRole="InvoicePayment" />
           <NavigationProperty Name="Service" Relationship="HMModel.FK_tb_Bookings_tb_Services" FromRole="Booking" ToRole="Service" />
         </EntityType>
         <EntityType Name="Customer">
@@ -623,8 +547,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="PromotionID" Type="Int32" />
           <Property Name="resetPasswordCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Customers_Promotions" FromRole="Customer" ToRole="Promotion" />
-          <NavigationProperty Name="Invoices" Relationship="HMModel.FK_Invoices_Customers" FromRole="Customer" ToRole="Invoice" />
-          <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Customers" FromRole="Customer" ToRole="Payment" />
+          <NavigationProperty Name="InvoicePayments" Relationship="HMModel.FK_Invoices_Customers" FromRole="Customer" ToRole="InvoicePayment" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -639,9 +562,9 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="PositionID" Type="Int32" />
           <NavigationProperty Name="Position" Relationship="HMModel.FK_Employees_Positions" FromRole="Employee" ToRole="Position" />
-          <NavigationProperty Name="Invoices" Relationship="HMModel.FK_Invoices_Employees" FromRole="Employee" ToRole="Invoice" />
+          <NavigationProperty Name="InvoicePayments" Relationship="HMModel.FK_Invoices_Employees" FromRole="Employee" ToRole="InvoicePayment" />
         </EntityType>
-        <EntityType Name="Invoice">
+        <EntityType Name="InvoicePayment">
           <Key>
             <PropertyRef Name="InvoiceID" />
           </Key>
@@ -653,10 +576,9 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="PaymentStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustomerID" Type="Int32" />
           <Property Name="EmployeeID" Type="Int32" />
-          <NavigationProperty Name="Booking" Relationship="HMModel.FK_Invoices_Bookings" FromRole="Invoice" ToRole="Booking" />
-          <NavigationProperty Name="Customer" Relationship="HMModel.FK_Invoices_Customers" FromRole="Invoice" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="HMModel.FK_Invoices_Employees" FromRole="Invoice" ToRole="Employee" />
-          <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Invoices" FromRole="Invoice" ToRole="Payment" />
+          <NavigationProperty Name="Booking" Relationship="HMModel.FK_Invoices_Bookings" FromRole="InvoicePayment" ToRole="Booking" />
+          <NavigationProperty Name="Customer" Relationship="HMModel.FK_Invoices_Customers" FromRole="InvoicePayment" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="HMModel.FK_Invoices_Employees" FromRole="InvoicePayment" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -695,22 +617,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="RoomID" Type="Int32" />
           <NavigationProperty Name="Room" Relationship="HMModel.FK_OrderDetail_Rooms" FromRole="OrderDetail" ToRole="Room" />
         </EntityType>
-        <EntityType Name="Payment">
-          <Key>
-            <PropertyRef Name="PaymentID" />
-          </Key>
-          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InvoiceID" Type="Int32" />
-          <Property Name="PaymentDate" Type="DateTime" Precision="0" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CustomerID" Type="Int32" />
-          <Property Name="PromotionID" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="HMModel.FK_Payments_Customers" FromRole="Payment" ToRole="Customer" />
-          <NavigationProperty Name="Invoice" Relationship="HMModel.FK_Payments_Invoices" FromRole="Payment" ToRole="Invoice" />
-          <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Payments_Promotions" FromRole="Payment" ToRole="Promotion" />
-        </EntityType>
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="PositionID" />
@@ -732,7 +638,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Conditions" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="PromotionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customers" Relationship="HMModel.FK_Customers_Promotions" FromRole="Promotion" ToRole="Customer" />
-          <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Promotions" FromRole="Promotion" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -744,6 +649,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Bath" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OldPirce" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoomTypeID" Type="Int32" />
@@ -817,12 +723,12 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
         </Association>
         <Association Name="FK_Invoices_Bookings">
           <End Type="HMModel.Booking" Role="Booking" Multiplicity="0..1" />
-          <End Type="HMModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <End Type="HMModel.InvoicePayment" Role="InvoicePayment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Booking">
               <PropertyRef Name="BookingID" />
             </Principal>
-            <Dependent Role="Invoice">
+            <Dependent Role="InvoicePayment">
               <PropertyRef Name="BookingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -853,24 +759,12 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
         </Association>
         <Association Name="FK_Invoices_Customers">
           <End Type="HMModel.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="HMModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <End Type="HMModel.InvoicePayment" Role="InvoicePayment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="CustomerID" />
             </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payments_Customers">
-          <End Type="HMModel.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="HMModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="Payment">
+            <Dependent Role="InvoicePayment">
               <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
@@ -891,25 +785,13 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
         </Association>
         <Association Name="FK_Invoices_Employees">
           <End Type="HMModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="HMModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <End Type="HMModel.InvoicePayment" Role="InvoicePayment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="Invoice">
+            <Dependent Role="InvoicePayment">
               <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payments_Invoices">
-          <End Type="HMModel.Invoice" Role="Invoice" Multiplicity="0..1" />
-          <End Type="HMModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoice">
-              <PropertyRef Name="InvoiceID" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="InvoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -922,18 +804,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="RoomID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payments_Promotions">
-          <End Type="HMModel.Promotion" Role="Promotion" Multiplicity="0..1" />
-          <End Type="HMModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Promotion">
-              <PropertyRef Name="PromotionID" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="PromotionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -999,7 +869,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             <EntityTypeMapping TypeName="HMModel.Booking">
               <MappingFragment StoreEntitySet="Bookings">
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
                 <ScalarProperty Name="Child" ColumnName="Child" />
                 <ScalarProperty Name="Adult" ColumnName="Adult" />
@@ -1048,9 +917,9 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Invoices">
-            <EntityTypeMapping TypeName="HMModel.Invoice">
-              <MappingFragment StoreEntitySet="Invoices">
+          <EntitySetMapping Name="InvoicePayments">
+            <EntityTypeMapping TypeName="HMModel.InvoicePayment">
+              <MappingFragment StoreEntitySet="InvoicePayments">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
@@ -1101,20 +970,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="HMModel.Payment">
-              <MappingFragment StoreEntitySet="Payments">
-                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
-                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
-                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Positions">
             <EntityTypeMapping TypeName="HMModel.Position">
               <MappingFragment StoreEntitySet="Positions">
@@ -1144,6 +999,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
                 <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="OldPirce" ColumnName="OldPirce" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Bath" ColumnName="Bath" />

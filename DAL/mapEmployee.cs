@@ -19,11 +19,11 @@ namespace DAL
             {
                 data = db.Employees.Where(p => p.FullName.ToLower().Contains(employeeName));
             }
-            if(!string.IsNullOrEmpty(position))
+            if (!string.IsNullOrEmpty(position))
             {
-                data = db.Employees.Where(p=>p.Position.PositionName.ToLower().Contains(position));
+                data = db.Employees.Where(p => p.Position.PositionName.ToLower().Contains(position));
             }
-            return data.OrderBy(p=>p.EmployeeID).Skip((page-1)*size).Take(size).ToList();
+            return data.OrderBy(p => p.EmployeeID).Skip((page - 1) * size).Take(size).ToList();
         }
 
         //------------------* DETAIL EMPLOYEE *------------------//
@@ -35,7 +35,7 @@ namespace DAL
         //------------------* CREATE *------------------//
         public int CreateEmployee(Employee employee)
         {
-            if(employee.FullName == null)
+            if (employee.FullName == null)
             {
                 return 0;
             }
@@ -48,7 +48,7 @@ namespace DAL
         public bool UpdateEmployee(Employee employee)
         {
             var employeeInfo = db.Employees.Find(employee.EmployeeID);
-            if(employeeInfo != null)
+            if (employeeInfo != null)
             {
                 employeeInfo.FullName = employee.FullName;
                 employeeInfo.Address = employee.Address;

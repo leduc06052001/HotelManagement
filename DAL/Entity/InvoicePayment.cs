@@ -12,19 +12,19 @@ namespace DAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Payment
+    public partial class InvoicePayment
     {
-        public int PaymentID { get; set; }
-        public Nullable<int> InvoiceID { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
+        public int InvoiceID { get; set; }
+        public string InvoiceName { get; set; }
+        public Nullable<int> BookingID { get; set; }
+        public Nullable<System.DateTime> InvoiceDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
-        public string PaymentType { get; set; }
-        public Nullable<decimal> PaidAmount { get; set; }
+        public string PaymentStatus { get; set; }
         public Nullable<int> CustomerID { get; set; }
-        public Nullable<int> PromotionID { get; set; }
+        public Nullable<int> EmployeeID { get; set; }
     
+        public virtual Booking Booking { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual Invoice Invoice { get; set; }
-        public virtual Promotion Promotion { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

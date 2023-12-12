@@ -3,6 +3,7 @@ using DAL;
 using DAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,26 +15,35 @@ namespace HM.Areas.Admin.Controllers
         public ActionResult AllEmployees(string employeeName, string position, int page = 1, int size = 1001)
         {
             ViewBag.employeeName = employeeName;
+            ViewBag.position = position;
             return View(new mapEmployee().AllEmployees(employeeName, position, page, size));
         }
 
         //------------------* CREATE *------------------//
         public ActionResult AddEmployee()
         {
+            
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddEmployee(Employee employee)
         {
-            if (new mapEmployee().CreateEmployee(employee) > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AllEmployee");
+                if (new mapEmployee().CreateEmployee(employee) > 0)
+                {
+                    return RedirectToAction("AllEmployee");
+                }
+                else
+                {
+                    return View(employee);
+                }
             }
-            else
-            {
-                return View(employee);
-            }
+            
+            return View(employee);
+
         }
 
         //------------------* UPDATE *------------------//

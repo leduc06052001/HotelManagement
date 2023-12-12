@@ -129,6 +129,9 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -274,6 +277,7 @@
     <Compile Include="Areas\Admin\Controllers\RoomManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesManageController.cs" />
+    <Compile Include="Models\BookingViewModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\MailHelper.cs" />
@@ -290,6 +294,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PayPalConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1553,9 +1558,9 @@
     <Content Include="Areas\Admin\Views\EmployeeManage\AllEmployees.cshtml" />
     <Content Include="Areas\Admin\Views\EmployeeManage\AddEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\EmployeeManage\UpdateEmployee.cshtml" />
-    <Content Include="Areas\Admin\Views\News\AddNews.cshtml" />
-    <Content Include="Areas\Admin\Views\News\AllNews.cshtml" />
-    <Content Include="Areas\Admin\Views\News\UpdateNews.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsManage\AddNews.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsManage\AllNews.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsManage\UpdateNews.cshtml" />
     <Content Include="Areas\Admin\Views\ServicesManage\AddServices.cshtml" />
     <Content Include="Areas\Admin\Views\ServicesManage\AllServices.cshtml" />
     <Content Include="Areas\Admin\Views\ServicesManage\UpdateServices.cshtml" />
@@ -1636,6 +1641,9 @@
     <Content Include="Views\Home\ForgotPasswordSuccess.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\NewsDetail.cshtml" />
+    <Content Include="Views\Bookings\BookingDetail.cshtml" />
+    <Content Include="Views\Bookings\SuccessView.cshtml" />
+    <Content Include="Views\Bookings\FailureView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,8 +17,7 @@ namespace DAL.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Invoices = new HashSet<Invoice>();
-            this.Payments = new HashSet<Payment>();
+            this.InvoicePayments = new HashSet<InvoicePayment>();
         }
     
         public int CustomerID { get; set; }
@@ -36,8 +35,6 @@ namespace DAL.Entity
     
         public virtual Promotion Promotion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<InvoicePayment> InvoicePayments { get; set; }
     }
 }

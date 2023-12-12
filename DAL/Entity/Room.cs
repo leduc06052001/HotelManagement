@@ -27,6 +27,7 @@ namespace DAL.Entity
         public Nullable<int> Bath { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> OldPirce { get; set; }
         public string Image { get; set; }
         public string Status { get; set; }
         public Nullable<int> RoomTypeID { get; set; }

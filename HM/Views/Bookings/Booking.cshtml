@@ -57,103 +57,94 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="wow fadeInUp" data-wow-delay="0.2s">
-                    @using (Html.BeginForm("Booking", "Bookings", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                    <div class="row g-3">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.RoomID)
-                        @Html.HiddenFor(model => model.BookingID)
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ tên" } })
-                                <label for="FullName">Họ tên</label>
-                                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                @using (Html.BeginForm("Booking", "Bookings", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="row g-3">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.RoomID)
+                            @Html.HiddenFor(model => model.BookingID)
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ tên" } })
+                                    <label for="FullName">Họ tên</label>
+                                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
-                                <label for="email">Email</label>
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                    <label for="email">Email</label>
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating" id="dateTimePicker" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#dateTimePicker" id="CheckinDate" data-toggle="datetimepicker" placeholder="Check in" name="CheckinDate"  />
-                                <label for="CheckinDate">Check In</label>
-                                @Html.ValidationMessageFor(model => model.CheckinDate, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" placeholder="Checkin" name="CheckinDate">
+                                    <label for="checkin">Check In</label>
+                                    @Html.ValidationMessageFor(model => model.CheckinDate, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-floating" id="nextDateTimePicker" data-target-input="#nextDateTimePicker">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#nextDateTimePicker" id="CheckoutDate" data-toggle="datetimepicker" placeholder="Check out"  name="CheckoutDate"/>
-                                <label for="CheckoutDate">Check Out</label>
-                                @Html.ValidationMessageFor(model => model.CheckoutDate, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" placeholder="Checkout" name="CheckoutDate">
+                                    <label for="checkout">Check Out</label>
+                                    @Html.ValidationMessageFor(model => model.CheckoutDate, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                @Html.EditorFor(model => model.IdentifyNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "CCCD"} })
-                                <label for="checkin">Số CCCD</label>
-                                @Html.ValidationMessageFor(model => model.IdentifyNo, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.EditorFor(model => model.IdentifyNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "CCCD" } })
+                                    <label for="checkin">Số CCCD</label>
+                                    @Html.ValidationMessageFor(model => model.IdentifyNo, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-floating">
-                                <select class="form-select" name="Adult">
-                                    @for (int i = 1; i < 10; i++)
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                </select>
-                                <label>Người lớn</label>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <select class="form-select" name="Adult">
+                                        @for (int i = 1; i < 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <label>Người lớn</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-floating">
-                                <select class="form-select" name="Child">
-                                    @for (int i = 0; i < 10; i++)
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                </select>
-                                <label>Trẻ em</label>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <select class="form-select" name="Child">
+                                        @for (int i = 0; i < 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <label>Trẻ em</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điện thoại" } })
-                                <label>Số điện thoại</label>
-                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điện thoại" } })
+                                    <label>Số điện thoại</label>
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                @Html.EditorFor(model => model.PromotionCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mã ưu đãi" } })
-                                <label>Mã ưu đãi (nếu có)</label>
-                                @Html.ValidationMessageFor(model => model.PromotionCode, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.EditorFor(model => model.PromotionCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mã ưu đãi" } })
+                                    <label>Mã ưu đãi (nếu có)</label>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <textarea class="form-control" name="Note" placeholder="Ghi chú" style="height: 100px"></textarea>
-                                <label>Ghi chú</label>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Đặt ngay</button>
                             </div>
-                        </div>
-
-                        <div class="col-12">
-                            <button class="btn btn-primary w-100 py-3" type="submit">Thanh toán</button>
                         </div>
                     </div>
-                    }
-                </div>
+                }
             </div>
         </div>
     </div>
@@ -164,18 +155,32 @@
     <script>
         $('#dateTimePicker').datetimepicker({
             format: 'DD-MM-YYYY', // Định dạng ngày và thời gian
-            defaultDate: new Date();
+            defaultDate: new Date() // Giá trị mặc định là ngày và giờ hiện tại
         });
 
+        // Kích hoạt Bootstrap DateTimePicker cho ô nhập ngày và thời gian thứ hai
         $('#nextDateTimePicker').datetimepicker({
             format: 'DD-MM-YYYY', // Định dạng ngày và thời gian
-            minDate: new Date() + 1;
+            minDate: new Date() // Giá trị tối thiểu là ngày và giờ hiện tại
         });
 
+        // Lắng nghe sự kiện thay đổi ngày và thời gian trên ô đầu tiên
         $('#dateTimePicker').on('dp.change', function (e) {
-            $('#nextDateTimePicker').data('#dateTimePicker').minDate(e.date);
+            // Cập nhật giá trị tối thiểu cho ô nhập ngày và thời gian thứ hai
+            $('#nextDateTimePicker').data('DateTimePicker').minDate(e.date);
+        });
 
-        })
+        /*function redirectToPayment() {
+            var selectedPaymentMethod = document.getElementById("paymentMethod").value;
+
+            if (selectedPaymentMethod === "paypal") {
+                window.location.href = "/Bookings/PaymentWithPayPal";
+            }
+            else if (selectedPaymentMethod === "vnpay") {
+                window.location.href = "#";
+            }
+        }*/
+
     </script>
 
-    }
+}

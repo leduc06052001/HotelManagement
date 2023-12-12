@@ -17,7 +17,7 @@ namespace DAL.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Invoices = new HashSet<Invoice>();
+            this.InvoicePayments = new HashSet<InvoicePayment>();
         }
     
         public int EmployeeID { get; set; }
@@ -31,6 +31,6 @@ namespace DAL.Entity
     
         public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<InvoicePayment> InvoicePayments { get; set; }
     }
 }

@@ -34,6 +34,31 @@ namespace DAL
             return db.Bookings.Find(ID);
         }
 
+        public List<Booking> LoadData()
+        {
+            return db.Bookings.ToList();
+        }
+
+        public decimal TotalAmout(Booking booking)
+        {
+            if(booking.CheckinDate.HasValue && booking.CheckoutDate.HasValue)
+            {
+                TimeSpan timeSpan = booking.CheckoutDate.Value - booking.CheckinDate.Value;
+                booking.TotalAmount = (int)timeSpan.TotalDays * booking.Room.Price;
+            }
+            return (decimal)booking.TotalAmount;
+        }
+
+        public decimal TotalAmout_USD(Booking booking)
+        {
+            if (booking.CheckinDate.HasValue && booking.CheckoutDate.HasValue)
+            {
+                TimeSpan timeSpan = booking.CheckoutDate.Value - booking.CheckinDate.Value;
+                booking.TotalAmount = Math.Round((decimal)((int)timeSpan.TotalDays * booking.Room.Price / 24000), 2);
+            }
+            return (decimal)booking.TotalAmount;
+        }
+
         //------------------* CREATE *------------------//
         public int AddBooking(Booking booking)
         {
@@ -68,7 +93,6 @@ namespace DAL
             bookingInfo.CheckoutDate = booking.CheckoutDate;
             bookingInfo.Email = booking.Email;
             bookingInfo.Phone= booking.Phone;
-            bookingInfo.Note = booking.Note;
             db.SaveChanges();
             return true;
         }
