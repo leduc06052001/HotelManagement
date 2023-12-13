@@ -12,7 +12,7 @@ namespace HM.App_Start
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             /*base.OnAuthorization(filterContext);*/
-            var user = AdminSessionConfig.GetUser();
+            var user = SessionConfig.GetUser();
             if (user == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new

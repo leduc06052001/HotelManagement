@@ -13,6 +13,5 @@ namespace DAL.Entity.Models
 
         [Required(ErrorMessage = "Nhập mật khẩu")]
         public string password { get; set; }
-        public string rememberMe { get; set; }
     }
 }

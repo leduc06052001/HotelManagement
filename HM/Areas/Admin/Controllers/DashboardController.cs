@@ -34,8 +34,8 @@ namespace HM.Areas.Admin.Controllers
             var accounts = new mapManager().Login(username, password);
             if (accounts != null)
             {
-                AdminSessionConfig.SetUser(accounts);
-                AdminSessionConfig.GetUser();
+                SessionConfig.SetUser(accounts);
+                SessionConfig.GetUser();
                 return RedirectToAction("Index");
             }
             else

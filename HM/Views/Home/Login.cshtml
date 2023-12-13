@@ -1,8 +1,6 @@
-﻿
+﻿@model HM.Common.LoginViewModel
 @{
     Layout = null;
-
-
 }
 
 <!DOCTYPE html>
@@ -186,16 +184,28 @@
                 .register a:hover {
                     text-decoration: underline;
                 }
+
+        .error-message {
+            color: red;
+            margin-left: 16px;
+        }
     </style>
 </head>
 
 <body>
-    <form method="post">
+
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
         <h5>Artemis Hotel</h5>
         <hr />
         <div class="login">
-            <input type="email" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Mật khẩu">
+            @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error-message" })
+
+            @Html.TextBoxFor(model => model.Password, new { @type = "password", @placeholder = "Mật khẩu" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error-message" })
+
             <button type="submit">Đăng nhập</button>
         </div>
 
@@ -215,89 +225,8 @@
             <span class="register-question">Chưa có tài khoản?</span>
             <a href="~/Home/Register">Đăng ký</a>
         </div>
-    </form>
+    }
 </body>
 
 </html>
 
-@*<!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Hotel Dashboard Template</title>
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-        <link href="~/Areas/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="~/Areas/Admin/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
-        <link href="~/Areas/Admin/assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
-        <link href="~/Areas/Admin/assets/css/feathericon.min.css" rel="stylesheet" />
-        <link href="~/Areas/Admin/assets/plugins/morris/morris.css" rel="stylesheet" />
-        <link href="~/Areas/Admin/assets/css/style.css" rel="stylesheet" />
-
-        <style>
-            .login-input {
-                display: block;
-                width:100%;
-                color: #333;
-                height: 40px;
-                line-height:1.5;
-                font-size: 15px;
-                border-radius:6px;
-                padding:6px 12px;
-                margin-bottom: 12px;
-                border:1px solid #ced4da;
-
-            }
-                .login-input .btn-login {
-                    background-color: #FEA116;
-                }
-        </style>
-    </head>
-
-    <body>
-        <div class="main-wrapper login-body login_class">
-            <div class="login-wrapper">
-                <div class="container">
-                    <div class="loginbox login_pswd">
-                        <div class="login-right">
-                            <div class="login-right-wrap mb-5 mt-5">
-                                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-                                {
-                                    <h1>Artemis Hotel</h1>
-                                    <hr />
-                                    <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email" class="login-input">
-                                        <input type="password" name="password" placeholder="Mật khẩu" class="login-input">
-                                        <button type="submit" class="login-input btn-login">Đăng nhập</button>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="forgot">
-                                            <a href="~/Home/ForgotPassword">Quên mật khẩu?</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><span class="span-or">hoặc</span> </div>
-                                    <div class="form-group">
-                                        <a href="~/Home/LoginFacebook" class="facebook"><i class="fab fa-facebook"></i> Đăng nhập với facebook</a>
-                                        <a href="~/Home/LoginGoogle" class="google"><i class="fab fa-google"></i>Đăng nhập với google</a>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <span class="register-question">Chưa có tài khoản?</span>
-                                        <a href="~/Home/Register">Đăng ký</a>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="~/Areas/Admin/assets/js/jquery-3.5.1.min.js"></script>
-        <script src="~/Areas/Admin/assets/js/bootstrap.min.js"></script>
-        <script src="~/Areas/Admin/assets/js/script.js"></script>
-    </body>
-
-    </html>*@

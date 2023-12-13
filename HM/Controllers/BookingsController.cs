@@ -1,6 +1,7 @@
 ﻿using Antlr.Runtime.Tree;
 using DAL;
 using DAL.Entity;
+using HM.App_Start;
 using HM.Common;
 using PayPal.Api;
 using System;
@@ -16,7 +17,6 @@ using static HM.Models.PayPalConfiguration;
 
 namespace HM.Controllers
 {
-
     public class BookingsController : Controller
     {
         HMEntities db = new HMEntities();
@@ -28,6 +28,11 @@ namespace HM.Controllers
         //------------------* BOOKING *------------------//
         public ActionResult Booking(int ID)
         {
+            var sessionCus = Session["user"] as Customer;
+            if(sessionCus == null)
+            {
+                return Redirect("/Home/Login");
+            }
             var room = db.Rooms.Find(ID);
             if (room == null)
             {

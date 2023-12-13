@@ -1,5 +1,5 @@
 ﻿
-@using HM.Common;
+@using DAL.Entity
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +75,7 @@
                             <div class="d-inline-flex align-items-center py-2">
 
                                 @{
-                                    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                                    var session = (Customer)HttpContext.Current.Session["user"];
                                     if (session == null)
                                     {
                                         <a class="me-0" href="~/Home/Login">Đăng nhập</a>
@@ -83,9 +83,10 @@
                                     else
                                     {
                                         <div class="nav-item dropdown has-arrow">
-                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> @session.UserName</a>
+                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" style="padding-left:38px"> @session.FullName</a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="profile.html">Trang cá nhân</a>
+                                                <a class="dropdown-item" href="~/Home/ProfileCustomer">Trang cá nhân</a>
+                                                <a class="dropdown-item" href="#">Đơn đặt phòng</a>
                                                 <a class="dropdown-item" href="~/Home/Logout">Đăng xuất</a>
                                             </div>
                                         </div>

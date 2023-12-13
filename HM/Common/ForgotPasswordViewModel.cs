@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace DAL.Entity.Models
+namespace HM.Common
 {
     public class ForgotPasswordViewModel
     {
-        [Required(ErrorMessage = "Bạn chưa nhập email!")]
-        [EmailAddress]
+        [Required(ErrorMessage = "*Bạn chưa nhập email!")]
+        [EmailAddress(ErrorMessage = "*Email không hợp lệ")]
         public string Email { get; set; }
     }
 }

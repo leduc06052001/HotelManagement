@@ -112,9 +112,7 @@
       <DependentUpon>ModelHM.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entity\Models\ApplicationUser.cs" />
-    <Compile Include="Entity\Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Entity\Models\LoginModel.cs" />
-    <Compile Include="Entity\Models\ResetPasswordViewModel.cs" />
     <Compile Include="Entity\News.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>

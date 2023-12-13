@@ -1,4 +1,4 @@
-﻿
+﻿@model HM.Common.RegisterViewModel
 @{
     Layout = null;
 }
@@ -11,7 +11,7 @@
     <title>Register</title>
     <style>
         body {
-            background-color:gainsboro;
+            background-color: gainsboro;
             height: 600px;
             display: flex;
             justify-content: center;
@@ -19,13 +19,13 @@
         }
 
         form {
-            background-color:#fff;
+            background-color: #fff;
             width: 360px;
             height: 580px;
             display: flex;
             flex-direction: column;
             backdrop-filter: blur(5px);
-            border: solid 1px;
+            border: solid 1px #ced4da;
             border-radius: 6px;
             align-items: center;
         }
@@ -42,11 +42,13 @@
                 width: 90%;
             }
 
+        .register input {
+            border: solid 1px #ced4da;
+        }
         .register input,
         button {
             margin: 10px;
             padding: 10px 15px;
-            border: solid 1px;
             outline: none;
             border-radius: 12px;
             font-size: 16px;
@@ -65,15 +67,16 @@
         }
 
         .register button {
-            color:#fff;
+            color: #fff;
             background-color: #FEA116;
             text-transform: uppercase;
-            margin-top:26px;
+            border:none;
+            margin-top: 26px;
             cursor: pointer;
         }
 
         .have_account {
-            color:#a0a0a0;
+            color: #a0a0a0;
             margin-top: 16px;
         }
 
@@ -82,24 +85,39 @@
                 text-decoration: none;
                 cursor: pointer;
             }
+        .error-message{
+            color:red;
+            margin-left: 16px;
+        }
     </style>
 </head>
 
 <body>
-    <form method="post">
+
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
         <h5>Artemis Hotel</h5>
         <div class="register">
-            <input type="text" name="fullname" placeholder="Tên của bạn">
-            <input type="email" name="email" id="" placeholder="Email">
-            <input type="password" name="password" id="" placeholder="Mật khẩu">
-            <input type="password" name="confirm_password" id="" placeholder="Nhập lại mật khẩu">
+            @Html.TextBoxFor(model => model.FullName, new { @placeholder = "Tên của bạn" })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "error-message" })
+
+            @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error-message" })
+
+            @Html.TextBoxFor(model => model.Password, new { @type = "password", @placeholder = "Mật khẩu" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error-message" })
+
+            @Html.TextBoxFor(model => model.ConfirmPassword, new { @type="password", @placeholder = "Nhập lại mật khẩu" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "error-message" })
+
             <button type="submit">Đăng ký</button>
         </div>
         <div class="have_account">
             <span>Bạn đã có tài khoản?</span>
             <a href="~/Home/Login">Đăng nhập</a>
         </div>
-    </form>
+    }
 </body>
 
 </html>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HM.App_Start
 {
-    public static class AdminSessionConfig
+    public static class SessionConfig
     {
         //Lưu session
         public static void SetUser(Manager manager)
@@ -18,6 +18,18 @@ namespace HM.App_Start
         public static Manager GetUser()
         {
             return (Manager)HttpContext.Current.Session["manager"];
+        }
+    }
+
+    public static class UserSessionConfig
+    {
+        public static void SetCustomer(Customer customer)
+        {
+            HttpContext.Current.Session["customer"] = customer;
+        }
+        public static Customer GetCustomer()
+        {
+            return (Customer)HttpContext.Current.Session["customer"];
         }
     }
 }

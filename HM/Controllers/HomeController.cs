@@ -2,37 +2,21 @@
 using DAL.Entity;
 using Facebook;
 using HM.Common;
-using DAL.Entity.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.Helpers;
+using System.Web.UI.WebControls;
 
 namespace HM.Controllers
 {
     public class HomeController : Controller
     {
+
         HMEntities db = new HMEntities();
 
-        //------------------* REDIRECT URI(FOR FACEBOOK) *------------------//
-        private Uri RedirectUri
-        {
-            get
-            {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallback");
-                return uriBuilder.Uri;
-            }
-        }
         public ActionResult Index()
         {
             return View();
@@ -45,11 +29,30 @@ namespace HM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(Customer customer)
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterViewModel registerModel)
         {
-            db.Customers.Add(customer);
-            db.SaveChanges();
-            return RedirectToAction("Login");
+            if (ModelState.IsValid)
+            {
+                var currentCustomer = db.Customers.Where(p => p.Email == registerModel.Email).FirstOrDefault();
+                if (currentCustomer == null)
+                {
+                    db.Customers.Add(currentCustomer);
+                    db.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "Email này đã đăng ký tài khoản, vui lòng đăng nhập");
+                    return View(registerModel);
+                }
+            }
+            else
+            {
+                return View(registerModel);
+            }
+
+
         }
 
         //------------------* LOGIN *------------------//
@@ -59,19 +62,38 @@ namespace HM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string email, string password)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel loginModel)
         {
-            var login = new mapCustomer().Login(email, password);
-            if (login != null)
+            if (ModelState.IsValid)
             {
-                var userSession = new UserLogin();
-                userSession.UserName = login.FullName;
-                userSession.UserID = login.CustomerID;
+                var login = db.Customers.FirstOrDefault(p => p.Email == loginModel.Email);
+                if (login == null)
+                {
+                    ModelState.AddModelError("Email", "Email không tồn tại, hãy đăng ký nhé.");
+                    return View(loginModel);
+                }
+                else if (login.Password != loginModel.Password)
+                {
+                    ModelState.AddModelError("Password", "Mật khẩu không đúng");
+                    return View(loginModel);
+                }
+
+                var userSession = new Customer();
+                userSession.CustomerID = login.CustomerID;
+                userSession.FullName = login.FullName;
+                userSession.Address = login.Address;
+                userSession.Phone = login.Phone;
+                userSession.IdentifyNumber = login.IdentifyNumber;
+                userSession.Email = login.Email;
+                userSession.Gender = login.Gender;
+                userSession.BirthDate = login.BirthDate;
                 userSession.Image = login.Image;
-                Session.Add(CommonConstants.USER_SESSION, userSession);
+                Session["user"] = userSession;
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(loginModel);
+
         }
 
         //------------------* LOGIN WITH FACEBOOK *------------------//
@@ -87,6 +109,18 @@ namespace HM.Controllers
                 scope = "email"
             });
             return Redirect(loginUrl.AbsoluteUri);
+        }
+
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
         }
 
         //------------------* FACEBOOK CALLBACK *------------------//
@@ -117,10 +151,17 @@ namespace HM.Controllers
                 var resultInsert = new mapCustomer().InsertForFacebook(user);
                 if (resultInsert > 0)
                 {
-                    var userSession = new UserLogin();
-                    userSession.UserName = user.FullName;
-                    userSession.UserID = user.CustomerID;
-                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    var userSession = new Customer();
+                    userSession.CustomerID = user.CustomerID;
+                    userSession.FullName = user.FullName;
+                    userSession.Address = user.Address;
+                    userSession.Phone = user.Phone;
+                    userSession.IdentifyNumber = user.IdentifyNumber;
+                    userSession.Email = user.Email;
+                    userSession.Gender = user.Gender;
+                    userSession.BirthDate = user.BirthDate;
+                    userSession.Image = user.Image;
+                    Session["user"] = userSession;
                 }
             }
             return Redirect("/");
@@ -140,7 +181,7 @@ namespace HM.Controllers
 
         public ActionResult Logout()
         {
-            Session.Remove("USER_SESSION");
+            Session.Remove("user");
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
@@ -160,8 +201,7 @@ namespace HM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var message = "";
-                var userData = db.Customers.SingleOrDefault(p => p.Email == forgotPassword.Email);
+                var userData = db.Customers.FirstOrDefault(p => p.Email == forgotPassword.Email);
                 if (userData != null)
                 {
                     // Tạo mã token đặt lại mật khẩu
@@ -180,9 +220,9 @@ namespace HM.Controllers
                 }
                 else
                 {
-                    message = "Email not found. Please check again...";
+                    ModelState.AddModelError("Email", "Email này chưa đăng ký tài khoản.");
+                    return View(forgotPassword);
                 }
-                ViewBag.message = message;
             }
             return View(forgotPassword);
         }
@@ -237,6 +277,12 @@ namespace HM.Controllers
         public ActionResult ForgotPasswordSuccess()
         {
             return View();
+        }
+
+        public ActionResult ProfileCustomer()
+        {
+            var user = (Customer)Session["user"];
+            return View(user);
         }
     }
 }

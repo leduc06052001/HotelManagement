@@ -261,11 +261,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AuthorizeCustomer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RoleAdmin.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\AdminSessionConfig.cs" />
+    <Compile Include="App_Start\SessionConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
@@ -277,6 +278,10 @@
     <Compile Include="Areas\Admin\Controllers\RoomManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesManageController.cs" />
+    <Compile Include="Common\ForgotPasswordViewModel.cs" />
+    <Compile Include="Common\LoginViewModel.cs" />
+    <Compile Include="Common\RegisterViewModel.cs" />
+    <Compile Include="Common\ResetPasswordViewModel.cs" />
     <Compile Include="Models\BookingViewModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
@@ -1644,6 +1649,7 @@
     <Content Include="Views\Bookings\BookingDetail.cshtml" />
     <Content Include="Views\Bookings\SuccessView.cshtml" />
     <Content Include="Views\Bookings\FailureView.cshtml" />
+    <Content Include="Views\Home\ProfileCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
