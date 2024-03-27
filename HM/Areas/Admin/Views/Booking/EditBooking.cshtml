@@ -57,7 +57,7 @@
                                 <label>Booking Date</label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker" name="BookingDate" value="@string.Format("{0:dd-MM-yyyy}", Model.BookingDate)">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                                 <label>Checkin Date</label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker" name="CheckinDate" value="@string.Format("{0:dd-MM-yyyy}", Model.CheckinDate)">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <label>Checkout Date</label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker" name="CheckoutDate" value="@string.Format("{0:dd-MM-yyyy}", @Model.CheckoutDate)">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -98,13 +98,14 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                <label>Note</label>
-                                <textarea class="form-control" rows="2" id="comment" name="Note">@Model.Note</textarea>
+                                <label>Active</label>
+                                <div class="center">
+                                    <input type="checkbox" value="true" name="IsActive" @Html.Raw(Model.IsActive == true ? "checked" : "") />
+                                </div>
                             </div>
                         </div>
-
                     </div>
                     <button type="submit" class="btn btn-primary buttonedit1">Save</button>
                     <a href="~/Admin/Booking/AllBooking" class="btn btn-primary btn-danger" style="float:right; margin-right:8px; padding:10px">Cancel</a>

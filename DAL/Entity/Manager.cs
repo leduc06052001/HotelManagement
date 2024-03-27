@@ -14,6 +14,12 @@ namespace DAL.Entity
     
     public partial class Manager
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Manager()
+        {
+            this.News = new HashSet<News>();
+        }
+    
         public int ManagerID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -22,5 +28,8 @@ namespace DAL.Entity
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
         public string Image { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<News> News { get; set; }
     }
 }

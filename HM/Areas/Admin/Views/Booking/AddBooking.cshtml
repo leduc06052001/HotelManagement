@@ -104,11 +104,12 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                <label>Note</label>
-                                <textarea class="form-control" rows="2" id="comment" name="Note"></textarea>
-                                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                                <label>Active</label>
+                                <div class="center">
+                                    <input type="checkbox" value="true" name="IsActive"/>
+                                </div>
                             </div>
                         </div>
 

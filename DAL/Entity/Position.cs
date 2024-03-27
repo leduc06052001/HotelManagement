@@ -22,6 +22,7 @@ namespace DAL.Entity
     
         public int PositionID { get; set; }
         public string PositionName { get; set; }
+        public Nullable<decimal> Salary { get; set; }
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

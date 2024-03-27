@@ -4,8 +4,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     var roomType = new DAL.mapRoomType().LoadData();
     int num = 0;
-
-
 }
 
 <div class="page-wrapper">
@@ -28,7 +26,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Room Number</label>
-                                <input class="form-control" type="text" value="" name="roomNo">
+                                <input class="form-control" type="text" value="@ViewBag.roomNo" name="roomNo">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -70,9 +68,8 @@
                                             <th style="text-align:center">@Html.DisplayNameFor(model => model.Bed)</th>
                                             <th style="text-align:center">@Html.DisplayNameFor(model => model.Bath)</th>
                                             <th style="text-align:right">@Html.DisplayNameFor(model => model.Price)</th>
-                                            <th>@Html.DisplayNameFor(model => model.Image)</th>
-                                            <th>@Html.DisplayNameFor(model => model.Description)</th>
                                             <th style="text-align:center">@Html.DisplayNameFor(model => model.IsActive)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Status)</th>
                                             <th class="text-right">Actions</th>
                                         </tr>
                                     </thead>
@@ -87,13 +84,10 @@
                                                 <td style="text-align:center">@item.Bed</td>
                                                 <td style="text-align:center">@item.Bath</td>
                                                 <td style="text-align:right">@string.Format("{0:#,0}", item.Price)</td>
-                                                <td>
-                                                    <img src="@item.Image" style="width: 80px; height: 50px" alt="image" />
-                                                </td>
-                                                <td>@item.Description</td>
                                                 <td style="text-align:center">
                                                     <input type="checkbox" @Html.Raw(item.IsActive == true ? "checked" : "") />
                                                 </td>
+                                                <td>@item.Status</td>
                                                 <td class="text-right">
                                                     <div class="dropdown dropdown-action">
                                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

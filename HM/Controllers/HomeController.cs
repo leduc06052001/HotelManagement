@@ -9,12 +9,16 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.Helpers;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.AspNet.Identity;
+using DAL.Entity.Models;
 
 namespace HM.Controllers
 {
+
     public class HomeController : Controller
     {
-
         HMEntities db = new HMEntities();
 
         public ActionResult Index()
@@ -51,13 +55,12 @@ namespace HM.Controllers
             {
                 return View(registerModel);
             }
-
-
         }
 
         //------------------* LOGIN *------------------//
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            Session["returnUrl"] = returnUrl;
             return View();
         }
 
@@ -90,7 +93,16 @@ namespace HM.Controllers
                 userSession.BirthDate = login.BirthDate;
                 userSession.Image = login.Image;
                 Session["user"] = userSession;
-                return RedirectToAction("Index");
+                string returnUrl = Session["returnUrl"] as string;
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    Session.Remove("returnUrl"); //Xóa returnUrl sau khi sử dụng
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(loginModel);
 
@@ -284,5 +296,16 @@ namespace HM.Controllers
             var user = (Customer)Session["user"];
             return View(user);
         }
+        //------------------* CHECK CHECKAVAILABLE *------------------//
+        /*        public ActionResult CheckAvailable(string roomType, int adult, int child)
+                {
+                    IQueryable<Room> rooms = db.Rooms;
+                    if (!string.IsNullOrEmpty(roomType))
+                    {
+
+                    }
+                    return View();
+                }*/
+
     }
 }

@@ -81,7 +81,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Product_Color.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Booking.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Category.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Color.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Customer.cs">
@@ -91,6 +100,9 @@
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\InvoicePayment.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\InvoiceType.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Manager.cs">
@@ -116,22 +128,34 @@
     <Compile Include="Entity\News.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\OrderDetail.cs">
+    <Compile Include="Entity\Payment.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Position.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Product.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Promotion.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Promotion1.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Provider.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Receipt.cs">
+      <DependentUpon>ModelHM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ReceiptDetail.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Room.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\RoomType.cs">
-      <DependentUpon>ModelHM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\Search.cs">
       <DependentUpon>ModelHM.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Service.cs">

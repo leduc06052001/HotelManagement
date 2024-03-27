@@ -1,0 +1,105 @@
+﻿@model DAL.Entity.Promotion
+
+@{
+    ViewBag.Title = "EditPromotion";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title mt-5">Edit Promotion</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.PromotionID)
+                    <div class="row formtype">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Promotion Name</label>
+                                <input type="text" class="form-control" name="PromotionName" , value="@Model.PromotionName" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Adult</label>
+                                <input type="number" name="Adult" class="form-control" value="@Model.Adult" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Child</label>
+                                <input type="number" name="Child" class="form-control" value="@Model.Child" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Booking Date</label>
+                                <div class="cal-icon">
+                                    <input type="text" class="form-control datetimepicker" name="BookingDate" value="@string.Format("{0:dd-MM-yyyy}", Model.BookingDate)">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Checkin Date</label>
+                                <div class="cal-icon">
+                                    <input type="text" class="form-control datetimepicker" name="CheckinDate" value="@string.Format("{0:dd-MM-yyyy}", Model.CheckinDate)">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Checkout Date</label>
+                                <div class="cal-icon">
+                                    <input type="text" class="form-control datetimepicker" name="CheckoutDate" value="@string.Format("{0:dd-MM-yyyy}", @Model.CheckoutDate)">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="Email" class="form-control" value="@Model.Email" />
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" name="Phone" class="form-control" value="@Model.Phone" />
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Active</label>
+                                <div class="center">
+                                    <input type="checkbox" value="true" name="IsActive" @Html.Raw(Model.IsActive == true ? "checked" : "") />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonedit1">Save</button>
+                    <a href="~/Admin/Booking/AllBooking" class="btn btn-primary btn-danger" style="float:right; margin-right:8px; padding:10px">Cancel</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

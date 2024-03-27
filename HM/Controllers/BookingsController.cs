@@ -29,9 +29,9 @@ namespace HM.Controllers
         public ActionResult Booking(int ID)
         {
             var sessionCus = Session["user"] as Customer;
-            if(sessionCus == null)
+            if (sessionCus == null)
             {
-                return Redirect("/Home/Login");
+                return RedirectToAction("Login", "Home", new { returnUrl = Request.RawUrl });
             }
             var room = db.Rooms.Find(ID);
             if (room == null)
@@ -69,7 +69,6 @@ namespace HM.Controllers
             }
             else
             {
-                //gán lại các giá trị
                 var room = db.Rooms.Find(booking.RoomID);
                 ViewBag.RoomDetail = room;
                 return View(booking);
@@ -112,17 +111,31 @@ namespace HM.Controllers
             {
                 return RedirectToAction("PaymentWithVNpay");
             }*/
-            return RedirectToAction("SuccessView");
+            return RedirectToAction("ListBooking", "Bookings", new { id = booking.BookingID });
         }
 
+        public ActionResult SuccessBooking(int ID)
+        {
+            var booking = db.Bookings.Find(ID);
+            if (booking == null)
+            {
+                return HttpNotFound();
+            }
+            return View(booking);
+        }
 
+        public ActionResult ListBooking()
+        {
+            var listBooking = db.Bookings.ToList();
+            return View(listBooking);
+        }
         public ActionResult Checkout(Booking booking)
         {
             return RedirectToAction("BookingDetail", "Bookings", new { id = booking.BookingID });
         }
 
         //------------------* PAYMENT WITH PAYPAL *------------------//
-        public ActionResult PaymentWithPaypal(string Cancel = null)
+/*        public ActionResult PaymentWithPaypal(string Cancel = null)
         {
             //getting the apiContext  
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
@@ -252,7 +265,7 @@ namespace HM.Controllers
             };
             // Create a payment using a APIContext  
             return this.payment.Create(apiContext);
-        }
+        }*/
 
         public ActionResult SuccessView()
         {
@@ -262,8 +275,6 @@ namespace HM.Controllers
         {
             return View();
         }
-
-
     }
 }
 

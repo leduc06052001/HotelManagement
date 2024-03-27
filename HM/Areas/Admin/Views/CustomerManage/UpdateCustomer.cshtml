@@ -51,6 +51,14 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label>Identify Number</label>
+                                <input class="form-control" type="number" name="IdentifyNumber" />
+                                @Html.ValidationMessageFor(model => model.IdentifyNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label>Gender</label>
                                 <div>
                                     <input type="radio" value="Male" name="Gender" />

@@ -275,10 +275,13 @@
     <Compile Include="Areas\Admin\Controllers\EmployeeManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesManageController.cs" />
+    <Compile Include="Common\ChangePasswordModel.cs" />
     <Compile Include="Common\ForgotPasswordViewModel.cs" />
+    <Compile Include="Common\IRoomService.cs" />
     <Compile Include="Common\LoginViewModel.cs" />
     <Compile Include="Common\RegisterViewModel.cs" />
     <Compile Include="Common\ResetPasswordViewModel.cs" />
@@ -309,6 +312,11 @@
     <Content Include="Areas\Admin\assets\css\select2.min.css" />
     <Content Include="Areas\Admin\assets\css\style.css" />
     <Content Include="Areas\Admin\assets\fonts\feathericon.svg" />
+    <Content Include="Areas\Admin\assets\img\ARTEMIS 500x280.png" />
+    <Content Include="Areas\Admin\assets\img\ARTEMIS mini.png" />
+    <Content Include="Areas\Admin\assets\img\ARTEMIS-250x250.png" />
+    <Content Include="Areas\Admin\assets\img\artemis-logo.png" />
+    <Content Include="Areas\Admin\assets\img\dashboard.jpg" />
     <Content Include="Areas\Admin\assets\img\favicon.png" />
     <Content Include="Areas\Admin\assets\img\hotel_logo.png" />
     <Content Include="Areas\Admin\assets\img\logo.png" />
@@ -1363,6 +1371,7 @@
     <Content Include="Assets\img\Lock.png" />
     <Content Include="Assets\img\background1.jpg" />
     <Content Include="Assets\img\logo\icons8_cent_500px.png" />
+    <Content Include="Assets\img\news-1.jpg" />
     <Content Include="Assets\img\room-1.jpg" />
     <Content Include="Assets\img\room-2.jpg" />
     <Content Include="Assets\img\room-3.jpg" />
@@ -1603,6 +1612,9 @@
     <Content Include="Areas\Admin\assets\plugins\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Areas\Admin\assets\plugins\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\Admin\Views\Manager\ViewProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotion\AllPromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotion\AddPromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotion\EditPromotion.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1650,6 +1662,8 @@
     <Content Include="Views\Bookings\SuccessView.cshtml" />
     <Content Include="Views\Bookings\FailureView.cshtml" />
     <Content Include="Views\Home\ProfileCustomer.cshtml" />
+    <Content Include="Views\Bookings\ViewBooking.cshtml" />
+    <Content Include="Views\Bookings\ListBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

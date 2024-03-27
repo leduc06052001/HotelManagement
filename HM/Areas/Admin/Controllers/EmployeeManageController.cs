@@ -34,7 +34,7 @@ namespace HM.Areas.Admin.Controllers
             {
                 if (new mapEmployee().CreateEmployee(employee) > 0)
                 {
-                    return RedirectToAction("AllEmployee");
+                    return RedirectToAction("AllEmployees");
                 }
                 else
                 {

@@ -15,7 +15,7 @@ namespace HM.Areas.Admin.Controllers
         {
             ViewBag.fullName = fullName;
             ViewBag.email = email;
-            return View(new mapCustomer().LoadPage(fullName, email, page, pageSize));
+            return View(new mapCustomer().AllCustomer(fullName, email, page, pageSize));
         }
 
         //------------------* CREATE *------------------//
@@ -86,7 +86,7 @@ namespace HM.Areas.Admin.Controllers
         {
             var mapped = new mapCustomer();
             mapped.DeleteCustomer(ID);
-            return RedirectToAction("AllRoom");
+            return RedirectToAction("AllCustomer");
         }
     }
 }

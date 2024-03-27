@@ -12,10 +12,12 @@ namespace HM.Areas.Admin.Controllers
     public class RoomManageController : Controller
     {
         //------------------* ALL ROOMS & SEARCH *------------------//
-        public ActionResult AllRoom(string roomType, int page = 1, int size = 1001)
+        public ActionResult AllRoom(int? roomNo, string roomType, int page = 1, int size = 1001)
         {
+            ViewBag.RoomNo = roomNo;
             ViewBag.roomType = roomType;
-            return View(new mapRoom().AllRooms(roomType, page, size));
+            int preRoomNo = roomNo.GetValueOrDefault();
+            return View(new mapRoom().AllRooms(preRoomNo, roomType, page, size));
         }
 
         //------------------* CREATE *------------------//

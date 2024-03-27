@@ -1,12 +1,13 @@
 ﻿using DAL;
 using DAL.Entity;
+using HM.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace QL_khachSan.Controllers
+namespace HM.Controllers
 {
     public class RoomsController : Controller
     {

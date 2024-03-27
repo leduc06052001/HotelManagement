@@ -12,7 +12,7 @@ namespace HM.Areas.Admin.Controllers
     {
         public ActionResult AllServices()
         {
-            return View(new mapServices().LoadData());
+            return View(new mapServiceType().LoadData());
         }
 
         //------------------* CREATE *------------------//

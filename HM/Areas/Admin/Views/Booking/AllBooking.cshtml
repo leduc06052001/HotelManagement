@@ -3,10 +3,8 @@
     ViewBag.Title = "AllBooking";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     int num = 1;
-
-
+    var roomType = new DAL.mapRoomType().LoadData();
 }
-
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="page-header">
@@ -43,10 +41,25 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label>Room Type</label>
+                                <select class="form-control" name="roomType">
+                                    <option>@ViewBag.roomType</option>
+                                    @foreach (var item in roomType)
+                                    {
+                                        <option value="@item.RoomTypeName">@item.RoomTypeName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label>Search</label>
                                 <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Search </button>
                             </div>
                         </div>
+
+
                     </div>
                 </form>
             </div>
@@ -71,8 +84,8 @@
                                         <th>Check out</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Note</th>
                                         <th class="text-right">Total</th>
+                                        <th>IsActive</th>
                                         <th class="text-right">Actions</th>
                                     </tr>
                                 </thead>
@@ -92,8 +105,10 @@
                                             <td>@string.Format("{0:dd-MM-yyyy}", item.CheckoutDate)</td>
                                             <td>@item.Email</td>
                                             <td>@item.Phone</td>
-                                            <td>@item.Note</td>
                                             <td class="text-right">@string.Format("{0:#,0}", item.TotalAmount)</td>
+                                            <td>
+                                                <input type="checkbox" @Html.Raw(item.IsActive == true ? "checked" : "") />
+                                            </td>
                                             <td class="text-right">
                                                 <div class="dropdown dropdown-action">
                                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <i class="fas fa-ellipsis-v ellipse_color"></i></a>

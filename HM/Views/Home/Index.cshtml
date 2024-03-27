@@ -127,8 +127,8 @@
                     <div class="room-item shadow rounded overflow-hidden">
                         <div class="position-relative">
                             <img class="img-fluid" src="~/Assets/img/room-1.jpg" alt="">
-                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4" style="font-size:18px">
-                                @string.Format("{0:#,0}", item.Price) /đêm
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4" style="font-size:16px; font-weight:bold">
+                                @string.Format("{0:#,0}", (item.Price * (decimal)0.9)) /đêm
                             </small>
                             <small class="position-absolute start-50 top-100 translate-middle-y bg-discount strikeThrough text-white rounded py-1 px-3 ms-4" style="text-decoration-color:black; font-size: 13px">
                                 @string.Format("{0:#,0}", item.Price) /đêm
@@ -152,7 +152,7 @@
                             </div>
                             <p class="text-body mb-3">Phù hợp cho những khách du lịch cá nhân hoặc phục vụ cho những chuyến công tác</p>
                             <div class="d-flex justify-content-center">
-                                <a class="btn btn-sm btn-primary rounded py-2 px-4" href="~/rooms/roomdetail">Xem chi tiết</a>
+                                <a class="btn btn-sm btn-primary rounded py-2 px-4" href="~/Rooms/RoomDetail?id=@item.RoomID">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>

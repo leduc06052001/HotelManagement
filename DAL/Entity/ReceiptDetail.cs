@@ -12,12 +12,15 @@ namespace DAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Search
+    public partial class ReceiptDetail
     {
-        public int SearchID { get; set; }
-        public Nullable<System.DateTime> CheckInDate { get; set; }
-        public Nullable<System.DateTime> CheckOutDate { get; set; }
-        public Nullable<int> Adult { get; set; }
-        public Nullable<int> Child { get; set; }
+        public int ReceiptDetailD { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<int> ReceiptID { get; set; }
+        public Nullable<int> ProductColorID { get; set; }
+    
+        public virtual Product_Color Product_Color { get; set; }
+        public virtual Receipt Receipt { get; set; }
     }
 }

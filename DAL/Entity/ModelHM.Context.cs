@@ -28,17 +28,25 @@ namespace DAL.Entity
         }
     
         public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<InvoicePayment> InvoicePayments { get; set; }
+        public virtual DbSet<InvoiceType> InvoiceTypes { get; set; }
         public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
+        public virtual DbSet<Product_Color> Product_Color { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
+        public virtual DbSet<Promotion1> Promotions1 { get; set; }
+        public virtual DbSet<Provider> Providers { get; set; }
+        public virtual DbSet<ReceiptDetail> ReceiptDetails { get; set; }
+        public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
-        public virtual DbSet<Search> Searchs { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<ServiceType> ServiceTypes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }

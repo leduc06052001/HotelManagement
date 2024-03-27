@@ -43,7 +43,7 @@ namespace DAL
         }
 
         //------------------* ALL CUSTOMERS & SEARCH(Load page) *------------------//
-        public List<Customer> LoadPage(string fullName, string email, int page, int size)
+        public List<Customer> AllCustomer(string fullName, string email, int page, int size)
         {
             IQueryable<Customer> data = db.Customers;
             if (!string.IsNullOrEmpty(fullName))

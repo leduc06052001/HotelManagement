@@ -12,18 +12,18 @@ namespace DAL
         HMEntities db = new HMEntities();
 
         //------------------* ALL ROOMS & SEARCH(Load Page) *------------------//
-        public List<Room> AllRooms(string roomType, int page, int size)
+        public List<Room> AllRooms(int roomNo, string roomType, int page, int size)
         {
             IQueryable<Room> data = db.Rooms;
-            /*if(roomNo > 0)
+            if (roomNo != 0)
             {
                 data = db.Rooms.Where(p => p.RoomNumber == roomNo);
-            }*/
-            if(!string.IsNullOrEmpty(roomType))
+            }
+            if (!string.IsNullOrEmpty(roomType))
             {
                 data = db.Rooms.Where(p => p.RoomType.RoomTypeName.ToLower().Contains(roomType));
             }
-            return data.OrderBy(p=>p.RoomID).Skip((page-1)*size).Take(size).ToList();
+            return data.OrderBy(p => p.RoomID).Skip((page - 1) * size).Take(size).ToList();
         }
 
         public List<Room> LoadData()

@@ -60,8 +60,6 @@
                                         <th>Email</th>
                                         <th>Gender</th>
                                         <th>BirthDate</th>
-                                        <th style="text-align:center">Image</th>
-                                        <th>Promotion</th>
                                         <th class="text-right">Actions</th>
                                     </tr>
                                 </thead>
@@ -77,10 +75,7 @@
                                             <td>@item.Email</td>
                                             <td>@item.Gender</td>
                                             <td>@string.Format("{0:dd-MM-yyyy}", item.BirthDate)</td>
-                                            <td style="text-align:center">
-                                                <img src="@item.Image" style="width:60px; height:60px" />
-                                            </td>
-                                            <td>@item.Promotion.PromotionName</td>
+                                            
                                             <td class="text-right">
                                                 <div class="dropdown dropdown-action">
                                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>

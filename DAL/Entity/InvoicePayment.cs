@@ -14,17 +14,27 @@ namespace DAL.Entity
     
     public partial class InvoicePayment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public InvoicePayment()
+        {
+            this.Payments = new HashSet<Payment>();
+        }
+    
         public int InvoiceID { get; set; }
         public string InvoiceName { get; set; }
         public Nullable<int> BookingID { get; set; }
         public Nullable<System.DateTime> InvoiceDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
-        public string PaymentStatus { get; set; }
+        public Nullable<bool> PaymentStatus { get; set; }
         public Nullable<int> CustomerID { get; set; }
         public Nullable<int> EmployeeID { get; set; }
+        public Nullable<int> InvoiceTypeID { get; set; }
     
         public virtual Booking Booking { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual InvoiceType InvoiceType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

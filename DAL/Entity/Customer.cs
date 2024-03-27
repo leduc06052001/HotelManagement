@@ -18,6 +18,7 @@ namespace DAL.Entity
         public Customer()
         {
             this.InvoicePayments = new HashSet<InvoicePayment>();
+            this.Payments = new HashSet<Payment>();
         }
     
         public int CustomerID { get; set; }
@@ -33,8 +34,10 @@ namespace DAL.Entity
         public Nullable<int> PromotionID { get; set; }
         public string resetPasswordCode { get; set; }
     
-        public virtual Promotion Promotion { get; set; }
+        public virtual Promotion1 Promotion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoicePayment> InvoicePayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

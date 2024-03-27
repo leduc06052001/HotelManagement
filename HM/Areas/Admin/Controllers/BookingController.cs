@@ -13,11 +13,12 @@ namespace HM.Areas.Admin.Controllers
 {
     public class BookingController : Controller
     {
-        public ActionResult AllBooking(string customerName, string email, int page = 1, int size = 1001)
+        public ActionResult AllBooking(string customerName, string email,string roomType, int page = 1, int size = 1001)
         {
             ViewBag.customerName = customerName;
             ViewBag.email = email;
-            return View(new mapBookings().AllBookings(customerName, email, page, size));
+            ViewBag.roomType = roomType;
+            return View(new mapBookings().AllBookings(customerName, email, roomType, page, size));
         }
 
         //------------------* ADD BOOKING *------------------//

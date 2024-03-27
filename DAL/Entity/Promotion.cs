@@ -17,18 +17,18 @@ namespace DAL.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Promotion()
         {
-            this.Customers = new HashSet<Customer>();
+            this.Products = new HashSet<Product>();
         }
     
         public int PromotionID { get; set; }
         public string PromotionName { get; set; }
-        public string Description { get; set; }
+        public Nullable<decimal> PromotinValues { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public string Conditions { get; set; }
-        public string PromotionCode { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

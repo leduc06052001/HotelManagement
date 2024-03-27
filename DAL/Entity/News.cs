@@ -21,5 +21,8 @@ namespace DAL.Entity
         public string Image { get; set; }
         public string NewsContent { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> ManagerID { get; set; }
+    
+        public virtual Manager Manager { get; set; }
     }
 }

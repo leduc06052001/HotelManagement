@@ -5,12 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Accounts">
-          <Property Name="AccountID" Type="int" />
-          <Property Name="AccountType" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="Bookings">
           <Key>
             <PropertyRef Name="BookingID" />
@@ -29,6 +23,29 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Child" Type="int" />
           <Property Name="PromotionCode" Type="nvarchar" MaxLength="50" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PromotionID" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpatedAt" Type="date" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ColorCode" Type="varchar" MaxLength="12" />
+          <Property Name="ProductID" Type="int" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -69,9 +86,18 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="BookingID" Type="int" />
           <Property Name="InvoiceDate" Type="date" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="PaymentStatus" Type="nvarchar" MaxLength="200" />
+          <Property Name="PaymentStatus" Type="bit" />
           <Property Name="CustomerID" Type="int" />
           <Property Name="EmployeeID" Type="int" />
+          <Property Name="InvoiceTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="InvoiceTypes">
+          <Key>
+            <PropertyRef Name="InvoiceTypeID" />
+          </Key>
+          <Property Name="InvoiceTypeID" Type="int" Nullable="false" />
+          <Property Name="InvoiceTypeName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Managers">
           <Key>
@@ -97,17 +123,29 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="NewsContent" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="ManagerID" Type="int" />
         </EntityType>
-        <EntityType Name="OrderDetail">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HM.dbo.Notifications' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Notifications">
+          <Property Name="NotificationID" Type="int" />
+          <Property Name="MessageContent" Type="nvarchar" MaxLength="200" />
+          <Property Name="SendingTime" Type="datetime" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="BookingID" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Payments">
           <Key>
-            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="PaymentID" />
           </Key>
-          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CheckInDate" Type="date" />
-          <Property Name="CheckOutDate" Type="date" />
-          <Property Name="Adult" Type="int" />
-          <Property Name="Child" Type="int" />
-          <Property Name="RoomID" Type="int" />
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceID" Type="int" />
+          <Property Name="PaymentDate" Type="date" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="PromotionID" Type="int" />
         </EntityType>
         <EntityType Name="Positions">
           <Key>
@@ -115,7 +153,51 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </Key>
           <Property Name="PositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PositionName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Product_Color">
+          <Key>
+            <PropertyRef Name="ProductColorID" />
+          </Key>
+          <Property Name="ProductColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ColorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Image" Type="varchar" MaxLength="200" />
+          <Property Name="ProductCode" Type="varchar" MaxLength="50" />
+          <Property Name="SellPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SoldQuantity" Type="int" />
+          <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Color" Type="nvarchar" MaxLength="20" />
+          <Property Name="Style" Type="nvarchar" MaxLength="50" />
+          <Property Name="Material" Type="nvarchar" MaxLength="50" />
+          <Property Name="Feature" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProviderID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="PromotionID" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdateAt" Type="date" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PromotionName" Type="nvarchar" MaxLength="200" />
+          <Property Name="PromotinValues" Type="numeric" Precision="5" Scale="1" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
         </EntityType>
         <EntityType Name="Promotions">
           <Key>
@@ -129,6 +211,36 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Conditions" Type="nvarchar" MaxLength="1000" />
           <Property Name="PromotionCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ProviderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProviderAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreatedAt" Type="date" />
+        </EntityType>
+        <EntityType Name="ReceiptDetail">
+          <Key>
+            <PropertyRef Name="ReceiptDetailD" />
+          </Key>
+          <Property Name="ReceiptDetailD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ReceiptID" Type="int" />
+          <Property Name="ProductColorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Receipts">
+          <Key>
+            <PropertyRef Name="ReceiptID" />
+          </Key>
+          <Property Name="ReceiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImportedDate" Type="date" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+        </EntityType>
         <EntityType Name="Rooms">
           <Key>
             <PropertyRef Name="RoomID" />
@@ -141,9 +253,9 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="OldPirce" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Image" Type="varchar(max)" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="RoomTypeID" Type="int" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="RoomTypeID" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RoomTypes">
           <Key>
@@ -153,16 +265,12 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="RoomTypeName" Type="nvarchar" MaxLength="150" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
         </EntityType>
-        <EntityType Name="Searchs">
-          <Key>
-            <PropertyRef Name="SearchID" />
-          </Key>
-          <Property Name="SearchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CheckInDate" Type="date" />
-          <Property Name="CheckOutDate" Type="date" />
-          <Property Name="Adult" Type="int" />
-          <Property Name="Child" Type="int" />
-        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HM.dbo.Salary' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Salary">
+          <Property Name="SalaryID" Type="int" />
+          <Property Name="PositionID" Type="int" />
+        </EntityType>-->
         <EntityType Name="Services">
           <Key>
             <PropertyRef Name="ServiceID" />
@@ -192,6 +300,18 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Bookings_Promotions">
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Rooms">
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
@@ -227,6 +347,20 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             </Principal>
             <Dependent Role="Employees">
               <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoicePayments_InvoiceTypes">
+          <End Role="InvoiceTypes" Type="Self.InvoiceTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvoicePayments" Type="Self.InvoicePayments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceTypes">
+              <PropertyRef Name="InvoiceTypeID" />
+            </Principal>
+            <Dependent Role="InvoicePayments">
+              <PropertyRef Name="InvoiceTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -266,15 +400,135 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderDetail_Rooms">
-          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+        <Association Name="FK_News_Managers">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Rooms">
-              <PropertyRef Name="RoomID" />
+            <Principal Role="Managers">
+              <PropertyRef Name="ManagerID" />
             </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="RoomID" />
+            <Dependent Role="News">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Invoices">
+          <End Role="InvoicePayments" Type="Self.InvoicePayments" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoicePayments">
+              <PropertyRef Name="InvoiceID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Promotions">
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Color_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="Product_Color" Type="Self.Product_Color" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="Product_Color">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Color_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Product_Color" Type="Self.Product_Color" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Color">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Promotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Providers">
+          <End Role="Providers" Type="Self.Providers" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="ProviderID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptDetail_Product_Color">
+          <End Role="Product_Color" Type="Self.Product_Color" Multiplicity="0..1" />
+          <End Role="ReceiptDetail" Type="Self.ReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Color">
+              <PropertyRef Name="ProductColorID" />
+            </Principal>
+            <Dependent Role="ReceiptDetail">
+              <PropertyRef Name="ProductColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptDetail_Receipts">
+          <End Role="Receipts" Type="Self.Receipts" Multiplicity="0..1" />
+          <End Role="ReceiptDetail" Type="Self.ReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipts">
+              <PropertyRef Name="ReceiptID" />
+            </Principal>
+            <Dependent Role="ReceiptDetail">
+              <PropertyRef Name="ReceiptID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -351,20 +605,32 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HMModelStoreContainer">
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoicePayments" EntityType="Self.InvoicePayments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceTypes" EntityType="Self.InvoiceTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Color" EntityType="Self.Product_Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotions" EntityType="Self.Promotions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Providers" EntityType="Self.Providers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptDetail" EntityType="Self.ReceiptDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipts" EntityType="Self.Receipts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomTypes" EntityType="Self.RoomTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Searchs" EntityType="Self.Searchs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceType" EntityType="Self.ServiceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bookings_Promotions" Association="Self.FK_Bookings_Promotions">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Rooms" Association="Self.FK_Bookings_Rooms">
             <End Role="Rooms" EntitySet="Rooms" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -376,6 +642,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <AssociationSet Name="FK_Employees_Positions" Association="Self.FK_Employees_Positions">
             <End Role="Positions" EntitySet="Positions" />
             <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoicePayments_InvoiceTypes" Association="Self.FK_InvoicePayments_InvoiceTypes">
+            <End Role="InvoiceTypes" EntitySet="InvoiceTypes" />
+            <End Role="InvoicePayments" EntitySet="InvoicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Bookings" Association="Self.FK_Invoices_Bookings">
             <End Role="Bookings" EntitySet="Bookings" />
@@ -389,9 +659,49 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             <End Role="Employees" EntitySet="Employees" />
             <End Role="InvoicePayments" EntitySet="InvoicePayments" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Rooms" Association="Self.FK_OrderDetail_Rooms">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          <AssociationSet Name="FK_News_Managers" Association="Self.FK_News_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Customers" Association="Self.FK_Payments_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Invoices" Association="Self.FK_Payments_Invoices">
+            <End Role="InvoicePayments" EntitySet="InvoicePayments" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Promotions" Association="Self.FK_Payments_Promotions">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Color_Color" Association="Self.FK_Product_Color_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Product_Color" EntitySet="Product_Color" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Color_Products" Association="Self.FK_Product_Color_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Color" EntitySet="Product_Color" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Promotion" Association="Self.FK_Products_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Providers" Association="Self.FK_Products_Providers">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptDetail_Product_Color" Association="Self.FK_ReceiptDetail_Product_Color">
+            <End Role="Product_Color" EntitySet="Product_Color" />
+            <End Role="ReceiptDetail" EntitySet="ReceiptDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptDetail_Receipts" Association="Self.FK_ReceiptDetail_Receipts">
+            <End Role="Receipts" EntitySet="Receipts" />
+            <End Role="ReceiptDetail" EntitySet="ReceiptDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_RoomType" Association="Self.FK_Rooms_RoomType">
             <End Role="RoomTypes" EntitySet="RoomTypes" />
@@ -442,20 +752,32 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="Bookings" EntityType="HMModel.Booking" />
+          <EntitySet Name="Categories" EntityType="HMModel.Category" />
+          <EntitySet Name="Colors" EntityType="HMModel.Color" />
           <EntitySet Name="Customers" EntityType="HMModel.Customer" />
           <EntitySet Name="Employees" EntityType="HMModel.Employee" />
           <EntitySet Name="InvoicePayments" EntityType="HMModel.InvoicePayment" />
+          <EntitySet Name="InvoiceTypes" EntityType="HMModel.InvoiceType" />
           <EntitySet Name="Managers" EntityType="HMModel.Manager" />
           <EntitySet Name="News" EntityType="HMModel.News" />
-          <EntitySet Name="OrderDetails" EntityType="HMModel.OrderDetail" />
+          <EntitySet Name="Payments" EntityType="HMModel.Payment" />
           <EntitySet Name="Positions" EntityType="HMModel.Position" />
+          <EntitySet Name="Product_Color" EntityType="HMModel.Product_Color" />
+          <EntitySet Name="Products" EntityType="HMModel.Product" />
           <EntitySet Name="Promotions" EntityType="HMModel.Promotion" />
+          <EntitySet Name="Promotions1" EntityType="HMModel.Promotion1" />
+          <EntitySet Name="Providers" EntityType="HMModel.Provider" />
+          <EntitySet Name="ReceiptDetails" EntityType="HMModel.ReceiptDetail" />
+          <EntitySet Name="Receipts" EntityType="HMModel.Receipt" />
           <EntitySet Name="Rooms" EntityType="HMModel.Room" />
           <EntitySet Name="RoomTypes" EntityType="HMModel.RoomType" />
-          <EntitySet Name="Searchs" EntityType="HMModel.Search" />
           <EntitySet Name="Services" EntityType="HMModel.Service" />
           <EntitySet Name="ServiceTypes" EntityType="HMModel.ServiceType" />
           <EntitySet Name="sysdiagrams" EntityType="HMModel.sysdiagram" />
+          <AssociationSet Name="FK_Bookings_Promotions" Association="HMModel.FK_Bookings_Promotions">
+            <End Role="Promotion1" EntitySet="Promotions1" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Rooms" Association="HMModel.FK_Bookings_Rooms">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Booking" EntitySet="Bookings" />
@@ -468,13 +790,25 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             <End Role="Service" EntitySet="Services" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="HMModel.FK_Products_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Color_Color" Association="HMModel.FK_Product_Color_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="Product_Color" EntitySet="Product_Color" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customers_Promotions" Association="HMModel.FK_Customers_Promotions">
-            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="Promotion1" EntitySet="Promotions1" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Invoices_Customers" Association="HMModel.FK_Invoices_Customers">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="InvoicePayment" EntitySet="InvoicePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Customers" Association="HMModel.FK_Payments_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Positions" Association="HMModel.FK_Employees_Positions">
             <End Role="Position" EntitySet="Positions" />
@@ -484,9 +818,41 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             <End Role="Employee" EntitySet="Employees" />
             <End Role="InvoicePayment" EntitySet="InvoicePayments" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Rooms" Association="HMModel.FK_OrderDetail_Rooms">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          <AssociationSet Name="FK_InvoicePayments_InvoiceTypes" Association="HMModel.FK_InvoicePayments_InvoiceTypes">
+            <End Role="InvoiceType" EntitySet="InvoiceTypes" />
+            <End Role="InvoicePayment" EntitySet="InvoicePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Invoices" Association="HMModel.FK_Payments_Invoices">
+            <End Role="InvoicePayment" EntitySet="InvoicePayments" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Managers" Association="HMModel.FK_News_Managers">
+            <End Role="Manager" EntitySet="Managers" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Promotions" Association="HMModel.FK_Payments_Promotions">
+            <End Role="Promotion1" EntitySet="Promotions1" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Color_Products" Association="HMModel.FK_Product_Color_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Color" EntitySet="Product_Color" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptDetail_Product_Color" Association="HMModel.FK_ReceiptDetail_Product_Color">
+            <End Role="Product_Color" EntitySet="Product_Color" />
+            <End Role="ReceiptDetail" EntitySet="ReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Promotion" Association="HMModel.FK_Products_Promotion">
+            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Providers" Association="HMModel.FK_Products_Providers">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptDetail_Receipts" Association="HMModel.FK_ReceiptDetail_Receipts">
+            <End Role="Receipt" EntitySet="Receipts" />
+            <End Role="ReceiptDetail" EntitySet="ReceiptDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_RoomType" Association="HMModel.FK_Rooms_RoomType">
             <End Role="RoomType" EntitySet="RoomTypes" />
@@ -526,9 +892,35 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Child" Type="Int32" />
           <Property Name="PromotionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PromotionID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Bookings_Promotions" FromRole="Booking" ToRole="Promotion1" />
           <NavigationProperty Name="Room" Relationship="HMModel.FK_Bookings_Rooms" FromRole="Booking" ToRole="Room" />
           <NavigationProperty Name="InvoicePayments" Relationship="HMModel.FK_Invoices_Bookings" FromRole="Booking" ToRole="InvoicePayment" />
           <NavigationProperty Name="Service" Relationship="HMModel.FK_tb_Bookings_tb_Services" FromRole="Booking" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Products" Relationship="HMModel.FK_Products_Categories" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColorCode" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Product_Color" Relationship="HMModel.FK_Product_Color_Color" FromRole="Color" ToRole="Product_Color" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -546,8 +938,9 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PromotionID" Type="Int32" />
           <Property Name="resetPasswordCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Customers_Promotions" FromRole="Customer" ToRole="Promotion" />
+          <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Customers_Promotions" FromRole="Customer" ToRole="Promotion1" />
           <NavigationProperty Name="InvoicePayments" Relationship="HMModel.FK_Invoices_Customers" FromRole="Customer" ToRole="InvoicePayment" />
+          <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Customers" FromRole="Customer" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -573,12 +966,24 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="BookingID" Type="Int32" />
           <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
           <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="PaymentStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentStatus" Type="Boolean" />
           <Property Name="CustomerID" Type="Int32" />
           <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="InvoiceTypeID" Type="Int32" />
           <NavigationProperty Name="Booking" Relationship="HMModel.FK_Invoices_Bookings" FromRole="InvoicePayment" ToRole="Booking" />
           <NavigationProperty Name="Customer" Relationship="HMModel.FK_Invoices_Customers" FromRole="InvoicePayment" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="HMModel.FK_Invoices_Employees" FromRole="InvoicePayment" ToRole="Employee" />
+          <NavigationProperty Name="InvoiceType" Relationship="HMModel.FK_InvoicePayments_InvoiceTypes" FromRole="InvoicePayment" ToRole="InvoiceType" />
+          <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Invoices" FromRole="InvoicePayment" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="InvoiceType">
+          <Key>
+            <PropertyRef Name="InvoiceTypeID" />
+          </Key>
+          <Property Name="InvoiceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceTypeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InvoicePayments" Relationship="HMModel.FK_InvoicePayments_InvoiceTypes" FromRole="InvoiceType" ToRole="InvoicePayment" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -592,6 +997,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="News" Relationship="HMModel.FK_News_Managers" FromRole="Manager" ToRole="News" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -604,18 +1010,24 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewsContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ManagerID" Type="Int32" />
+          <NavigationProperty Name="Manager" Relationship="HMModel.FK_News_Managers" FromRole="News" ToRole="Manager" />
         </EntityType>
-        <EntityType Name="OrderDetail">
+        <EntityType Name="Payment">
           <Key>
-            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="PaymentID" />
           </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CheckInDate" Type="DateTime" Precision="0" />
-          <Property Name="CheckOutDate" Type="DateTime" Precision="0" />
-          <Property Name="Adult" Type="Int32" />
-          <Property Name="Child" Type="Int32" />
-          <Property Name="RoomID" Type="Int32" />
-          <NavigationProperty Name="Room" Relationship="HMModel.FK_OrderDetail_Rooms" FromRole="OrderDetail" ToRole="Room" />
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceID" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="PromotionID" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="HMModel.FK_Payments_Customers" FromRole="Payment" ToRole="Customer" />
+          <NavigationProperty Name="InvoicePayment" Relationship="HMModel.FK_Payments_Invoices" FromRole="Payment" ToRole="InvoicePayment" />
+          <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Payments_Promotions" FromRole="Payment" ToRole="Promotion1" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -623,10 +1035,62 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           </Key>
           <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PositionName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employees" Relationship="HMModel.FK_Employees_Positions" FromRole="Position" ToRole="Employee" />
         </EntityType>
+        <EntityType Name="Product_Color">
+          <Key>
+            <PropertyRef Name="ProductColorID" />
+          </Key>
+          <Property Name="ProductColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ColorID" Type="Int32" />
+          <NavigationProperty Name="Color" Relationship="HMModel.FK_Product_Color_Color" FromRole="Product_Color" ToRole="Color" />
+          <NavigationProperty Name="Product" Relationship="HMModel.FK_Product_Color_Products" FromRole="Product_Color" ToRole="Product" />
+          <NavigationProperty Name="ReceiptDetails" Relationship="HMModel.FK_ReceiptDetail_Product_Color" FromRole="Product_Color" ToRole="ReceiptDetail" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SellPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SoldQuantity" Type="Int32" />
+          <Property Name="DiscountPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Style" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Material" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Feature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="PromotionID" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdateAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Category" Relationship="HMModel.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Product_Color" Relationship="HMModel.FK_Product_Color_Products" FromRole="Product" ToRole="Product_Color" />
+          <NavigationProperty Name="Promotion" Relationship="HMModel.FK_Products_Promotion" FromRole="Product" ToRole="Promotion" />
+          <NavigationProperty Name="Provider" Relationship="HMModel.FK_Products_Providers" FromRole="Product" ToRole="Provider" />
+        </EntityType>
         <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PromotionName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PromotinValues" Type="Decimal" Precision="5" Scale="1" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Products" Relationship="HMModel.FK_Products_Promotion" FromRole="Promotion" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Promotion1">
           <Key>
             <PropertyRef Name="PromotionID" />
           </Key>
@@ -637,7 +1101,43 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="Conditions" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="PromotionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customers" Relationship="HMModel.FK_Customers_Promotions" FromRole="Promotion" ToRole="Customer" />
+          <NavigationProperty Name="Bookings" Relationship="HMModel.FK_Bookings_Promotions" FromRole="Promotion1" ToRole="Booking" />
+          <NavigationProperty Name="Customers" Relationship="HMModel.FK_Customers_Promotions" FromRole="Promotion1" ToRole="Customer" />
+          <NavigationProperty Name="Payments" Relationship="HMModel.FK_Payments_Promotions" FromRole="Promotion1" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ProviderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Products" Relationship="HMModel.FK_Products_Providers" FromRole="Provider" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ReceiptDetail">
+          <Key>
+            <PropertyRef Name="ReceiptDetailD" />
+          </Key>
+          <Property Name="ReceiptDetailD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ReceiptID" Type="Int32" />
+          <Property Name="ProductColorID" Type="Int32" />
+          <NavigationProperty Name="Product_Color" Relationship="HMModel.FK_ReceiptDetail_Product_Color" FromRole="ReceiptDetail" ToRole="Product_Color" />
+          <NavigationProperty Name="Receipt" Relationship="HMModel.FK_ReceiptDetail_Receipts" FromRole="ReceiptDetail" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ReceiptID" />
+          </Key>
+          <Property Name="ReceiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImportedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ReceiptDetails" Relationship="HMModel.FK_ReceiptDetail_Receipts" FromRole="Receipt" ToRole="ReceiptDetail" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -651,11 +1151,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="OldPirce" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RoomTypeID" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="RoomTypeID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bookings" Relationship="HMModel.FK_Bookings_Rooms" FromRole="Room" ToRole="Booking" />
-          <NavigationProperty Name="OrderDetails" Relationship="HMModel.FK_OrderDetail_Rooms" FromRole="Room" ToRole="OrderDetail" />
           <NavigationProperty Name="RoomType" Relationship="HMModel.FK_Rooms_RoomType" FromRole="Room" ToRole="RoomType" />
         </EntityType>
         <EntityType Name="RoomType">
@@ -666,16 +1165,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="RoomTypeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rooms" Relationship="HMModel.FK_Rooms_RoomType" FromRole="RoomType" ToRole="Room" />
-        </EntityType>
-        <EntityType Name="Search">
-          <Key>
-            <PropertyRef Name="SearchID" />
-          </Key>
-          <Property Name="SearchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CheckInDate" Type="DateTime" Precision="0" />
-          <Property Name="CheckOutDate" Type="DateTime" Precision="0" />
-          <Property Name="Adult" Type="Int32" />
-          <Property Name="Child" Type="Int32" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -709,6 +1198,18 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_Bookings_Promotions">
+          <End Type="HMModel.Promotion1" Role="Promotion1" Multiplicity="0..1" />
+          <End Type="HMModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion1">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Rooms">
           <End Type="HMModel.Room" Role="Room" Multiplicity="1" />
           <End Type="HMModel.Booking" Role="Booking" Multiplicity="*" />
@@ -745,11 +1246,35 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_Categories">
+          <End Type="HMModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="HMModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Color_Color">
+          <End Type="HMModel.Color" Role="Color" Multiplicity="0..1" />
+          <End Type="HMModel.Product_Color" Role="Product_Color" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="Product_Color">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customers_Promotions">
-          <End Type="HMModel.Promotion" Role="Promotion" Multiplicity="0..1" />
+          <End Type="HMModel.Promotion1" Role="Promotion1" Multiplicity="0..1" />
           <End Type="HMModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Promotion">
+            <Principal Role="Promotion1">
               <PropertyRef Name="PromotionID" />
             </Principal>
             <Dependent Role="Customer">
@@ -765,6 +1290,18 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
               <PropertyRef Name="CustomerID" />
             </Principal>
             <Dependent Role="InvoicePayment">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Customers">
+          <End Type="HMModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="HMModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Payment">
               <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
@@ -795,15 +1332,113 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderDetail_Rooms">
-          <End Type="HMModel.Room" Role="Room" Multiplicity="0..1" />
-          <End Type="HMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+        <Association Name="FK_InvoicePayments_InvoiceTypes">
+          <End Type="HMModel.InvoiceType" Role="InvoiceType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HMModel.InvoicePayment" Role="InvoicePayment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="RoomID" />
+            <Principal Role="InvoiceType">
+              <PropertyRef Name="InvoiceTypeID" />
             </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="RoomID" />
+            <Dependent Role="InvoicePayment">
+              <PropertyRef Name="InvoiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Invoices">
+          <End Type="HMModel.InvoicePayment" Role="InvoicePayment" Multiplicity="0..1" />
+          <End Type="HMModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoicePayment">
+              <PropertyRef Name="InvoiceID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Managers">
+          <End Type="HMModel.Manager" Role="Manager" Multiplicity="0..1" />
+          <End Type="HMModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="ManagerID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Promotions">
+          <End Type="HMModel.Promotion1" Role="Promotion1" Multiplicity="0..1" />
+          <End Type="HMModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion1">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Color_Products">
+          <End Type="HMModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="HMModel.Product_Color" Role="Product_Color" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Color">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptDetail_Product_Color">
+          <End Type="HMModel.Product_Color" Role="Product_Color" Multiplicity="0..1" />
+          <End Type="HMModel.ReceiptDetail" Role="ReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Color">
+              <PropertyRef Name="ProductColorID" />
+            </Principal>
+            <Dependent Role="ReceiptDetail">
+              <PropertyRef Name="ProductColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Promotion">
+          <End Type="HMModel.Promotion" Role="Promotion" Multiplicity="0..1" />
+          <End Type="HMModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Providers">
+          <End Type="HMModel.Provider" Role="Provider" Multiplicity="0..1" />
+          <End Type="HMModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptDetail_Receipts">
+          <End Type="HMModel.Receipt" Role="Receipt" Multiplicity="0..1" />
+          <End Type="HMModel.ReceiptDetail" Role="ReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="ReceiptID" />
+            </Principal>
+            <Dependent Role="ReceiptDetail">
+              <PropertyRef Name="ReceiptID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -868,6 +1503,10 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="HMModel.Booking">
               <MappingFragment StoreEntitySet="Bookings">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
                 <ScalarProperty Name="Child" ColumnName="Child" />
@@ -882,6 +1521,27 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="HMModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="UpatedAt" ColumnName="UpatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="HMModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -920,6 +1580,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <EntitySetMapping Name="InvoicePayments">
             <EntityTypeMapping TypeName="HMModel.InvoicePayment">
               <MappingFragment StoreEntitySet="InvoicePayments">
+                <ScalarProperty Name="InvoiceTypeID" ColumnName="InvoiceTypeID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
@@ -928,6 +1589,15 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
                 <ScalarProperty Name="BookingID" ColumnName="BookingID" />
                 <ScalarProperty Name="InvoiceName" ColumnName="InvoiceName" />
                 <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceTypes">
+            <EntityTypeMapping TypeName="HMModel.InvoiceType">
+              <MappingFragment StoreEntitySet="InvoiceTypes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InvoiceTypeName" ColumnName="InvoiceTypeName" />
+                <ScalarProperty Name="InvoiceTypeID" ColumnName="InvoiceTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -948,6 +1618,7 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="HMModel.News">
               <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
@@ -958,15 +1629,17 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="HMModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
-                <ScalarProperty Name="Child" ColumnName="Child" />
-                <ScalarProperty Name="Adult" ColumnName="Adult" />
-                <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
-                <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="HMModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -974,13 +1647,60 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
             <EntityTypeMapping TypeName="HMModel.Position">
               <MappingFragment StoreEntitySet="Positions">
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="PositionName" ColumnName="PositionName" />
                 <ScalarProperty Name="PositionID" ColumnName="PositionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Product_Color">
+            <EntityTypeMapping TypeName="HMModel.Product_Color">
+              <MappingFragment StoreEntitySet="Product_Color">
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductColorID" ColumnName="ProductColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="HMModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Feature" ColumnName="Feature" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="SoldQuantity" ColumnName="SoldQuantity" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Promotions">
             <EntityTypeMapping TypeName="HMModel.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="PromotinValues" ColumnName="PromotinValues" />
+                <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions1">
+            <EntityTypeMapping TypeName="HMModel.Promotion1">
               <MappingFragment StoreEntitySet="Promotions">
                 <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
                 <ScalarProperty Name="Conditions" ColumnName="Conditions" />
@@ -992,12 +1712,45 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="HMModel.Provider">
+              <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ProviderAddress" ColumnName="ProviderAddress" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptDetails">
+            <EntityTypeMapping TypeName="HMModel.ReceiptDetail">
+              <MappingFragment StoreEntitySet="ReceiptDetail">
+                <ScalarProperty Name="ProductColorID" ColumnName="ProductColorID" />
+                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ReceiptDetailD" ColumnName="ReceiptDetailD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipts">
+            <EntityTypeMapping TypeName="HMModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipts">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ImportedDate" ColumnName="ImportedDate" />
+                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="HMModel.Room">
               <MappingFragment StoreEntitySet="Rooms">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="OldPirce" ColumnName="OldPirce" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -1015,17 +1768,6 @@ warning 6013: The table/view 'HM.dbo.Accounts' does not have a primary key defin
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="RoomTypeName" ColumnName="RoomTypeName" />
                 <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Searchs">
-            <EntityTypeMapping TypeName="HMModel.Search">
-              <MappingFragment StoreEntitySet="Searchs">
-                <ScalarProperty Name="Child" ColumnName="Child" />
-                <ScalarProperty Name="Adult" ColumnName="Adult" />
-                <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
-                <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
-                <ScalarProperty Name="SearchID" ColumnName="SearchID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

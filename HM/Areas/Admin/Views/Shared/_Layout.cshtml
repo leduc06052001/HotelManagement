@@ -24,14 +24,14 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="~/Admin/DashBoard/Index" class="logo"> <img src="~/Areas/Admin/assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass text-uppercase">Artemis</span> </a>
-                <a href="~/Admin/DashBoard/Index" class="logo logo-small"> <img src="~/Areas/Admin/assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
+                <a href="~/Admin/DashBoard/Index" class="logo"> <img src="~/Areas/Admin/assets/img/ARTEMIS mini.png" width="50" height="70" alt="logo"> <span class="logoclass text-uppercase">Artemis</span> </a>
+                <a href="~/Admin/DashBoard/Index" class="logo logo-small"> <img src="~/Areas/Admin/assets/img/ARTEMIS mini.png" alt="Logo" width="30" height="30"> </a>
             </div>
             <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
             <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
             <ul class="nav user-menu">
-                <li class="nav-item dropdown noti-dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> @*<span class="badge badge-pill"></span>*@ </a>
+                <!--<li class="nav-item dropdown noti-dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i>--> @*<span class="badge badge-pill"></span>*@ <!--</a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header"> <span class="notification-title">Notifications</span> <a href="javascript:void(0)" class="clear-noti"> Clear All </a> </div>
                         <div class="noti-content">
@@ -40,9 +40,9 @@
                         </div>
                         <div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>
                     </div>
-                </li>
+                </li>-->
                 @{
-                    var user = HM.App_Start.AdminSessionConfig.GetUser();
+                    var user = HM.App_Start.SessionConfig.GetUser();
                 }
                 @if (user != null)
                 {
@@ -138,88 +138,130 @@
                         <!--Room Type-->
                         <li> <a href="~/Admin/RoomType/RoomType"><i class="fas fa-th-large"></i> <span>Room Type</span></a> </li>
 
-                        <!--Accounts-->
+                        <!-- Areas shopping online -->
                         <li class="submenu">
-                            <a href="#"><i class="far fa-money-bill-alt"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
+                            <a href="#"><i class="fas fa-tasks"></i> <span> Provider </span> <span class="menu-arrow"></span></a>
                             <ul class="submenu_class" style="display: none;">
-                                <li><a href="invoices.html">Invoices </a></li>
-                                <li><a href="payments.html">Payments </a></li>
-                                <li><a href="expenses.html">Expenses </a></li>
-                                <li><a href="taxes.html">Taxes </a></li>
-                                <li><a href="provident-fund.html">Provident Fund </a></li>
+                                <li><a href="~/Admin/Provider/AllProvider">All Provider </a></li>
+                                <li><a href="~/Admin/Provider/AddProvider">Add Provider </a></li>
                             </ul>
                         </li>
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-tasks"></i> <span> Product </span> <span class="menu-arrow"></span></a>
+                            <ul class="submenu_class" style="display: none;">
+                                <li><a href="~/Admin/Product/AllProduct">All Product </a></li>
+                                <li><a href="~/Admin/Product/AddProduct">Add Service </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-tasks"></i> <span> Promotion </span> <span class="menu-arrow"></span></a>
+                            <ul class="submenu_class" style="display: none;">
+                                <li><a href="~/Admin/Promotion/AllPromotion">All Promotion </a></li>
+                                <li><a href="~/Admin/Promotion/AddPromotion">Add Promotion </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-tasks"></i> <span> Receipt </span> <span class="menu-arrow"></span></a>
+                            <ul class="submenu_class" style="display: none;">
+                                <li><a href="~/Admin/Receipt/AllReceipt">All Services </a></li>
+                                <li><a href="~/Admin/Receipt/AddReceipt">Add Service </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-tasks"></i> <span> Color </span> <span class="menu-arrow"></span></a>
+                            <ul class="submenu_class" style="display: none;">
+                                <li><a href="~/Admin/Color/AllColor">All Color </a></li>
+                                <li><a href="~/Admin/Color/AddColor">Add Color </a></li>
+                            </ul>
+                        </li>
+
+
+
 
                         <!--Payroll-->
-                        <li class="submenu">
-                            <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
-                            <ul class="submenu_class" style="display: none;">
-                                <li><a href="salary.html">Employee Salary </a></li>
-                                <li><a href="salary-veiw.html">Payslip </a></li>
-                            </ul>
-                        </li>
-                        <li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
-
+                        <!--<li class="submenu">
+        <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
+        <ul class="submenu_class" style="display: none;">
+            <li><a href="salary.html">Employee Salary </a></li>
+            <li><a href="salary-veiw.html">Payslip </a></li>
+        </ul>
+    </li>-->
+                        <!--Accounts-->
+                        <!--<li class="submenu">
+        <a href="#"><i class="far fa-money-bill-alt"></i> <span> Invoices </span> <span class="menu-arrow"></span></a>
+        <ul class="submenu_class" style="display: none;">
+            <li><a href="invoices.html">Invoices </a></li>
+            <li><a href="payments.html">Payments </a></li>
+            <li><a href="expenses.html">Expenses </a></li>
+            <li><a href="taxes.html">Taxes </a></li>
+            <li><a href="provident-fund.html">Provident Fund </a></li>
+        </ul>
+    </li>
+    <li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>-->
                         @*<li> <a href="calendar.html"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a> </li>
-                            <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
-                            <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="expense-reports.html">Expense Report </a></li>
-                                    <li><a href="invoice-reports.html">Invoice Report </a></li>
-                                </ul>
-                            </li>
-                            <li class="list-divider"></li>
-                            <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="uikit.html">UI Kit </a></li>
-                                    <li><a href="typography.html">Typography </a></li>
-                                    <li><a href="tabs.html">Tabs </a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-edit"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="form-basic-inputs.html">Basic Input </a></li>
-                                    <li><a href="form-input-groups.html">Input Groups </a></li>
-                                    <li><a href="form-horizontal.html">Horizontal Form </a></li>
-                                    <li><a href="form-vertical.html">Vertical Form </a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="tables-basic.html">Basic Table </a></li>
-                                    <li><a href="tables-datatables.html">Data Table </a></li>
-                                </ul>
-                            </li>
-                            <li class="list-divider"></li>
-                            <li class="menu-title mt-3"> <span>EXTRAS</span> </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="login.html">Login </a></li>
-                                    <li><a href="register.html">Register </a></li>
-                                    <li><a href="forgot-password.html">Forgot Password </a></li>
-                                    <li><a href="change-password.html">Change Password </a></li>
-                                    <li><a href="lock-screen.html">Lockscreen </a></li>
-                                    <li><a href="profile.html">Profile </a></li>
-                                    <li><a href="gallery.html">Gallery </a></li>
-                                    <li><a href="error-404.html">404 Error </a></li>
-                                    <li><a href="error-500.html">500 Error </a></li>
-                                    <li><a href="blank-page.html">Blank Page </a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
-                                <ul class="submenu_class" style="display: none;">
-                                    <li><a href="">Level 1 </a></li>
-                                    <li><a href="">Level 2 </a></li>
-                                </ul>
-                            </li>*@
+        <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
+        <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
+        <li class="submenu">
+            <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="expense-reports.html">Expense Report </a></li>
+                <li><a href="invoice-reports.html">Invoice Report </a></li>
+            </ul>
+        </li>
+        <li class="list-divider"></li>
+        <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="uikit.html">UI Kit </a></li>
+                <li><a href="typography.html">Typography </a></li>
+                <li><a href="tabs.html">Tabs </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-edit"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="form-basic-inputs.html">Basic Input </a></li>
+                <li><a href="form-input-groups.html">Input Groups </a></li>
+                <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                <li><a href="form-vertical.html">Vertical Form </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="tables-basic.html">Basic Table </a></li>
+                <li><a href="tables-datatables.html">Data Table </a></li>
+            </ul>
+        </li>
+        <li class="list-divider"></li>
+        <li class="menu-title mt-3"> <span>EXTRAS</span> </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="login.html">Login </a></li>
+                <li><a href="register.html">Register </a></li>
+                <li><a href="forgot-password.html">Forgot Password </a></li>
+                <li><a href="change-password.html">Change Password </a></li>
+                <li><a href="lock-screen.html">Lockscreen </a></li>
+                <li><a href="profile.html">Profile </a></li>
+                <li><a href="gallery.html">Gallery </a></li>
+                <li><a href="error-404.html">404 Error </a></li>
+                <li><a href="error-500.html">500 Error </a></li>
+                <li><a href="blank-page.html">Blank Page </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
+            <ul class="submenu_class" style="display: none;">
+                <li><a href="">Level 1 </a></li>
+                <li><a href="">Level 2 </a></li>
+            </ul>
+        </li>*@
                     </ul>
                 </div>
             </div>

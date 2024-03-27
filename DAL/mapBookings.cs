@@ -14,7 +14,7 @@ namespace DAL
         private HMEntities db = new HMEntities();
 
         //------------------* All Rooms & Search(load page) *------------------//
-        public List<Booking> AllBookings(string customerName, string email, int page, int size)
+        public List<Booking> AllBookings(string customerName, string email, string roomType, int page, int size)
         {
             IQueryable<Booking> data = db.Bookings;
             if (!string.IsNullOrEmpty(customerName))
@@ -25,18 +25,17 @@ namespace DAL
             {
                 data = data.Where(p => p.Email.ToLower().Contains(email));
             }
-            return data.OrderBy(p => p.CustomerName).Skip((page - 1) * size).Take(size).ToList();
+            if (!string.IsNullOrEmpty(roomType))
+            {
+                data = data.Where(p=>p.Room.RoomType.RoomTypeName.ToLower().Contains(roomType.ToLower()));
+            }
+            return data.OrderBy(p => p.BookingID).Skip((page - 1) * size).Take(size).ToList();
         }
 
         //------------------* Get Detail *------------------//
         public Booking GetDetail(int ID)
         {
             return db.Bookings.Find(ID);
-        }
-
-        public List<Booking> LoadData()
-        {
-            return db.Bookings.ToList();
         }
 
         public decimal TotalAmout(Booking booking)
@@ -93,6 +92,7 @@ namespace DAL
             bookingInfo.CheckoutDate = booking.CheckoutDate;
             bookingInfo.Email = booking.Email;
             bookingInfo.Phone= booking.Phone;
+            bookingInfo.IsActive = booking.IsActive;
             db.SaveChanges();
             return true;
         }
